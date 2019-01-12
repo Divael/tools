@@ -35,7 +35,8 @@ namespace Tools
     /// <para>　DownLoadFiles:下载文件</para>CopyFile
     /// <para>　SelectPath:选择文件路径，并返回</para>
     /// <para>　CopyFile:复制文件到指定目录下，并返回bool</para>
-    /// 
+    /// 资源路径格式
+    /// pack://application:,,,/售货机人机界面程序;component/icon/goods_NULL.png
     /// </summary>
     public class FilesHelper
     {
