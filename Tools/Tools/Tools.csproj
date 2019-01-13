@@ -186,9 +186,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="WPF\dicbutton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
