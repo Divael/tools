@@ -38,7 +38,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Tools.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -48,6 +49,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Speech" />
     <Reference Include="System.Web" />
@@ -129,6 +131,25 @@
     <Compile Include="WinSystem\WinApi.cs" />
     <Compile Include="XmlHelper.cs" />
     <Compile Include="XMLWriteConfig.cs" />
+    <Compile Include="注册机\AuthorizeCheckAction.cs" />
+    <Compile Include="注册机\DefaultLanguage.cs" />
+    <Compile Include="注册机\English.cs" />
+    <Compile Include="注册机\FormAuthorize.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="注册机\FormAuthorize.Designer.cs">
+      <DependentUpon>FormAuthorize.cs</DependentUpon>
+    </Compile>
+    <Compile Include="注册机\ISoftFileSaveBase.cs" />
+    <Compile Include="注册机\SimpleHybirdLock.cs" />
+    <Compile Include="注册机\SoftAuthorize.cs" />
+    <Compile Include="注册机\StringResources.cs" />
+    <Compile Include="注册机\UserButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="注册机\UserButton.designer.cs">
+      <DependentUpon>UserButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="硬件设备\KeyBoard.cs" />
     <Compile Include="硬件设备\Printer.cs" />
   </ItemGroup>
@@ -165,7 +186,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Tools.pfx" />
+    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="WPF\dicbutton.xaml">
@@ -173,7 +194,11 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="注册机\UserButton.resx">
+      <DependentUpon>UserButton.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

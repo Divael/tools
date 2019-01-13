@@ -181,5 +181,59 @@ namespace Tools
             return jsonString = DeleteLast(jsonString) + "}";
         }
         #endregion
+
+        //#region JSON Data Get
+
+        ///// <summary>
+        ///// 一个泛型方法，提供json对象的数据读取 ->
+        ///// A generic method that provides data read for a JSON object
+        ///// </summary>
+        ///// <typeparam name="T">读取的泛型</typeparam>
+        ///// <param name="json">json对象</param>
+        ///// <param name="value_name">值名称</param>
+        ///// <param name="default_value">默认值</param>
+        ///// <returns>值对象</returns>
+        ///// <example>
+        ///// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="GetValueFromJsonObjectExample" title="GetValueFromJsonObject示例" />
+        ///// </example>
+        //public static T GetValueFromJsonObject<T>(JObject json, string value_name, T default_value)
+        //{
+        //    if (json.Property(value_name) != null)
+        //    {
+        //        return json.Property(value_name).Value.Value<T>();
+        //    }
+        //    else
+        //    {
+        //        return default_value;
+        //    }
+        //}
+
+
+
+        ///// <summary>
+        ///// 一个泛型方法，提供json对象的数据写入 ->
+        ///// A generic method that provides data writing to a JSON object
+        ///// </summary>
+        ///// <typeparam name="T">写入的泛型</typeparam>
+        ///// <param name="json">json对象</param>
+        ///// <param name="property">值名称</param>
+        ///// <param name="value">值数据</param>
+        ///// <example>
+        ///// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="JsonSetValueExample" title="JsonSetValue示例" />
+        ///// </example>
+        //public static void JsonSetValue<T>(JObject json, string property, T value)
+        //{
+        //    if (json.Property(property) != null)
+        //    {
+        //        json.Property(property).Value = new JValue(value);
+        //    }
+        //    else
+        //    {
+        //        json.Add(property, new JValue(value));
+        //    }
+        //}
+
+
+        //#endregion
     }
 }
