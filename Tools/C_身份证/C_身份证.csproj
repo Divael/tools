@@ -40,8 +40,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Tool">
-      <HintPath>..\..\..\CXS\Tool\bin\Release\Tool.dll</HintPath>
+    <Reference Include="Tool, Version=7.0.0.0, Culture=neutral, PublicKeyToken=6a796b320d947832, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Tool.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +59,7 @@
     <Content Include="termb.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Tool.dll" />
     <Content Include="ZKMCard.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
