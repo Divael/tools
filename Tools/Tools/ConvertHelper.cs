@@ -742,6 +742,60 @@ namespace Tools
         }
         #endregion
 
+
+
+        #region bitmap bitmapImage icon相互转化
+
+
+        public static BitmapImage CreateBitmapImageFromBitmap(Bitmap bitmap) {
+            BitmapImage bitmapImage = new BitmapImage();
+            using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+            {
+                bitmap.Save(ms, bitmap.RawFormat);
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = ms;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
+            }
+            return bitmapImage;
+        }
+
+        /// <summary>
+        /// bitmap转Icon
+        /// </summary>
+        /// <param name="bmp"></param>
+        /// <returns></returns>
+        public static Icon CreateIconFromBitmap(Bitmap bmp) {
+            System.IntPtr iconHandle = bmp.GetHicon();
+            return System.Drawing.Icon.FromHandle(iconHandle);
+        }
+
+        /// <summary>
+        /// BitmapImage转Bitmap
+        /// </summary>
+        /// <param name="bitmapSource"></param>
+        /// <returns></returns>
+        public static Bitmap CreateBitmapFromBitmapImage(BitmapSource bitmapSource) {
+            System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(bitmapSource.PixelWidth, bitmapSource.PixelHeight, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+            System.Drawing.Imaging.BitmapData data = bmp.LockBits(
+            new System.Drawing.Rectangle(System.Drawing.Point.Empty, bmp.Size), System.Drawing.Imaging.ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+            bitmapSource.CopyPixels(Int32Rect.Empty, data.Scan0, data.Height * data.Stride, data.Stride); bmp.UnlockBits(data);
+            return bmp;
+        }
+
+        /// <summary>
+        /// BitmapSource转Icon
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="kind"></param>
+        /// <returns></returns>
+        public static Icon CreateIconFromBitmapSource(string path, UriKind kind = UriKind.Relative) {
+            BitmapImage bitmapImage = CreateBitmapSourceFromUri(path, UriKind.RelativeOrAbsolute);
+            return CreateIconFromBitmap(CreateBitmapFromBitmapImage(bitmapImage));
+        }
+        #endregion
+
         #region 保存图片为...png,jpg
         public static void SaveToJpg(BitmapSource source, string filename)
         {
