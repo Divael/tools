@@ -55,6 +55,7 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -129,6 +130,9 @@
     <Compile Include="WinSystem\Hook\MouseSimulator.cs" />
     <Compile Include="WinSystem\Hook\StandardShortcut.cs" />
     <Compile Include="WinSystem\WinApi.cs" />
+    <Compile Include="WPF\Warning.xaml.cs">
+      <DependentUpon>Warning.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XmlHelper.cs" />
     <Compile Include="XMLWriteConfig.cs" />
     <Compile Include="注册机\AuthorizeCheckAction.cs" />
@@ -189,6 +193,10 @@
     <Page Include="WPF\dicbutton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WPF\Warning.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
