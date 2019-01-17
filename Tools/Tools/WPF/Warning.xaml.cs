@@ -47,7 +47,7 @@ namespace Tools
         {
         }
 
-        internal Warning setText(string v)
+        public Warning setText(string v)
         {
             Error_message.Text = "";
             Error_message.Text = v;
