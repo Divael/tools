@@ -16,7 +16,8 @@ namespace Test
     {
         private string TAG = "App";
 
-        App() {
+        App()
+        {
             //单例程序，让程序只有一个存在！
             this.Startup += new StartupEventHandler(App_Startup);
 
@@ -42,7 +43,7 @@ namespace Test
 
             //这里可以初始化日志
 
-            if (!Tools.注册机.AuthorizeCheckAction.getInstance().init("1","1").AuthorizeCheck())
+            if (!Tools.注册机.AuthorizeCheckAction.getInstance().init("1", "1").AuthorizeCheck())
             {
                 MessageBox.Show("机器未获得使用权限!");
                 Environment.Exit(0);
