@@ -9,6 +9,7 @@ namespace Tools.sound
 {
     /**//// <summary>
         /// 用Win32Api实现的媒体播放类.支持Mp3,wma,wmv
+        /// http://www.voidcn.com/article/p-ckelsbsx-mx.html
         /// </summary>
     public class Mp3
     {
