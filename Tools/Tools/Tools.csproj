@@ -103,7 +103,9 @@
     <Compile Include="QRCodeConvert.cs" />
     <Compile Include="RegistryHelper.cs" />
     <Compile Include="RMBHelper.cs" />
-    <Compile Include="Speaker.cs" />
+    <Compile Include="sound\Mp3.cs" />
+    <Compile Include="sound\Speaker.cs" />
+    <Compile Include="sound\Wav.cs" />
     <Compile Include="StringHelper.cs" />
     <Compile Include="HTTP\HttpService.cs" />
     <Compile Include="TCP\Client.cs" />
