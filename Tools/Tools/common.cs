@@ -150,10 +150,18 @@ namespace System
         {
             return Convert.ToBase64String(Common.MD5Code(data.GetBytes1(Encoding.UTF8)));
         }
+
+        public static byte[] GBKToUTF8(byte[] buffer)
+        {
+            string txt = Encoding.GetEncoding("GBK").GetString(buffer);
+            return Encoding.UTF8.GetBytes(txt);
+        }
+
         public static byte[] GetBytes1(this string data, Encoding e)
         {
             return Common.GetBytes(data, e);
         }
+
         public static byte[] MD5Code(byte[] input)
         {
             return MD5.Create().ComputeHash(input);
@@ -221,10 +229,12 @@ namespace System
         /// </summary>
         /// <param name="mess">信息</param>
         /// <param name="ex">异常</param>
-        public static void logErr(string mess,Exception ex)
+        public static void logErr(this string mess,Exception ex)
         {
             Tools.Loger.err(mess,ex);
         }
+
+
 
         public static string ToHex(this byte[] data, string split = " ")
         {
