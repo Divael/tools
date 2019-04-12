@@ -132,6 +132,9 @@
     <Compile Include="WinSystem\Hook\MouseSimulator.cs" />
     <Compile Include="WinSystem\Hook\StandardShortcut.cs" />
     <Compile Include="WinSystem\WinApi.cs" />
+    <Compile Include="WPF\FingerPictureBox.xaml.cs">
+      <DependentUpon>FingerPictureBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF\Warning.xaml.cs">
       <DependentUpon>Warning.xaml</DependentUpon>
     </Compile>
@@ -199,6 +202,10 @@
     <Page Include="WPF\dicbutton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WPF\FingerPictureBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\wait.xaml">
       <Generator>MSBuild:Compile</Generator>
