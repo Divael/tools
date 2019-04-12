@@ -43,6 +43,7 @@ namespace Test
 
             //这里可以初始化日志
 
+            //注册机注册判断
             if (!Tools.注册机.AuthorizeCheckAction.getInstance().init("1", "1").AuthorizeCheck())
             {
                 MessageBox.Show("机器未获得使用权限!");
