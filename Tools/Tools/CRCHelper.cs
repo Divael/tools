@@ -28,7 +28,7 @@ namespace Tools
             /// <param name="data">要校验的数组</param>
             /// <param name="size">长度</param>
             /// <returns>返回校验结果，低字节在前，高字节在后</returns>
-            public static byte[] crc16(byte[] data)
+            public static byte[] CRC16(byte[] data)
             {
                 if (data.Length == 0)
                     throw new Exception("调用CRC16校验算法,（低字节在前，高字节在后）时发生异常，异常信息：被校验的数组长度为0。");
@@ -55,7 +55,7 @@ namespace Tools
                 return list.ToArray();
             }
 
-            public static byte[] crc16(byte[] data, int size)
+            public static byte[] CRC16(byte[] data, int size)
             {
                 if (data.Length == 0)
                     throw new Exception("调用CRC16校验算法,（低字节在前，高字节在后）时发生异常，异常信息：被校验的数组长度为0。");

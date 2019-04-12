@@ -26,7 +26,7 @@ namespace Test
             var t = Tools.CRCHelper.ADD8.ADD8_Add("E2 00 09 00 00 00 00 00 18 00 00 00 F1".ToHex());//E2 00 09 00 00 00 00 00 18 00 00 00 F1 F4
             string g = Tools.StringHelper.byteToHexStr(t);
             bool a = Tools.CRCHelper.ADD8.ADD8_Check("E2 00 09 00 00 00 00 00 18 00 00 00 F1 F4".ToHex());
-             t = Tools.CRCHelper.CRC_16.crc16("02 05 00 01 FF 00".ToHex());//02 05 00 01 FF 00 DD C9
+             t = Tools.CRCHelper.CRC_16.CRC16("02 05 00 01 FF 00".ToHex());//02 05 00 01 FF 00 DD C9
              g = Tools.StringHelper.byteToHexStr(t);
             Console.ReadKey();
         }
