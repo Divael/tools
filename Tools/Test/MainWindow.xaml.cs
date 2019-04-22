@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tools;
 
 namespace Test
 {
@@ -23,12 +25,29 @@ namespace Test
         public MainWindow()
         {
             InitializeComponent();
-            var t = Tools.CRCHelper.ADD8.ADD8_Add("E2 00 09 00 00 00 00 00 18 00 00 00 F1".ToHex());//E2 00 09 00 00 00 00 00 18 00 00 00 F1 F4
-            string g = Tools.StringHelper.byteToHexStr(t);
-            bool a = Tools.CRCHelper.ADD8.ADD8_Check("E2 00 09 00 00 00 00 00 18 00 00 00 F1 F4".ToHex());
-             t = Tools.CRCHelper.CRC_16.CRC16("02 05 00 01 FF 00".ToHex());//02 05 00 01 FF 00 DD C9
-             g = Tools.StringHelper.byteToHexStr(t);
+            //http://123.206.110.239:8383/pay.php
+            WebServiceInfo webServiceInfo = new WebServiceInfo() {
+                WebServiceName = "pay",
+                WebServiceUrl = "http://123.206.110.239:8383"
+            };
+            int Amt = (int)Math.Round((decimal)(100.00 * 0.01), 0, MidpointRounding.AwayFromZero);
+            string dataString = $"mid={898323473720126}&tid={86743852}&amt={Amt}&ord=23136&paycode=135074208938566876";
+            Hashtable pars = new Hashtable();
+            pars["mid"] = 898323473720126;
+            pars["tid"] = 86743852;
+            pars["amt"] = Amt;
+            pars["ord"] = 23136;
+            pars["paycode"] = 135074208938566876;
+            var str = Tools.WebServiceHelper.QueryPostWebService(webServiceInfo,"", pars);
             Console.ReadKey();
+        }
+
+
+
+        public void msg(string msg) {
+            text_msg.Dispatcher.BeginInvoke((Action)delegate() {
+                text_msg.Text += "msg"+"\r\n";
+            });
         }
     }
 }

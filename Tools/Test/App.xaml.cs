@@ -47,7 +47,7 @@ namespace Test
             if (!Tools.注册机.AuthorizeCheckAction.getInstance().init("1", "1").AuthorizeCheck())
             {
                 MessageBox.Show("机器未获得使用权限!");
-                Environment.Exit(0);
+                //Environment.Exit(0);
             }
         }
 

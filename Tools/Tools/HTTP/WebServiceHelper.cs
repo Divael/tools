@@ -58,6 +58,22 @@ namespace Tools
 
             return ReadXmlResponse(request.GetResponse());
         }
+
+        public static string QueryPostWebServiceByJson(WebServiceInfo WebServiceInfos, string MethodName, Hashtable Para)
+        {
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(WebServiceInfos.WebServiceUrl + "/" + WebServiceInfos.WebServiceName + ".php/" + MethodName);
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+            SetWebRequest(request);
+            byte[] data = EncodePars(Para);
+            WriteRequestData(request, data);
+            var s = request.GetResponse().GetResponseStream();
+            StreamReader sRead = new StreamReader(s);
+            string res = sRead.ReadToEnd();
+            s.Close();
+            sRead.Close();
+            return res;
+        }
         /// <summary>   
         /// 采用Get方式调用WebService   
         /// </summary>   

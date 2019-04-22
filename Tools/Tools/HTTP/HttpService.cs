@@ -12,8 +12,14 @@ namespace Tools
     /// </summary>
     public class HttpService
     {
+        public static string JsonType = "application/json";
+        public static string TextType = "application/x-www-form-urlencoded";
         private static readonly string DefaultUserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)";//浏览器  
         private static Encoding requestEncoding = System.Text.Encoding.UTF8;//字符集  
+
+
+        public Action<Exception> httpErr;
+
         private static bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
         {
             return true; //总是接受  
@@ -33,49 +39,54 @@ namespace Tools
             }
             return request;
         }
-        /// <summary>
-        /// 获取accesstoken
-        /// </summary>
-        /// <param name="url">url</param>
-        /// <param name="jsondata">json字符串</param>
-        /// <returns></returns>
-        public string GetAccessTokenJSON(string url, string jsondata)
-        {
-            HttpWebRequest request = getHttpWebRequest(url);
-            HttpWebResponse response = Post(request, jsondata, "application/json");
 
-            return DealResponse(response);
-        }
         /// <summary>
-        /// Post方法
+        /// 发送数据，接收返回
         /// </summary>
-        /// <param name="url">url</param>
-        /// <param name="jsondata">json字符串</param>
+        /// <param name="url">地址</param>
+        /// <param name="data">数据</param>
+        /// <param name="contentType">发送类型</param>
         /// <returns></returns>
-        public string PostService(string url,string data,string contentType)
-        {
-            HttpWebRequest request = getHttpWebRequest(url);
-            HttpWebResponse resonse = Post(request,data, contentType);
-            return DealResponse(resonse);
-        }
-        /// <summary>
-        /// pos通服务交互
-        /// </summary>
-        /// <param name="url">url</param>
-        /// <param name="jsondata">json字符串</param>
-        /// <param name="accessToken">accessToken</param>
-        /// <returns></returns>
-        public string PostServiceJSON(string url, string jsondata, string accessToken)
+        public string PostService(string url, string data, string contentType, int delay = 6)
         {
             HttpWebRequest request = getHttpWebRequest(url);
 
-            request.PreAuthenticate = true;
-            request.Headers.Add("Authorization", accessToken);//accessToken;
-            HttpWebResponse response = Post(request, jsondata,"application/json");
-            return DealResponse(response);
+            request.PreAuthenticate = false;
+            HttpWebResponse resonse = Post(request, data, contentType, delay * 1000);
+            if (resonse == null)
+            {
+                return null;
+            }
+            else
+            {
+                return DealResponse(resonse);
+            }
+
         }
 
-        private HttpWebResponse Post(HttpWebRequest request, string _data , string _contentType)
+        public string PostService(string url, string data, string contentType, string[] HeaderName, string[] HeaderValue, bool isDelay = false, int delay = 30, bool preAuthenticate = false)
+        {
+            HttpWebRequest request = getHttpWebRequest(url);
+
+            request.PreAuthenticate = preAuthenticate;
+            for (int i = 0; i < HeaderName.Length; i++)
+            {
+                request.Headers.Add(HeaderName[i], HeaderValue[i]);
+            }
+
+            HttpWebResponse resonse = Post(request, data, contentType);
+            if (resonse == null)
+            {
+                return null;
+            }
+            else
+            {
+                return DealResponse(resonse);
+            }
+        }
+
+
+        private HttpWebResponse Post(HttpWebRequest request, string _data, string _contentType, int timeOut = 6000)
         {
             Stream stream = null;//用于传参数的流  
 
@@ -84,8 +95,8 @@ namespace Tools
             request.UserAgent = DefaultUserAgent;//请求的客户端浏览器信息,默认IE            
 
             //    request.p                 
-            request.Timeout = 9000;//超时时间，写死6秒  
-                                   //随同HTTP请求发送的Cookie信息，如果不需要身份验证可以为空  
+            request.Timeout = timeOut;//超时时间，写死6秒  
+                                      //随同HTTP请求发送的Cookie信息，如果不需要身份验证可以为空  
 
             System.Globalization.DateTimeFormatInfo dtfi;
 
@@ -100,16 +111,28 @@ namespace Tools
 
 
             //如果需求POST传数据，转换成utf-8编码  
-            byte[] data = requestEncoding.GetBytes(_data);
-            request.ContentLength = data.Length;
+            if (!_data.Equals(""))
+            {
+                byte[] data = requestEncoding.GetBytes(_data);
+                request.ContentLength = data.Length;
 
-            stream = request.GetRequestStream();
+                stream = request.GetRequestStream();
 
-            stream.Write(data, 0, data.Length);
+                stream.Write(data, 0, data.Length);
 
-            stream.Close();
+                stream.Close();
+            }
 
-            HttpWebResponse temp = request.GetResponse() as HttpWebResponse;
+            HttpWebResponse temp = null;
+            try
+            {
+                temp = request.GetResponse() as HttpWebResponse;
+            }
+            catch (Exception e)
+            {
+                temp = null;
+                httpErr?.Invoke(e);
+            }
 
             return temp;
 
