@@ -61,7 +61,15 @@ namespace Tools
 
         public static string QueryPostWebServiceByJson(WebServiceInfo WebServiceInfos, string MethodName, Hashtable Para)
         {
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(WebServiceInfos.WebServiceUrl + "/" + WebServiceInfos.WebServiceName + ".php/" + MethodName);
+            HttpWebRequest request;
+            if (string.IsNullOrWhiteSpace(MethodName))
+            {
+                request = (HttpWebRequest)HttpWebRequest.Create(WebServiceInfos.WebServiceUrl + "/" + WebServiceInfos.WebServiceName);
+            }
+            else
+            {
+                request = (HttpWebRequest)HttpWebRequest.Create(WebServiceInfos.WebServiceUrl + "/" + WebServiceInfos.WebServiceName + "/" + MethodName);
+            }
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             SetWebRequest(request);
