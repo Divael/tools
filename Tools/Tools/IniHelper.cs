@@ -16,7 +16,7 @@ namespace Tools
     /// </summary>
     public class IniHelper
     {
-        private static string path = System.Environment.CurrentDirectory+"/";
+        public static string path = System.Environment.CurrentDirectory+"/";
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -42,9 +42,14 @@ namespace Tools
         /// <param name="Section">要写入的段落</param>
         /// <param name="Key">要写入的键</param>
         /// <param name="Value">要写的的键值</param>
-        public static void IniWriteValue(string Section, string Key, string Value)
+        /// <param name="Value">路径</param>
+        public static void IniWriteValue(string Section, string Key, string Value,string Path = "")
         {
-            WritePrivateProfileString(Section, Key, Value,path);
+            if (string.IsNullOrWhiteSpace(Path))
+            {
+                Path = IniHelper.path;
+            }
+            WritePrivateProfileString(Section, Key, Value,Path);
         }
         #endregion
 
@@ -75,7 +80,6 @@ namespace Tools
             byte[] temp = new byte[255];
             int i = GetPrivateProfileString(section, key, "", temp, 255, path);
             return temp;
-
         }
         #endregion
 
