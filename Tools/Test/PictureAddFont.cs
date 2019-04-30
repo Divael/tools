@@ -52,13 +52,13 @@ namespace Test
             Bitmap bmp = new Bitmap(path);
             Graphics g = Graphics.FromImage(bmp);
             String str = content;
-            Font font = new Font("KaiTi", 52, FontStyle.Bold);//设置字体，大小，粗细
+            Font font = new Font("KaiTi", 32, FontStyle.Bold);//设置字体，大小，粗细
             SolidBrush sbrush = new SolidBrush(Color.Red);//设置颜色
-            int base_left = _base_left;
-            int left_space = _left_space;
+            float base_left = _base_left;
+            float left_space = (float)font.GetHeight(g);
 
-            int base_top = _base_top;
-            int top_space = _top_space;
+            float base_top = _base_top;
+            float top_space = (float)font.GetHeight(g);
             for (int i = 0; i < str.Length; i++)
             {
                 if (i > 13)
@@ -72,7 +72,8 @@ namespace Test
                 }
                 else
                 {
-                    g.DrawString(str[i] + "", font, sbrush, new PointF(base_left, base_top + (top_space * i)));
+                    g.DrawString(str[i] + "", font, sbrush, new PointF(base_left+(left_space*i), base_top));
+                    g.DrawString(str[i] + "", font, sbrush, new PointF(base_left, base_top+(i*top_space)));
                 }
 
             }
