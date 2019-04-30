@@ -5,9 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <TextBox TextWrapping="Wrap" Text="TextBox" x:Name="text_msg"/>
-
-    </Grid>
+        Title="MainWindow" FontSize="24" Height="450" Width="800">
+    <Canvas>
+        <TextBox FontSize="16" TextWrapping="Wrap" Text="D:\Users\Pictures\壁纸\wallhaven-541924.png" x:Name="text_msg" Canvas.Left="37" Canvas.Top="46" Height="37" Width="719"/>
+        <TextBox FontSize="16" x:Name="base_top" Width="69" Canvas.Left="229" Canvas.Top="106" Text="10"></TextBox>
+        <TextBox FontSize="16" x:Name="space_top" Width="69" Canvas.Left="330" Canvas.Top="106" Text="10"></TextBox>
+        <Button x:Name="sdf" Content="测试" Canvas.Left="37" Click="Sdf_Click" Canvas.Top="106" Width="95"></Button>
+        <TextBox FontSize="16" x:Name="base_left" Width="69" Canvas.Left="229" Canvas.Top="152" Text="10"/>
+        <TextBox FontSize="16" x:Name="space_left" Width="69" Canvas.Left="330" Canvas.Top="152" Text="50"/>
+    </Canvas>
 </Window>

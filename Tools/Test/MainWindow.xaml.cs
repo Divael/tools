@@ -25,9 +25,9 @@ namespace Test
         public MainWindow()
         {
             InitializeComponent();
-            //http://123.206.110.239:8383/pay.php
 
-            Console.ReadKey();
+            //http://123.206.110.239:8383/pay.php;
+
         }
 
 
@@ -36,6 +36,16 @@ namespace Test
             text_msg.Dispatcher.BeginInvoke((Action)delegate() {
                 text_msg.Text += "msg"+"\r\n";
             });
+        }
+
+        private void Sdf_Click(object sender, RoutedEventArgs e)
+        {
+            PictureAddFont.getInstance()._base_top = int.Parse(base_top.Text);
+            PictureAddFont.getInstance()._base_left = int.Parse(base_left.Text);
+            PictureAddFont.getInstance()._left_space = int.Parse(space_left.Text);
+            PictureAddFont.getInstance()._top_space = int.Parse(space_top.Text);
+
+            PictureAddFont.getInstance().PicAddFonts(text_msg.Text, "魔鬼", @"D:\cover.png");
         }
     }
 }

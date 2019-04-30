@@ -85,6 +85,7 @@
     <Compile Include="GUIDHelper.cs" />
     <Compile Include="HttpServices.cs" />
     <Compile Include="Image\ImageHelper.cs" />
+    <Compile Include="Image\PngAddFonts.cs" />
     <Compile Include="IniHelper.cs" />
     <Compile Include="JSONHelper.cs" />
     <Compile Include="MouseMoveEvents\KeyBroad_Hook.cs" />
