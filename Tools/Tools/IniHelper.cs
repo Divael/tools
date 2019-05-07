@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -91,6 +92,18 @@ namespace Tools
                     j = i + 1;
                 }
             return result;
+        }
+        #endregion
+
+        #region 读取指定section下的所有键值对HashTable
+        public static Hashtable ReadIniDataByHashTable(string SectionName) {
+            Hashtable ht = new Hashtable();
+            var tp = ReadKeys(SectionName);
+            foreach (var item in tp)
+            {
+                ht.Add(item,ReadIniData(SectionName,item,""));
+            }
+            return ht;
         }
         #endregion
 

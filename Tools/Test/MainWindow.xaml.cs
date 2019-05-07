@@ -33,6 +33,8 @@ namespace Test
             var p2 = Tools.IniHelper.WriteIniData("Config","调试模式2",true.ToString());
             var p3 = Tools.IniHelper.WriteIniData("Config1","调试模式",true.ToString());
 
+            var s = Tools.IniHelper.ReadIniDataByHashTable("Config");
+            string a = (string)s["调试模式"];
             var tp = Tools.IniHelper.ReadSections();
             var tp1 = Tools.IniHelper.ReadKeys("Config");
             var tp2 = Tools.IniHelper.ReadIniData("Config", "调试模式1","");

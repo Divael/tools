@@ -41,8 +41,6 @@ namespace Test
                 Environment.Exit(0);
             }
 
-            //这里可以初始化日志
-
             //注册机注册判断
             if (!Tools.注册机.AuthorizeCheckAction.getInstance().init("1", "1").AuthorizeCheck())
             {
@@ -53,17 +51,35 @@ namespace Test
 
         private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            Tools.Loger.err(TAG, e.ToString());
+            e.Handled = true;
+            ErrorDeal(e.Exception.Message + "\n" + e.Exception.StackTrace);
         }
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            Tools.Loger.err(TAG, e.ToString());
+            ErrorDeal(e.ExceptionObject.ToString());
         }
 
         private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
             Tools.Loger.err(TAG, e.ToString());
+        }
+
+        private void ErrorDeal(string errorMsg)
+        {
+            MessageBox.Show("我们很抱歉，当前应用程序遇到一些问题，该操作已经终止，请进行重试，如果问题继续存在，请联系管理员.", "意外的操作", MessageBoxButton.OK, MessageBoxImage.Information);
+            Tools.Loger.err(TAG+"异常日志", errorMsg);
+            Environment.Exit(0);
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            base.OnExit(e);
         }
     }
 }
