@@ -25,9 +25,23 @@ namespace Test
         public MainWindow()
         {
             InitializeComponent();
-
             //http://123.206.110.239:8383/pay.php;
+            Tools.IniHelper.SetFilePath(@"D:\config.ini");
+            /*
+            var p = Tools.IniHelper.WriteIniData("Config","调试模式",true.ToString());
+            var p1  = Tools.IniHelper.WriteIniData("Config","调试模式1",true.ToString());
+            var p2 = Tools.IniHelper.WriteIniData("Config","调试模式2",true.ToString());
+            var p3 = Tools.IniHelper.WriteIniData("Config1","调试模式",true.ToString());
 
+            var tp = Tools.IniHelper.ReadSections();
+            var tp1 = Tools.IniHelper.ReadKeys("Config");
+            var tp2 = Tools.IniHelper.ReadIniData("Config", "调试模式1","");
+            var e1 = Tools.IniHelper.ClearSection("Config1");
+            var e2 = Tools.IniHelper.ClearAllSection();
+            var _1tp = Tools.IniHelper.ReadSections();
+            var _1tp1 = Tools.IniHelper.ReadKeys("Config");
+            var _1tp2 = Tools.IniHelper.ReadIniData("Config1", "调试模式1", "");
+            */
         }
 
 
@@ -45,7 +59,7 @@ namespace Test
             PictureAddFont.getInstance()._left_space = int.Parse(space_left.Text);
             PictureAddFont.getInstance()._top_space = int.Parse(space_top.Text);
 
-            PictureAddFont.getInstance().PicAddFonts(text_msg.Text, "魔鬼", @"D:\cover.png");
+            PictureAddFont.getInstance().PicAddFonts(text_msg.Text, "123456", @"D:\cover.png");
         }
     }
 }

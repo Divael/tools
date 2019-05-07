@@ -63,8 +63,9 @@ namespace Test
             {
                 if (i > 13)
                 {
-                    continue;
+                    
                     g.DrawString(str[i] + "", font, sbrush, new PointF(base_left + (left_space * 2), base_top + (top_space * (i - 14))));
+                    continue;
                 }
                 else if (i > 6)
                 {
