@@ -47,7 +47,15 @@ namespace 数据库配置工具
             config.Server = Tools.IniHelper.ReadIniData("数据库配置", "DataSource", "");
             config.Database = Tools.IniHelper.ReadIniData("数据库配置", "Database", "");
             config.UserId = Tools.IniHelper.ReadIniData("数据库配置", "UserID", "");
-            config.PassWord = Tools.EncyptHelper.MD5Decrypt(Tools.IniHelper.ReadIniData("数据库配置", "Password", "").Trim());
+            string s = Tools.IniHelper.ReadIniData("数据库配置", "Password", "").Trim();
+            if (!string.IsNullOrWhiteSpace(s))
+            {
+                config.PassWord = Tools.EncyptHelper.MD5Decrypt(s);
+            }
+            else
+            {
+                config.PassWord = "";
+            }
             config.TopSelected = Tools.IniHelper.ReadIniData("数据库配置", "最大连接数", "");
             return config;
         }

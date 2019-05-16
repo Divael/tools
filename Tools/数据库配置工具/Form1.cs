@@ -30,8 +30,11 @@ namespace 数据库配置工具
                 tbservername.Text = Tools.IniHelper.ReadIniData("数据库配置", "DataSource", "") ;
                 tbdbname.Text = Tools.IniHelper.ReadIniData("数据库配置", "Database", "");
                 tbusername.Text = Tools.IniHelper.ReadIniData("数据库配置", "UserID", "");
-                tbpassword.Text = Tools.EncyptHelper.MD5Decrypt(Tools.IniHelper.ReadIniData("数据库配置", "Password", "").Trim());
-                tbselectNumber.Text = Tools.IniHelper.ReadIniData("数据库配置", "最大连接数", "");
+                string s = Tools.IniHelper.ReadIniData("数据库配置", "Password", "").Trim();
+                if (!string.IsNullOrWhiteSpace(s))
+                {
+                    tbpassword.Text = Tools.EncyptHelper.MD5Decrypt(s);
+                }
             }
             else
             {
@@ -39,7 +42,6 @@ namespace 数据库配置工具
                 tbdbname.Text = "";
                 tbusername.Text = "";
                 tbpassword.Text = "";
-                tbselectNumber.Text = "60";
             }
         }
 
@@ -63,7 +65,6 @@ namespace 数据库配置工具
             Tools.IniHelper.IniWriteValue("数据库配置", "Database", tbdbname.Text);
             Tools.IniHelper.IniWriteValue("数据库配置", "UserID", tbusername.Text);
             Tools.IniHelper.IniWriteValue("数据库配置", "Password", Tools.EncyptHelper.MD5Encrypt(tbpassword.Text.Trim()));
-            Tools.IniHelper.IniWriteValue("数据库配置", "最大连接数", tbselectNumber.Text);
             MessageBox.Show("保存完成");
         }
 
