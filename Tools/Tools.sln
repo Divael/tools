@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "数据库配置工具", "�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceCapture", "FaceCapture\FaceCapture.csproj", "{A72AAEB3-C00C-445D-BDD9-B0078C43A566}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRT591_M001_MR01", "CRT591_M001_MR01\CRT591_M001_MR01.csproj", "{E2A3ED3F-0175-49F3-B9B0-260AD16B9C5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,14 @@ Global
 		{A72AAEB3-C00C-445D-BDD9-B0078C43A566}.Release|Any CPU.ActiveCfg = Release|x86
 		{A72AAEB3-C00C-445D-BDD9-B0078C43A566}.Release|x86.ActiveCfg = Release|x86
 		{A72AAEB3-C00C-445D-BDD9-B0078C43A566}.Release|x86.Build.0 = Release|x86
+		{E2A3ED3F-0175-49F3-B9B0-260AD16B9C5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2A3ED3F-0175-49F3-B9B0-260AD16B9C5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2A3ED3F-0175-49F3-B9B0-260AD16B9C5D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E2A3ED3F-0175-49F3-B9B0-260AD16B9C5D}.Debug|x86.Build.0 = Debug|Any CPU
+		{E2A3ED3F-0175-49F3-B9B0-260AD16B9C5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2A3ED3F-0175-49F3-B9B0-260AD16B9C5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2A3ED3F-0175-49F3-B9B0-260AD16B9C5D}.Release|x86.ActiveCfg = Release|Any CPU
+		{E2A3ED3F-0175-49F3-B9B0-260AD16B9C5D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

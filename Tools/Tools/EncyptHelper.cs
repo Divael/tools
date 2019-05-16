@@ -174,7 +174,7 @@ namespace Tools
         /// </summary>
         /// <param name="pToEncrypt">待加密的数据</param>
         /// <returns>加密后的数据</returns>
-        internal static string MD5Encrypt(string pToEncrypt)
+        public static string MD5Encrypt(string pToEncrypt)
         {
             return MD5Encrypt(pToEncrypt, "yangsea1");
         }
@@ -211,9 +211,9 @@ namespace Tools
         /// </summary>
         /// <param name="pToDecrypt">等待解密的字符</param>
         /// <returns>返回原密码，如果解密失败，返回‘解密失败’</returns>
-        internal static string MD5Decrypt(string pToDecrypt)
+        public static string MD5Decrypt(string pToDecrypt)
         {
-            return MD5Decrypt(pToDecrypt, "yangseatools");
+            return MD5Decrypt(pToDecrypt, "yangsea1");
         }
 
         /// <summary>

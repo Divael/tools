@@ -6,7 +6,6 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SGJLToolLib.Tool.Log;
 
 namespace 数据库配置工具
 {
@@ -15,14 +14,11 @@ namespace 数据库配置工具
         private static SqlConnection connection = null;
 
         private string connectionString;
-        public DBClass(string server,string dbname,string username,string password)
+        public DBClass(string server, string dbname, string username, string password)
         {
             connectionString =
                 $"Data Source={server};Initial Catalog={dbname};Persist Security Info=True;User ID={username};Password={password}";
-            if (connection == null)
-            {
-                connection = new SqlConnection(connectionString);
-            }
+            connection = new SqlConnection(connectionString);
         }
 
         public bool OpenTest()
@@ -35,7 +31,7 @@ namespace 数据库配置工具
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                SGLog.Log("DBTool", e.Message, "Error");
+                Tools.Loger.err("DBTool", e.Message);
                 return false;
             }
             finally
@@ -43,6 +39,32 @@ namespace 数据库配置工具
                 connection.Close();
             }
 
+        }
+
+        public static DBConfig getConnectionString() {
+            DBConfig config = new DBConfig();
+            Tools.IniHelper.SetFilePath(System.Environment.CurrentDirectory + @"\config.ini");
+            config.Server = Tools.IniHelper.ReadIniData("数据库配置", "DataSource", "");
+            config.Database = Tools.IniHelper.ReadIniData("数据库配置", "Database", "");
+            config.UserId = Tools.IniHelper.ReadIniData("数据库配置", "UserID", "");
+            config.PassWord = Tools.EncyptHelper.MD5Decrypt(Tools.IniHelper.ReadIniData("数据库配置", "Password", "").Trim());
+            config.TopSelected = Tools.IniHelper.ReadIniData("数据库配置", "最大连接数", "");
+            return config;
+        }
+    }
+
+
+    public class DBConfig {
+        public string Server { get; set; }
+        public string Database { get; set; }
+        public string UserId { get; set; }
+        public string PassWord { get; set; }
+        public string TopSelected { get; set; }
+
+        public override string ToString()
+        {
+            //Provider=SQLOLEDB.1;Password=aza@lea@123;Persist Security Info=True;User ID=sa;Initial Catalog=fkgl;Data Source=ftp.smartpioneer.cn
+            return $"Password ={PassWord}; Persist Security Info = True; User ID = {UserId}; Initial Catalog = {Database}; Data Source = {Server}";
         }
     }
 }
