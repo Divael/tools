@@ -136,16 +136,32 @@ namespace System
             return array2;
         }
 
+        /// <summary>
+        /// 获取字符串的bytes
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
         public static byte[] GetBytes(string s, Encoding e)
         {
             return e.GetBytes(s);
         }
 
+        /// <summary>
+        /// 获取字符串的bytes
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public static byte[] GetBytes(string s)
         {
             return Encoding.Default.GetBytes((s == null) ? string.Empty : s);
         }
 
+        /// <summary>
+        /// 获取字符串的bytes
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public static string MD5Str(string data)
         {
             return Convert.ToBase64String(Common.MD5Code(data.GetBytes1(Encoding.UTF8)));
@@ -178,6 +194,11 @@ namespace System
             return result;
         }
 
+        /// <summary>
+        /// 交给线程池进行托管处理一些小任务
+        /// </summary>
+        /// <param name="act"></param>
+        /// <param name="LogException"></param>
         public static void RunInBackThread(Action act, bool LogException = true)
         {
             Common.RunInBackThread(act, delegate (Exception p)
@@ -189,6 +210,11 @@ namespace System
             });
         }
 
+        /// <summary>
+        /// 交给线程池进行托管处理一些小任务
+        /// </summary>
+        /// <param name="act"></param>
+        /// <param name="WhenFail"></param>
         public static void RunInBackThread(Action act, Action<Exception> WhenFail)
         {
             //交给线程池进行托管处理一些小任务
@@ -218,9 +244,22 @@ namespace System
             Tools.Loger.info(mess);
         }
 
+        /// <summary>
+        /// 正常日志
+        /// </summary>
+        /// <param name="mess"></param>
         public static void logThis(this Exception mess)
         {
             Tools.Loger.info(mess.ToString());
+        }
+
+        /// <summary>
+        /// 正常日志
+        /// </summary>
+        /// <param name="mess"></param>
+        public static void logThis(this string mess,string title)
+        {
+            Tools.Loger.info(title +"  " +mess.ToString());
         }
 
 
