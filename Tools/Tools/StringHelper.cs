@@ -1028,5 +1028,22 @@ namespace Tools
         }
 
         #endregion
+
+        /// <summary>
+        /// 将十六进制字节数组转化为int类型卡号
+        /// </summary>
+        /// <param name="vs"></param>
+        /// <returns></returns>
+        public static int bytesToInt32(byte [] vs) {
+            try
+            {
+               return BitConverter.ToInt32(vs, 0);
+
+            }
+            catch (Exception)
+            {
+                throw new Exception("bytesToInt32转换失败！");
+            }
+        }
     }
 }
