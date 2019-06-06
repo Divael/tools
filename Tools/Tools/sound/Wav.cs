@@ -15,8 +15,10 @@ namespace Tools.sound
         /// <param name="wavfile">wav格式地址</param>
         public static void WavPlayer(string wavfile)
         {
-            SoundPlayer sound = new SoundPlayer(wavfile);
-            sound.Play();
+            using (SoundPlayer sound = new SoundPlayer(wavfile))
+            {
+                sound.Play();
+            }
         }
 
         /// <summary>
