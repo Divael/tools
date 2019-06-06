@@ -18,5 +18,16 @@ namespace Tools.sound
             SoundPlayer sound = new SoundPlayer(wavfile);
             sound.Play();
         }
+
+        /// <summary>
+        /// 播放音频文件wav格式的
+        /// </summary>
+        /// <param name="wavfile">wav格式地址</param>
+        public static void WavPlayerInvoke(string wavfile)
+        {
+            Common.invoke(()=> {
+                WavPlayer(wavfile);
+            });
+        }
     }
 }
