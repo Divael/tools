@@ -85,6 +85,7 @@
     <Compile Include="FilesHelper.cs" />
     <Compile Include="GUIDHelper.cs" />
     <Compile Include="HttpServices.cs" />
+    <Compile Include="HTTP\RestFulClientHelper.cs" />
     <Compile Include="Image\ImageHelper.cs" />
     <Compile Include="Image\PngAddFonts.cs" />
     <Compile Include="IniHelper.cs" />
