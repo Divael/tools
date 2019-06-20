@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,7 +34,7 @@ namespace Tools
         /// 获取实例
         /// </summary>
         /// <returns></returns>
-        public ImageHelper getInstance() {
+        public static ImageHelper getInstance() {
             if (mImageHelper == null)
             {
                 lock (obj)
@@ -48,6 +49,45 @@ namespace Tools
         }
 
         #endregion
+
+        /// <summary>
+        /// Bitmap转换为BitmapSource
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public System.Windows.Media.Imaging.BitmapSource BitmapToBitmapSource(System.Drawing.Bitmap source)
+        {
+            using (MemoryStream memory = new MemoryStream())
+            {
+                source.Save(memory, ImageFormat.Png);
+                memory.Position = 0;
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memory;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+                return bitmapImage;
+            }
+        }
+
+        /// <summary>
+        /// BitmapSource转换为Bitmap
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public System.Drawing.Bitmap BitmapFromSource(BitmapSource source)
+        {
+            using (MemoryStream outStream = new MemoryStream())
+            {
+                BitmapEncoder enc = new PngBitmapEncoder();
+                enc.Frames.Add(BitmapFrame.Create(source));
+                enc.Save(outStream);
+                System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(outStream);
+
+                // return bitmap; <-- leads to problems, stream is closed/closing ...
+                return new Bitmap(bitmap);
+            }
+        }
 
         private static ImageCodecInfo GetEncoderInfo(String mimeType)
         {
@@ -68,7 +108,7 @@ namespace Tools
         /// <param name="srcBitmap">传入的Bitmap对象</param>
         /// <param name="destStream">压缩后的Stream对象</param>
         /// <param name="level">压缩等级，0到100，0 最差质量，100 最佳</param>
-        public static void Compress(Bitmap srcBitmap, Stream destStream, long level)
+        public void Compress(Bitmap srcBitmap, Stream destStream, long level)
         {
             ImageCodecInfo myImageCodecInfo;
             System.Drawing.Imaging.Encoder myEncoder;
@@ -102,7 +142,7 @@ namespace Tools
         /// <param name="srcBitMap">传入的Bitmap对象</param>
         /// <param name="destFile">压缩后的图片保存路径</param>
         /// <param name="level">压缩等级，0到100，0 最差质量，100 最佳</param>
-        public static void Compress(Bitmap srcBitMap, string destFile, long level)
+        public void Compress(Bitmap srcBitMap, string destFile, long level)
         {
             Stream s = new FileStream(destFile, FileMode.Create);
             Compress(srcBitMap, s, level);
@@ -377,6 +417,34 @@ namespace Tools
                 ms.Seek(0, SeekOrigin.Begin);
                 ms.Read(buffer, 0, buffer.Length);
                 return buffer;
+            }
+        }
+        public string ImageToBase64(Image image)
+        {
+            Image img = image;
+            BinaryFormatter binFormatter = new BinaryFormatter();
+            using (MemoryStream memStream = new MemoryStream())
+            {
+                binFormatter.Serialize(memStream, img);
+                byte[] bytes = memStream.GetBuffer();
+                string base64 = Convert.ToBase64String(bytes);
+                return base64;
+            }
+        }
+
+        /// <summary>
+        /// 将Base64字符串转换为图片
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public Image Base64ToImage(string base64)
+        {
+            byte[] bytes = Convert.FromBase64String(base64);
+            using (MemoryStream memStream = new MemoryStream(bytes))
+            {
+                BinaryFormatter binFormatter = new BinaryFormatter();
+                Image img = (Image)binFormatter.Deserialize(memStream);
+                return img;
             }
         }
     }

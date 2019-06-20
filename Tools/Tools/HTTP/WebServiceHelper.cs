@@ -7,6 +7,7 @@ using System.Xml;
 using System.Collections;
 using System.Net;
 using System.Xml.Serialization;
+using System.Drawing;
 
 namespace Tools
 {
@@ -21,7 +22,7 @@ namespace Tools
         /// </summary>
         public string WebServiceUrl { get { return this._WebServiceUrl; } set { this._WebServiceUrl = value; } }
         /// <summary>
-        /// WebService服务名，不包含.asmx，如：UserService
+        /// WebService服务名，如：UserService.asmx UserService.php...
         /// </summary>
         public string WebServiceName { get; set; }
     }
@@ -42,24 +43,13 @@ namespace Tools
 
         /// <summary>   
         /// 采用Post方式调用WebService   
+        /// 
         /// </summary>    
         /// <param name="WebServiceInfos"></param>
         /// <param name="MethodName"></param>   
         /// <param name="Para">string型的参数名和参数值组成的哈希表</param>   
         /// <returns></returns>   
-        public static XmlDocument QueryPostWebService(WebServiceInfo WebServiceInfos, string MethodName, Hashtable Para)
-        {
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(WebServiceInfos.WebServiceUrl +"/"+WebServiceInfos.WebServiceName+ ".php/" + MethodName);
-            request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
-            SetWebRequest(request);
-            byte[] data = EncodePars(Para);
-            WriteRequestData(request, data);
-
-            return ReadXmlResponse(request.GetResponse());
-        }
-
-        public static string QueryPostWebServiceByJson(WebServiceInfo WebServiceInfos, string MethodName, Hashtable Para)
+        public static XmlDocument QueryPostWebService(WebServiceInfo WebServiceInfos, string MethodName, Hashtable Para ,string contentType = "application/x-www-form-urlencoded")
         {
             HttpWebRequest request;
             if (string.IsNullOrWhiteSpace(MethodName))
@@ -71,17 +61,52 @@ namespace Tools
                 request = (HttpWebRequest)HttpWebRequest.Create(WebServiceInfos.WebServiceUrl + "/" + WebServiceInfos.WebServiceName + "/" + MethodName);
             }
             request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentType = contentType;
             SetWebRequest(request);
             byte[] data = EncodePars(Para);
             WriteRequestData(request, data);
-            var s = request.GetResponse().GetResponseStream();
-            StreamReader sRead = new StreamReader(s);
-            string res = sRead.ReadToEnd();
-            s.Close();
-            sRead.Close();
+
+            return ReadXmlResponse(request.GetResponse());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="WebServiceInfos">web地址信息</param>
+        /// <param name="MethodName"></param>
+        /// <param name="Para">post 参数hashtable.add("","")</param>
+        /// <param name="contentType">默认application/x-www-form-urlencoded</param>
+        /// <returns>string 可以是json</returns>
+        public static string QueryPostWebServiceReString(WebServiceInfo WebServiceInfos, string MethodName, Hashtable Para,string contentType = "application/x-www-form-urlencoded")
+        {
+            HttpWebRequest request;
+            if (string.IsNullOrWhiteSpace(MethodName))
+            {
+                request = (HttpWebRequest)HttpWebRequest.Create(WebServiceInfos.WebServiceUrl + "/" + WebServiceInfos.WebServiceName);
+            }
+            else
+            {
+                request = (HttpWebRequest)HttpWebRequest.Create(WebServiceInfos.WebServiceUrl + "/" + WebServiceInfos.WebServiceName + "/" + MethodName);
+            }
+            request.Method = "POST";
+            request.ContentType = contentType;
+            SetWebRequest(request);
+            byte[] data = EncodePars(Para);
+            WriteRequestData(request, data);
+            string res = string.Empty;
+            using (var s = request.GetResponse().GetResponseStream())
+            {
+                if (s!= null)
+                {
+                    using (StreamReader sRead = new StreamReader(s))
+                    {
+                        res = sRead.ReadToEnd();
+                    }
+                }
+            }
             return res;
         }
+
         /// <summary>   
         /// 采用Get方式调用WebService   
         /// </summary>   
@@ -91,7 +116,15 @@ namespace Tools
         /// <returns></returns>   
         public static XmlDocument QueryGetWebService(WebServiceInfo WebServiceInfos, string MethodName, Hashtable Para)
         {
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(WebServiceInfos.WebServiceUrl +"/"+ WebServiceInfos.WebServiceName+".asmx/" + MethodName + "?" + ParsToString(Para));
+            HttpWebRequest request;
+            if (string.IsNullOrWhiteSpace(MethodName))
+            {
+                request = (HttpWebRequest)HttpWebRequest.Create(WebServiceInfos.WebServiceUrl + "/" + WebServiceInfos.WebServiceName);
+            }
+            else
+            {
+                request = (HttpWebRequest)HttpWebRequest.Create(WebServiceInfos.WebServiceUrl + "/" + WebServiceInfos.WebServiceName + "/" + MethodName);
+            }
             request.Method = "GET";
             request.ContentType = "application/x-www-form-urlencoded";
             SetWebRequest(request);
@@ -107,13 +140,13 @@ namespace Tools
         /// <returns></returns>   
         public static XmlDocument QuerySoapWebService(WebServiceInfo WebServiceInfos, string MethodName, Hashtable Para)
         {
-            if (_xmlNamespaces.ContainsKey(WebServiceInfos.WebServiceUrl+"/"+WebServiceInfos.WebServiceName+".asmx"))
+            if (_xmlNamespaces.ContainsKey(WebServiceInfos.WebServiceUrl+"/"+WebServiceInfos.WebServiceName))
             {
-                return QuerySoapWebService(WebServiceInfos, MethodName, Para, _xmlNamespaces[WebServiceInfos.WebServiceUrl+"/"+WebServiceInfos.WebServiceName+".asmx"].ToString());
+                return QuerySoapWebService(WebServiceInfos, MethodName, Para, _xmlNamespaces[WebServiceInfos.WebServiceUrl+"/"+WebServiceInfos.WebServiceName].ToString());
             }
             else
             {
-                return QuerySoapWebService(WebServiceInfos, MethodName, Para, GetNamespace(WebServiceInfos.WebServiceUrl + "/" + WebServiceInfos.WebServiceName + ".asmx"));
+                return QuerySoapWebService(WebServiceInfos, MethodName, Para, GetNamespace(WebServiceInfos.WebServiceUrl + "/" + WebServiceInfos.WebServiceName));
             }
         }
 
@@ -222,9 +255,10 @@ namespace Tools
         private static void WriteRequestData(HttpWebRequest request, byte[] data)
         {
             request.ContentLength = data.Length;
-            Stream writer = request.GetRequestStream();
-            writer.Write(data, 0, data.Length);
-            writer.Close();
+            using (Stream writer = request.GetRequestStream())
+            {
+                writer.Write(data, 0, data.Length);
+            }
         }
         /// <summary>
         /// 
@@ -260,11 +294,14 @@ namespace Tools
         /// <returns></returns>
         private static XmlDocument ReadXmlResponse(WebResponse response)
         {
-            StreamReader sr = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
-            String retXml = sr.ReadToEnd();
-            sr.Close();
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(retXml);
+            XmlDocument doc;
+            using (StreamReader sr = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
+            {
+                String retXml = sr.ReadToEnd();
+                sr.Close();
+                doc = new XmlDocument();
+                doc.LoadXml(retXml);
+            }
             return doc;
         }
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Tools;
+using Tools.HTTP;
 
 namespace Test
 {
@@ -44,8 +46,36 @@ namespace Test
             var _1tp1 = Tools.IniHelper.ReadKeys("Config");
             var _1tp2 = Tools.IniHelper.ReadIniData("Config1", "调试模式1", "");
             */
-        }
+            /*
+            Tools.HTTP.RestFulClientHelper client = new Tools.HTTP.RestFulClientHelper();
+            client.EndPoint = @"http://www.webxml.com.cn/WebServices/ChinaStockWebService.asmx/getStockImageByCode";
+            //client.Method = EnumHttpVerb.GET;
+            //string resultGet = client.HttpRequest("PersonInfoQuery/王二麻子");
+            
+            client.Method = EnumHttpVerb.POST;
+            client.ContentType = "application/x-www-form-urlencoded";
+            client.PostData = "theStockCode=sh000001";// JsonConvert.SerializeObject(jsons);//JSon序列化我们用到第三方Newtonsoft.Json.dll
+            var resultPost = client.HttpRequest();
+            Console.WriteLine();
+            */
 
+            WebServiceInfo webServiceInfo = new WebServiceInfo()
+            {//http://www.webxml.com.cn/WebServices/ValidateCodeWebService.asmx?op=smallValidateImage
+                WebServiceUrl = "http://www.webxml.com.cn/WebServices/ValidateCodeWebService.asmx"
+            };
+            Hashtable hashtable = new Hashtable();
+            hashtable.Add("byString", "132456");
+            var stri = Tools.WebServiceHelper.QueryPostWebService(webServiceInfo, "cnValidateByte", hashtable);
+            
+            string s = stri.DocumentElement.InnerText;
+            image.Source = Tools.ImageHelper.getInstance().CreateBitmapSourceFromBytes(Encoding.UTF8.GetBytes(s));
+        }
+        public class Jsons<T>
+        {
+            public string status;
+            public string msg;
+            public T data;
+        }
 
 
         public void msg(string msg) {
