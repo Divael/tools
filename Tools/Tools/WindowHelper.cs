@@ -101,7 +101,7 @@ namespace Tools
         /// <summary>
         /// 快捷方式名称-任意自定义
         /// </summary>
-        private const string QuickName = "YangProgram";
+        private static string QuickName = "YangProgram";
 
         /// <summary>
         /// 自动获取系统自动启动目录
@@ -116,14 +116,17 @@ namespace Tools
         /// <summary>
         /// 自动获取桌面目录
         /// </summary>
-        private string desktopPath { get { return Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory); } }
+        private static string desktopPath { get { return Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory); } }
 
         /// <summary>
         /// 设置开机自动启动-只需要调用改方法就可以了参数里面的bool变量是控制开机启动的开关的，默认为开启自启启动
         /// </summary>
+        /// <param name="quickName">快捷方式名称</param>
         /// <param name="onOff">自启开关</param>
-        public static void SetMeAutoStart(bool onOff = true)
+        /// <param name="isDeskTop">是否创建桌面快捷方式</param> 
+        public static void SetMeAutoStart(string quickName, bool onOff = true,bool isDeskTop = false)
         {
+            QuickName = quickName;
             if (onOff)//开机启动
             {
                 //获取启动路径应用程序快捷方式的路径集合
@@ -155,7 +158,11 @@ namespace Tools
                 }
             }
             //创建桌面快捷方式-如果需要可以取消注释
-            //CreateDesktopQuick(desktopPath, QuickName, appAllPath);
+            if (isDeskTop)
+            {
+                CreateDesktopQuick(desktopPath, QuickName, appAllPath);
+            }
+            
         }
 
         /// <summary>
@@ -264,7 +271,7 @@ namespace Tools
         /// </summary>
         /// <param name="desktopPath">桌面地址</param>
         /// <param name="appPath">应用路径</param>
-        public void CreateDesktopQuick(string desktopPath = "", string quickName = "", string appPath = "")
+        public static void CreateDesktopQuick(string desktopPath = "", string quickName = "", string appPath = "")
         {
             List<string> shortcutPaths = GetQuickFromFolder(desktopPath, appPath);
             //如果没有则创建
