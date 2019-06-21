@@ -419,6 +419,9 @@ namespace Tools
                 return buffer;
             }
         }
+
+
+
         public string ImageToBase64(Image image)
         {
             Image img = image;
@@ -446,6 +449,89 @@ namespace Tools
                 Image img = (Image)binFormatter.Deserialize(memStream);
                 return img;
             }
+        }
+
+        /// <summary>
+        /// 从文件名传化为base64字符串
+        /// </summary>
+        /// <param name="Imagefilename"></param>
+        /// <returns></returns>
+        public string ImgFileToBase64String(string Imagefilename)
+        {
+            try
+            {
+                byte[] arr;
+                Bitmap bmp = new Bitmap(Imagefilename);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    arr = new byte[ms.Length];
+                    ms.Position = 0;
+                    ms.Read(arr, 0, (int)ms.Length);
+                }
+                return Convert.ToBase64String(arr);
+            }
+            catch 
+            {
+                return null;
+            }
+        }
+
+
+        /// <summary>
+        /// threeebase64编码的字符串转为图片
+        /// </summary>
+        /// <param name="strbase64"></param>
+        /// <returns></returns>
+        public Bitmap Base64StringToImage(string strbase64)
+        {
+            try
+            {
+                byte[] arr = Convert.FromBase64String(strbase64);
+                MemoryStream ms = new MemoryStream(arr);
+                Bitmap bmp = new Bitmap(ms);
+
+                bmp.Save(@"d:\test.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+                //bmp.Save(@"d:\"test.bmp", ImageFormat.Bmp);
+                //bmp.Save(@"d:\"test.gif", ImageFormat.Gif);
+                //bmp.Save(@"d:\"test.png", ImageFormat.Png);
+                ms.Close();
+                return bmp;
+            }
+            catch 
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 多张base64图片转换为图片另存为，路径有问题，要改！
+        /// </summary>
+        /// <param name="upimgPath">路径</param>
+        /// <param name="base64String"></param>
+        /// <returns></returns>
+        public string Base64ToImage(string upimgPath, string base64String)
+        {
+            string goodspath = upimgPath.Substring(0, upimgPath.LastIndexOf('/'));  //用来生成文件夹  
+            if (!Directory.Exists(goodspath))
+            {
+                Directory.CreateDirectory(goodspath);
+            }
+            var imgPath = string.Empty;
+            if (!string.IsNullOrEmpty(base64String))
+            {
+                var splitBase = base64String.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var item in splitBase)
+                {
+                    var path = upimgPath + Guid.NewGuid() + ".jpg";
+
+                    string filePath = path;// Server.MapPath(upimgPath + Guid.NewGuid() + ".jpg");  
+                    File.WriteAllBytes(filePath, Convert.FromBase64String(item));
+                    imgPath += path + ";";
+                }
+            }
+            else { imgPath = ";"; }
+            return imgPath.TrimEnd(';');
         }
     }
 }
