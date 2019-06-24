@@ -107,6 +107,46 @@ namespace Tools
             return res;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="WebServiceInfos">web地址信息</param>
+        /// <param name="MethodName"></param>
+        /// <param name="JsonPara">post Json方式提交("","")</param>
+        /// <param name="contentType">默认application/x-www-form-urlencoded</param>
+        /// <returns>string 可以是json</returns>
+        public static string QueryPostWebServiceReString(WebServiceInfo WebServiceInfos, string MethodName, string JsonPara, string contentType = "application/json")
+        {
+            HttpWebRequest request;
+            if (string.IsNullOrWhiteSpace(MethodName))
+            {
+                request = (HttpWebRequest)HttpWebRequest.Create(WebServiceInfos.WebServiceUrl + "/" + WebServiceInfos.WebServiceName);
+            }
+            else
+            {
+                request = (HttpWebRequest)HttpWebRequest.Create(WebServiceInfos.WebServiceUrl + "/" + WebServiceInfos.WebServiceName + "/" + MethodName);
+            }
+            request.Method = "POST";
+            request.ContentType = contentType;
+            SetWebRequest(request);
+            byte[] data = Encoding.UTF8.GetBytes(JsonPara);
+            WriteRequestData(request, data);
+            string res = string.Empty;
+            using (var s = request.GetResponse().GetResponseStream())
+            {
+                if (s != null)
+                {
+                    using (StreamReader sRead = new StreamReader(s))
+                    {
+                        res = sRead.ReadToEnd();
+                    }
+                }
+            }
+            return res;
+        }
+
+
         /// <summary>   
         /// 采用Get方式调用WebService   
         /// </summary>   
