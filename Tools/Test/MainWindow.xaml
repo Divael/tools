@@ -14,5 +14,6 @@
         <TextBox FontSize="16" x:Name="base_left" Width="69" Canvas.Left="229" Canvas.Top="152" Text="10"/>
         <TextBox FontSize="16" x:Name="space_left" Width="69" Canvas.Left="330" Canvas.Top="152" Text="50"/>
         <Image x:Name="image" Height="100" Canvas.Left="399" Canvas.Top="269" Width="327"/>
+        <Button x:Name="sdf_Copy" Content="show" Canvas.Left="37" Click="Sdf_Copy_Click" Canvas.Top="243" Width="95"/>
     </Canvas>
 </Window>

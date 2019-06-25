@@ -40,13 +40,14 @@ namespace Test
                 MessageBox.Show("已有一个程序实例运行,或者请至任务管理器中，将其结束!");
                 Environment.Exit(0);
             }
-
+            /*
             //注册机注册判断
             if (!Tools.注册机.AuthorizeCheckAction.getInstance().init("1", "1").AuthorizeCheck())
             {
                 MessageBox.Show("机器未获得使用权限!");
                 //Environment.Exit(0);
             }
+            */
         }
 
         private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

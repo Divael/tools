@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Test.UI弹窗;
 using Tools;
 using Tools.HTTP;
 
@@ -58,7 +59,7 @@ namespace Test
             var resultPost = client.HttpRequest();
             Console.WriteLine();
             */
-
+            /*
             WebServiceInfo webServiceInfo = new WebServiceInfo()
             {//http://www.webxml.com.cn/WebServices/ValidateCodeWebService.asmx?op=smallValidateImage
                 WebServiceUrl = "http://www.webxml.com.cn/WebServices/ValidateCodeWebService.asmx"
@@ -68,7 +69,7 @@ namespace Test
             var stri = Tools.WebServiceHelper.QueryPostWebService(webServiceInfo, "cnValidateByte", hashtable);
             
             string s = stri.DocumentElement.InnerText;
-            image.Source = Tools.ImageHelper.getInstance().CreateBitmapSourceFromBytes(Encoding.UTF8.GetBytes(s));
+            image.Source = Tools.ImageHelper.getInstance().CreateBitmapSourceFromBytes(Encoding.UTF8.GetBytes(s));*/
         }
         public class Jsons<T>
         {
@@ -92,6 +93,22 @@ namespace Test
             PictureAddFont.getInstance()._top_space = int.Parse(space_top.Text);
 
             PictureAddFont.getInstance().PicAddFonts(text_msg.Text, "123456", @"D:\cover.png");
+        }
+
+        private void Sdf_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            /*
+            oastNone toastNone = new ToastNone("审核失败", "未查询到预约信息,请与被仿人联系后重试！");
+            toastNone.Show();
+            */
+            /*
+            ToastNone toastNone = new ToastNone("人证验证失败", "人证验证未通过，请与前台联系！");
+            toastNone.Show();
+            */
+            
+            ToastNone toastNone = new ToastNone("Welcome To TianMa", "请取走您的访客卡，并到前台领取访客证！",3);
+            toastNone.Show();
+            
         }
     }
 }
