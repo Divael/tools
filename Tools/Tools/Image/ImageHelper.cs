@@ -500,13 +500,16 @@ namespace Tools
             try
             {
                 byte[] arr;
-                Bitmap bmp = new Bitmap(Imagefilename);
                 using (MemoryStream ms = new MemoryStream())
                 {
+                    Bitmap bmp = new Bitmap(Imagefilename);
                     bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    bmp.Dispose();
+                    bmp = null;
                     arr = new byte[ms.Length];
                     ms.Position = 0;
                     ms.Read(arr, 0, (int)ms.Length);
+
                 }
                 return Convert.ToBase64String(arr);
             }
