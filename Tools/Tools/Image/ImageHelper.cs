@@ -440,15 +440,54 @@ namespace Tools
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        public Bitmap Base64ToBitmap(string base64)
+        {
+            Bitmap bitmap = null;
+
+            try
+            {
+                byte[] arr = Convert.FromBase64String(base64);
+                using (MemoryStream ms = new MemoryStream(arr))
+                {
+                    Bitmap bmp = new Bitmap(ms);
+                    ms.Close();
+                    bitmap = bmp;
+                }
+            }
+            catch
+            {
+            }
+            return bitmap;
+            //---------------------
+            //作者：qubernet
+            //来源：CSDN
+            //原文：https://blog.csdn.net/qubernet/article/details/84067203 
+            //版权声明：本文为博主原创文章，转载请附上博文链接！
+        }
+
+        /// <summary>
+        /// 将Base64字符串转换为Image对象
+        /// </summary>
+        /// <param name="base64"></param>
+        /// <returns></returns>
         public Image Base64ToImage(string base64)
         {
-            byte[] bytes = Convert.FromBase64String(base64);
-            using (MemoryStream memStream = new MemoryStream(bytes))
+            Image bitmap = null;
+            try
             {
-                BinaryFormatter binFormatter = new BinaryFormatter();
-                Image img = (Image)binFormatter.Deserialize(memStream);
-                return img;
+                byte[] arr = Convert.FromBase64String(base64);
+                using (MemoryStream ms = new MemoryStream(arr))
+                {
+                    BinaryFormatter binFormatter = new BinaryFormatter();
+                    Image img = (Image)binFormatter.Deserialize(ms);
+                    ms.Close();
+                    bitmap = img;
+                }
             }
+            catch 
+            {
+            }
+            return bitmap;
         }
 
         /// <summary>
@@ -482,21 +521,23 @@ namespace Tools
         /// threeebase64编码的字符串转为图片
         /// </summary>
         /// <param name="strbase64"></param>
+        /// <param name="filepath">jpg路径</param>
         /// <returns></returns>
-        public Bitmap Base64StringToImage(string strbase64)
+        public Bitmap Base64StringToBitmap(string strbase64,string filepath)
         {
             try
             {
                 byte[] arr = Convert.FromBase64String(strbase64);
-                MemoryStream ms = new MemoryStream(arr);
-                Bitmap bmp = new Bitmap(ms);
-
-                bmp.Save(@"d:\test.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
-                //bmp.Save(@"d:\"test.bmp", ImageFormat.Bmp);
-                //bmp.Save(@"d:\"test.gif", ImageFormat.Gif);
-                //bmp.Save(@"d:\"test.png", ImageFormat.Png);
-                ms.Close();
-                return bmp;
+                using (MemoryStream ms = new MemoryStream(arr))
+                {
+                    Bitmap bmp = new Bitmap(ms);
+                    bmp.Save(@filepath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    //bmp.Save(@"d:\"test.bmp", ImageFormat.Bmp);
+                    //bmp.Save(@"d:\"test.gif", ImageFormat.Gif);
+                    //bmp.Save(@"d:\"test.png", ImageFormat.Png);
+                    ms.Close();
+                    return bmp;
+                }
             }
             catch 
             {

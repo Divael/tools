@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Media.Imaging;
 using AForge.Video.DirectShow;
-using Tools.WPF;
+using Splash;
 
 namespace FaceCapture
 {

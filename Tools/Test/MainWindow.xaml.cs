@@ -98,17 +98,17 @@ namespace Test
         private void Sdf_Copy_Click(object sender, RoutedEventArgs e)
         {
             /*
-            oastNone toastNone = new ToastNone("审核失败", "未查询到预约信息,请与被仿人联系后重试！");
+            ToastNone toastNone = new ToastNone("审核失败", "未查询到预约信息,请与被仿人联系后重试！");
             toastNone.Show();
             */
             /*
             ToastNone toastNone = new ToastNone("人证验证失败", "人证验证未通过，请与前台联系！");
             toastNone.Show();
             */
-            
+            /*
             ToastNone toastNone = new ToastNone("Welcome To TianMa", "请取走您的访客卡，并到前台领取访客证！",3);
             toastNone.Show();
-            
+            */
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.106
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "Tools\Tools.csproj", "{44CA16DA-E67A-4942-895F-032FB4B46B3E}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceCapture", "FaceCapture\FaceCapture.csproj", "{A72AAEB3-C00C-445D-BDD9-B0078C43A566}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRT591_M001_MR01", "CRT591_M001_MR01\CRT591_M001_MR01.csproj", "{E2A3ED3F-0175-49F3-B9B0-260AD16B9C5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FingerPictureBox", "FingerPictureBox\FingerPictureBox.csproj", "{00777BAB-5318-46FC-870A-1D13B55B0041}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +99,14 @@ Global
 		{E2A3ED3F-0175-49F3-B9B0-260AD16B9C5D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E2A3ED3F-0175-49F3-B9B0-260AD16B9C5D}.Release|x86.ActiveCfg = Release|Any CPU
 		{E2A3ED3F-0175-49F3-B9B0-260AD16B9C5D}.Release|x86.Build.0 = Release|Any CPU
+		{00777BAB-5318-46FC-870A-1D13B55B0041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00777BAB-5318-46FC-870A-1D13B55B0041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00777BAB-5318-46FC-870A-1D13B55B0041}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{00777BAB-5318-46FC-870A-1D13B55B0041}.Debug|x86.Build.0 = Debug|Any CPU
+		{00777BAB-5318-46FC-870A-1D13B55B0041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00777BAB-5318-46FC-870A-1D13B55B0041}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00777BAB-5318-46FC-870A-1D13B55B0041}.Release|x86.ActiveCfg = Release|Any CPU
+		{00777BAB-5318-46FC-870A-1D13B55B0041}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
