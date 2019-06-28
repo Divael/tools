@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -147,6 +148,70 @@ namespace Tools
             Stream s = new FileStream(destFile, FileMode.Create);
             Compress(srcBitMap, s, level);
             s.Close();
+        }
+
+        /// <summary>
+        /// 将bmp图片转成jpg图片
+        /// </summary>
+        /// <param name="BmpFilePath"></param>
+        /// <param name="JpgFilePath"></param>
+        public void BmpToJpg(string BmpFilePath, string JpgFilePath)
+        {
+            string BMPFiles = BmpFilePath;
+            //BMP文件所在路径
+            BitmapImage BitImage = new BitmapImage(new Uri(BMPFiles, UriKind.Absolute));
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(BitImage));
+            String JpegImage = JpgFilePath;
+            //JPG文件件路径
+            using (FileStream fileStream = new FileStream(JpegImage, FileMode.Create, FileAccess.ReadWrite))
+            {
+                encoder.Save(fileStream);
+                fileStream.Close();
+            }
+            //---------------------
+            //作者：flywithmj
+            //来源：CSDN
+            //原文：https://blog.csdn.net/flywithmj/article/details/6548732 
+            //版权声明：本文为博主原创文章，转载请附上博文链接！
+        }
+
+        /// <summary>
+        /// 图片压缩(降低质量以减小文件的大小)
+        /// </summary>
+        /// <param name="mg">传入的Bitmap对象</param>
+        /// <param name="newSize">大小300*300</param>
+        /// <returns></returns>
+        public Bitmap Compress(Bitmap mg, System.Drawing.Size newSize)
+        {
+            double ratio = 0d;
+            double myThumbWidth = 0d;
+            double myThumbHeight = 0d;
+            int x = 0;
+            int y = 0;
+
+            Bitmap bp;
+
+            if ((mg.Width / Convert.ToDouble(newSize.Width)) > (mg.Height /
+            Convert.ToDouble(newSize.Height)))
+                ratio = Convert.ToDouble(mg.Width) / Convert.ToDouble(newSize.Width);
+            else
+                ratio = Convert.ToDouble(mg.Height) / Convert.ToDouble(newSize.Height);
+            myThumbHeight = Math.Ceiling(mg.Height / ratio);
+            myThumbWidth = Math.Ceiling(mg.Width / ratio);
+
+            System.Drawing.Size thumbSize = new System.Drawing.Size((int)newSize.Width, (int)newSize.Height);
+            bp = new Bitmap(newSize.Width, newSize.Height);
+            x = (newSize.Width - thumbSize.Width) / 2;
+            y = (newSize.Height - thumbSize.Height);
+            System.Drawing.Graphics g = Graphics.FromImage(bp);
+            g.SmoothingMode = SmoothingMode.HighQuality;
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+            Rectangle rect = new Rectangle(x, y, thumbSize.Width, thumbSize.Height);
+            g.DrawImage(mg, rect, 0, 0, mg.Width, mg.Height, GraphicsUnit.Pixel);
+
+            return bp;
         }
 
         /// <summary>
