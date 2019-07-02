@@ -1,0 +1,31 @@
+﻿<Window x:Class="System.Waiting"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        ShowInTaskbar="false" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen"
+        Height="200" Width="1024" AllowsTransparency="true" Background="{x:Null}" Topmost="True" WindowState="Maximized">
+    <Viewbox Margin="70,30" Height="200" Width="1024">
+        <Border CornerRadius="2" Padding="10,0,10,0">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3393F3"/>
+                    <GradientStop Color="#FF3A076C" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <TextBlock Name="tb" Margin="1.5" TextAlignment="Center" VerticalAlignment="Center" FontFamily="黑体">
+                <TextBlock.Foreground>
+                    <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+                        <GradientStop Color="#FFFF3515" Offset="1"/>
+                        <GradientStop Color="#FFF1D837"/>
+                    </LinearGradientBrush>
+                </TextBlock.Foreground>
+        正在初始化(By Fly)，请稍等...
+            </TextBlock>
+            <UIElement.Effect>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="DarkBlue"/>
+            </UIElement.Effect>
+        </Border>
+    </Viewbox>
+</Window>
