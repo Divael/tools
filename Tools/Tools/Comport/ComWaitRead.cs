@@ -17,6 +17,11 @@ namespace Comport
     /// </summary>
     public class ComWaitRead : Com
 	{
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cpp">参数</param>
+        /// <param name="ReceiveDelay">等待接收时间</param>
 		public ComWaitRead(ComPortParm cpp, int ReceiveDelay = 50) : base(cpp)
 		{
 			base.DataReceive += this.ComWaitRead_DataReceive;
@@ -59,7 +64,9 @@ namespace Comport
 				}
 			}
 		}
-
+        /// <summary>
+        /// 接收延时
+        /// </summary>
 		public int ReceiveDelay = 50;
 
 		private List<byte> Data = new List<byte>();

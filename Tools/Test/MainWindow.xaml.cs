@@ -70,6 +70,8 @@ namespace Test
             
             string s = stri.DocumentElement.InnerText;
             image.Source = Tools.ImageHelper.getInstance().CreateBitmapSourceFromBytes(Encoding.UTF8.GetBytes(s));*/
+
+            
         }
         public class Jsons<T>
         {
