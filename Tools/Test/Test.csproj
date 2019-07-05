@@ -65,6 +65,9 @@
     <Compile Include="UI弹窗\LoadingSendCard.xaml.cs">
       <DependentUpon>LoadingSendCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI弹窗\MessageBoxSelf.xaml.cs">
+      <DependentUpon>MessageBoxSelf.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI弹窗\toast.xaml.cs">
       <DependentUpon>toast.xaml</DependentUpon>
     </Compile>
@@ -90,6 +93,10 @@
     <Page Include="UI弹窗\LoadingSendCard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI弹窗\MessageBoxSelf.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI弹窗\toast.xaml">
       <Generator>MSBuild:Compile</Generator>

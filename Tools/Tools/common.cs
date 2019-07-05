@@ -10,6 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.WinSystem;
 using Tools;
 
@@ -20,6 +21,42 @@ namespace System
     /// </summary>
     public static class Common
     {
+        /// <summary>
+        /// 打开一个窗口，并返回而不等待新打开的窗口关闭。
+        /// </summary>
+        /// <param name="win"></param>
+        /// <param name="owner"></param>
+        public static void Show(this Window win, Window owner) {
+            win.Owner = owner;
+            win.Show();
+        }
+        /// <summary>
+        /// 打开一个窗口，并返回而不等待新打开的窗口关闭。
+        /// </summary>
+        /// <param name="win"></param>
+        public static void ShowEx(this Window win) {
+            win.Show(Application.Current.MainWindow);
+        }
+
+        /// <summary>
+        /// 显示对话框,打开一个窗口，并关闭新打开的窗口时，才返回。
+        /// </summary>
+        /// <param name="win"></param>
+        /// <param name="owner"></param>
+        public static void ShowDialog(this Window win, Window owner)
+        {
+            win.Owner = owner;
+            win.ShowDialog();
+        }
+
+        /// <summary>
+        /// 显示对话框,打开一个窗口，并关闭新打开的窗口时，才返回。
+        /// </summary>
+        /// <param name="win"></param>
+        public static void ShowDialogEx(this Window win)
+        {
+            win.ShowDialog(Application.Current.MainWindow);
+        }
 
         public static void ForEach<T>(this IEnumerable<T> shit, Action<T> action)
         {
@@ -27,6 +64,11 @@ namespace System
                 action(obj);
         }
 
+        /// <summary>
+        /// 根据默认编码Default获取字节的字符串
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static string GetString(byte[] b)
         {
             if (b != null)
@@ -34,6 +76,12 @@ namespace System
             return (string)null;
         }
 
+        /// <summary>
+        /// 根据Encoding编码获取字节的字符串
+        /// </summary>
+        /// <param name="b">byte</param>
+        /// <param name="e">Encoding</param>
+        /// <returns></returns>
         public static string GetString(byte[] b, Encoding e)
         {
             if (b != null)
@@ -41,15 +89,24 @@ namespace System
             return (string)null;
         }
 
+        /// <summary>
+        /// 当前线程睡眠
+        /// </summary>
+        /// <param name="ms"></param>
         public static void Sleep(int ms)
         {
             Lazy.Sleep(ms);
         }
 
+        /// <summary>
+        /// 当前线程睡眠
+        /// </summary>
+        /// <param name="ts"></param>
         public static void Sleep(TimeSpan ts)
         {
             Lazy.Sleep(ts);
         }
+
 
         public static void SetSleepTick()
         {
@@ -137,7 +194,7 @@ namespace System
         }
 
         /// <summary>
-        /// 获取字符串的bytes
+        /// 获取Encoding字符串的bytes
         /// </summary>
         /// <param name="s"></param>
         /// <param name="e"></param>
@@ -148,7 +205,7 @@ namespace System
         }
 
         /// <summary>
-        /// 获取字符串的bytes
+        /// 获取默认字符串的bytes
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
@@ -158,7 +215,7 @@ namespace System
         }
 
         /// <summary>
-        /// 获取字符串的bytes
+        /// MD5Code加密转ToBase64String
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
@@ -166,7 +223,11 @@ namespace System
         {
             return Convert.ToBase64String(Common.MD5Code(data.GetBytes1(Encoding.UTF8)));
         }
-
+        /// <summary>
+        /// gbk
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <returns></returns>
         public static byte[] GBKToUTF8(byte[] buffer)
         {
             string txt = Encoding.GetEncoding("GBK").GetString(buffer);
@@ -205,7 +266,7 @@ namespace System
             {
                 if (LogException)
                 {
-                    logErr("Tools内部错误",p);
+                    logErr("Tools内部错误RunInBackThread ", p);
                 }
             });
         }
@@ -250,7 +311,7 @@ namespace System
         /// <param name="mess"></param>
         public static void logThis(this Exception mess)
         {
-            Tools.Loger.info(mess.ToString());
+            Tools.Loger.info(mess.Message.ToString());
         }
 
         /// <summary>
@@ -286,6 +347,12 @@ namespace System
                                       select how(m));
         }
 
+        /// <summary>
+        /// 字符串转16进制
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="split">分隔符</param>
+        /// <returns></returns>
         public static byte[] ToHex(this string data, string split = " ")
         {
             data = data.Replace(split, string.Empty);
