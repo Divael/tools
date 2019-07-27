@@ -31,5 +31,25 @@ namespace Tools.sound
                 WavPlayer(wavfile);
             });
         }
+
+        private static Task task = null;
+
+        /// <summary>
+        /// 播放音频文件wav格式的
+        /// </summary>
+        /// <param name="wavfile">wav格式地址</param>
+        public static void WavPlayerTask(string wavfile)
+        {
+            if (task != null)
+            {
+                if (!task.IsCompleted)
+                {
+                    return;
+                }
+            }
+            task = Task.Run(()=> {
+                WavPlayerInvoke(wavfile);
+            });
+        }
     }
 }
