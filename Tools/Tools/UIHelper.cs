@@ -23,6 +23,11 @@ namespace Tools
         /// </summary>
         private static UserControl main_page = null;
 
+        public static ContentControl DisplayUserControl
+        {
+            get; set;
+        }
+
         public static UserControl Last_page
         {
             get
@@ -62,29 +67,34 @@ namespace Tools
             }
         }
 
-        public static ContentControl DisplayUserControl
-        {
-            get;set;
-        }
+
 
         /// <summary>
-        /// 初始化，绑定viewbox
+        /// 初始化，绑定ContentControl
         /// </summary>
-        /// <param name="userControl"></param>
-        public static void Init(ContentControl mainContentControl, UserControl mainUserControl)
+        /// <param name="mainContentControl">ContentControl</param>
+        /// <param name="mainUserControl">mainUserControl</param>
+        public static void Init(ContentControl mainContentControl, UserControl mainUserControl = null)
         {
             DisplayUserControl = mainContentControl;
-            Main_page = mainUserControl;
+            if (mainUserControl != null)
+            {
+                Main_page = mainUserControl;
+            }
         }
 
         /// <summary>
         /// 指定页面
         /// </summary>
-        /// <param name="curControl"></param>
-        /// <param name="nextControlControl"></param>
+        /// <param name="curControl">当前页面</param>
+        /// <param name="nextControlControl">下一页面</param>
         public static void ToUI(UserControl curControl, UserControl nextControlControl)
         {
             if (DisplayUserControl != null) {
+                if (Main_page == null)
+                {
+                    Main_page = curControl;
+                }
                 Last_page = curControl;
                 Cur_page = nextControlControl;
                 DisplayUserControl.Content = nextControlControl;
@@ -99,11 +109,18 @@ namespace Tools
         /// 主页
         /// </summary>
         /// <param name="curControl"></param>
-        public static void ToMainUI(UserControl curControl)
+        public static void ToMainUI(UserControl curControl = null)
         {
             Last_page = curControl;
             Cur_page = Main_page;
             DisplayUserControl.Content = Main_page;
+        }
+
+        public static void ToUpUI(UserControl curControl = null)
+        {
+            Cur_page = Last_page;
+            DisplayUserControl.Content = Last_page;
+            Last_page = curControl;
         }
     }
 }
