@@ -47,7 +47,8 @@ namespace Tools
         /// </summary>    
         /// <param name="WebServiceInfos"></param>
         /// <param name="MethodName"></param>   
-        /// <param name="Para">string型的参数名和参数值组成的哈希表</param>   
+        /// <param name="Para">string型的参数名和参数值组成的哈希表</param>
+        /// <param name="contentType">application/x-www-form-urlencoded</param>   
         /// <returns></returns>   
         public static XmlDocument QueryPostWebService(WebServiceInfo WebServiceInfos, string MethodName, Hashtable Para ,string contentType = "application/x-www-form-urlencoded")
         {
