@@ -289,7 +289,8 @@ namespace Tools
         private static void SetWebRequest(HttpWebRequest request)
         {
             request.Credentials = CredentialCache.DefaultCredentials;
-            request.Timeout = 10000;
+            //request.Timeout = 30000;
+            request.Timeout = 120000;
         }
 
         private static void WriteRequestData(HttpWebRequest request, byte[] data)
