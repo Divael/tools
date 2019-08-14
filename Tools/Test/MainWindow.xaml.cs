@@ -70,9 +70,22 @@ namespace Test
             
             string s = stri.DocumentElement.InnerText;
             image.Source = Tools.ImageHelper.getInstance().CreateBitmapSourceFromBytes(Encoding.UTF8.GetBytes(s));*/
-
-            
+            //uint s = BitConverter.ToUInt32(StringHelper.HexStringToByteArray("EA 97 63 93"),0);
+            //Console.WriteLine();
         }
+        private static string byteToHexStr(byte[] bytes, int length)
+        {
+            string returnStr = "";
+            if (bytes != null)
+            {
+                for (int i = 0; i < length; i++)
+                {
+                    returnStr += bytes[i].ToString("X2");
+                }
+            }
+            return returnStr;
+        }
+
         public class Jsons<T>
         {
             public string status;
