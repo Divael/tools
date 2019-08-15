@@ -70,8 +70,10 @@ namespace Test
             
             string s = stri.DocumentElement.InnerText;
             image.Source = Tools.ImageHelper.getInstance().CreateBitmapSourceFromBytes(Encoding.UTF8.GetBytes(s));*/
-            //uint s = BitConverter.ToUInt32(StringHelper.HexStringToByteArray("EA 97 63 93"),0);
-            //Console.WriteLine();
+            string s = BitConverter.ToUInt32(StringHelper.HexStringToByteArray("EA 7C A1 CD"), 0).ToString();
+            
+            
+            Console.WriteLine();
         }
         private static string byteToHexStr(byte[] bytes, int length)
         {
