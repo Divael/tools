@@ -106,4 +106,71 @@ namespace Tools
             DisplayUserControl.Content = Main_page;
         }
     }
+
+    public class UIController {
+
+        public ContentControl _MainContentControl { get;private set; }
+        public UserControl _lastUserControl { get; private set; }
+        public UserControl _FirstUserControl { get; private set; }
+
+
+        private static UIController sClass;
+        private static object locks = new object();
+
+        private UIController()
+        {
+
+        }
+
+        public static UIController getInstance()
+        {
+            if (sClass == null)
+            {
+                lock (locks)
+                {
+                    if (sClass == null)
+                    {
+                        sClass = new UIController();
+                        return sClass;
+                    }
+                }
+            }
+            return sClass;
+        }
+
+        public void SetMainControlContent(ContentControl contentControl) {
+            _MainContentControl = contentControl;
+        }
+
+        public void ToUserControl(UserControl userControl) {
+            if (_MainContentControl.Content!= null)
+            {
+                _lastUserControl = (UserControl)_MainContentControl.Content;
+            }
+            else
+            {
+                _FirstUserControl = userControl;
+            }
+            _MainContentControl.Content = userControl;
+        }
+
+        public void ToUpUserControl() {
+            if (_lastUserControl == null)
+            {
+                throw new Exception("ToUpUserControl 上一个control是空的！");
+            }
+            _MainContentControl.Content = _lastUserControl;
+        }
+
+        public void ToFirstUserControl() {
+            if (_FirstUserControl == null)
+            {
+                throw new Exception("ToFirstUserControl error = _FirstUserControl是空的！");
+            }
+            _MainContentControl.Content = _FirstUserControl;
+            _lastUserControl = null;
+        }
+
+
+    }
 }
