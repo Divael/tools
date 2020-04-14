@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -282,6 +283,41 @@ namespace Tools
         }
 
         #endregion
+
+
+
+        [DllImport("kernel32.dll", EntryPoint = "SetProcessWorkingSetSize")]
+        public static extern int SetProcessWorkingSetSize(IntPtr process, int minSize, int maxSize);
+
+        /// <summary>
+        /// 超过多少MB清理内存,需要try catch
+        /// </summary>
+        /// <param name="moreMB">300</param>
+        public static void ClearMemory(int moreMB)
+        {
+            //获得当前工作进程
+            Process proc = Process.GetCurrentProcess();
+            long usedMemory = proc.PrivateMemorySize64;
+            if (usedMemory > 1024 * 1024 * moreMB)
+            {
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                {
+                    SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1);
+                }
+            }
+        }
+
+        public static void ClearMemory()
+        {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            {
+                SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1);
+            }
+        }
 
     }
 

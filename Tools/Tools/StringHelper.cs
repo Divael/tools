@@ -86,9 +86,9 @@ namespace Tools
         }
 
         /// <summary>
-        /// 字符串分割  a=1&b=2
+        /// 字符串分割  
         /// </summary>
-        /// <param name="str"></param>
+        /// <param name="str">a=1&b=2</param>
         /// <returns></returns>
         public static Dictionary<string,string> StringSplit(string str)
         {
@@ -184,11 +184,11 @@ namespace Tools
         #endregion
 
         #region 将字符串转换为Color
-        /// <summary>
-        /// 将字符串转换为Color
-        /// </summary>
-        /// <param name="color">字符串颜色：#000000</param>
-        /// <returns></returns>
+        ///// <summary>
+        ///// 将字符串转换为Color
+        ///// </summary>
+        ///// <param name="color">字符串颜色：#000000</param>
+        ///// <returns></returns>
         //public static Color ToColor(string color)
         //{
         //    int red, green, blue = 0;
@@ -823,7 +823,7 @@ namespace Tools
         /// 字节数组转字符串
         /// </summary>
         /// <param name="bytes"></param>
-        /// <returns></returns>
+        /// <returns>Encoding.Default.GetString</returns>
         public static string byteToString(byte[] bytes) {
             string str = null;
             if (bytes!= null) {
@@ -852,11 +852,23 @@ namespace Tools
         #endregion
 
         #region Base64和String互转
+        /// <summary>
+        /// base64转字符串类型
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
         public static string Base64ToString(string source, Encoding e)
         {
             return Common.GetString(Convert.FromBase64String(source), e);
         }
 
+        /// <summary>
+        /// 字符串类型转base64
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
         public static string StringToBase64(string source, Encoding e)
         {
             return Convert.ToBase64String(Common.GetBytes(source, e));
@@ -866,7 +878,7 @@ namespace Tools
 
         /// <summary>
         /// 16进制字符串转bytes数组
-        /// 当你要转换成对应的中文或url的时候即为 
+        /// A1 E2 =》 bytes
         /// </summary>
         /// <param name="s">16进制的字符串</param>
         /// <returns></returns>
@@ -979,7 +991,7 @@ namespace Tools
         /// 字符串数据转化成16进制表示的字符串 ->
         /// String data into a string of 16 binary representations
         /// </summary>
-        /// <param name="InString">输入的字符串数据</param>
+        /// <param name="InString">输入的字符串数据Encoding.Unicode.GetBytes</param>
         /// <returns>返回的字符串</returns>
         /// <exception cref="NullReferenceException"></exception>
         public static string ByteToHexString(string InString)
