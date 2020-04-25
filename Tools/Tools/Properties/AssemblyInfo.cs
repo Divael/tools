@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("Tools")]
-[assembly: AssemblyDescription("本程序由OceanerY编写，未经授权不得使用 ©  2018")]
+[assembly: AssemblyDescription("本程序由OceanerY编写，未经授权不得使用 ©  2020")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("OceanerY")]
+[assembly: AssemblyCompany("yangsea101@qq.com")]
 [assembly: AssemblyProduct("Tools")]
 [assembly: AssemblyCopyright("杨海")]
 [assembly: AssemblyTrademark("@OceanerY")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 //可以指定所有这些值，也可以使用“生成号”和“修订号”的默认值，
 // 方法是按如下所示使用“*”: :
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.0.0.0")]
-[assembly: AssemblyFileVersion("2.0.0.0")]
+[assembly: AssemblyVersion("2.0.0.1")]
+[assembly: AssemblyFileVersion("2.0.0.1")]
