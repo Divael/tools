@@ -8,6 +8,22 @@ using System.Threading.Tasks;
 
 namespace Tools.mvvm
 {
+    /***
+     *  private string _leader;
+        public string leader {
+            get { return _leader; }
+            set {
+                if (value != _leader)
+                {
+                    _leader = value;
+                    this.NotifyPropertyChanged(()=>leader);
+                }
+            }
+        }
+     * */
+    /// <summary>
+    /// 应用于wpf、winform 窗体控件和后台代码 双向发生变化 同时更新
+    /// </summary>
     public class PropertyChangedBase : INotifyPropertyChanged
     {
         /// <summary>
