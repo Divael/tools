@@ -99,6 +99,7 @@
     <Compile Include="MouseMoveEvents\MouseMoveEventsHelper.cs" />
     <Compile Include="MssqlHelper.cs" />
     <Compile Include="common.cs" />
+    <Compile Include="mvvm\PropertyChangedBase.cs" />
     <Compile Include="NetWorkHelper.cs" />
     <Compile Include="OtherHelper.cs" />
     <Compile Include="PrinterHelper.cs" />
