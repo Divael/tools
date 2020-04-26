@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRT591_M001_MR01", "CRT591_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FingerPictureBox", "FingerPictureBox\FingerPictureBox.csproj", "{00777BAB-5318-46FC-870A-1D13B55B0041}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "数据绑定应用", "Test1\数据绑定应用.csproj", "{AEBD6D53-C361-4BA0-9DC1-F8AF35F67EE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "数据绑定应用和链接access数据库", "Test1\数据绑定应用和链接access数据库.csproj", "{AEBD6D53-C361-4BA0-9DC1-F8AF35F67EE7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "工厂模式", "工厂模式\工厂模式.csproj", "{A6CCF849-A13E-499C-93E5-0C56741863CB}"
 EndProject

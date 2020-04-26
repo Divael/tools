@@ -35,7 +35,12 @@ namespace Test1
             }
         }
 
-
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            DB dB = new DB();
+            DataTable dt = dB.Get();
+            dataGridView1.DataSource = dt;
+        }
     }
 
     public class Team:PropertyChangedBase {

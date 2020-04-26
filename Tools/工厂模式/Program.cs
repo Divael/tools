@@ -28,7 +28,7 @@ namespace 工厂模式
             modernizationFactory.CreateDoor().Create();
             Console.Read();
 
-            DbProviderFactory dbProviderFactory 
+            DbProviderFactory dbProviderFactory;
 
         }
     }
