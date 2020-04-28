@@ -12,6 +12,10 @@ namespace Test1
     public partial class Form1 : Form
     {
         private Team team;
+        private bool isUpdate = false;//是否需要更新
+        private DataTable dt;
+
+        DB dB = new DB();
 
         public Form1()
         {
@@ -37,9 +41,43 @@ namespace Test1
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            DB dB = new DB();
-            DataTable dt = dB.Get();
+            dt = dB.Get();
             dataGridView1.DataSource = dt;
+        }
+
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            if (isUpdate)
+            {
+                bool isOk = dB.Update(dt);
+                isUpdate = false;
+                MessageBox.Show("更新成功","保存");
+            }
+            else
+            {
+                MessageBox.Show("没有更新内容! ");
+            }
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                for (int j = 0; j < dt.Columns.Count; j++)
+                {
+                    dataGridView1[j, i].Style.BackColor = Color.White;
+                }
+            }
+        }
+
+        private void DataGridView1_CellValueChanged_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (MessageBox.Show("是否需要单个单元格保存？","保存",MessageBoxButtons.OKCancel)==DialogResult.OK)
+            {
+                dB.Update(e.RowIndex + 1, dt.Columns[e.ColumnIndex].Caption, dataGridView1.SelectedCells[0].FormattedValue.ToString());
+            }
+            else
+            {
+                isUpdate = true;
+                dataGridView1[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.Blue;
+            }
+
         }
     }
 
