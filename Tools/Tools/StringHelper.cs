@@ -819,18 +819,7 @@ namespace Tools
         }
         #endregion
 
-        /// <summary>
-        /// 字节数组转字符串
-        /// </summary>
-        /// <param name="bytes"></param>
-        /// <returns>Encoding.Default.GetString</returns>
-        public static string byteToString(byte[] bytes) {
-            string str = null;
-            if (bytes!= null) {
-                 str = Encoding.Default.GetString(bytes);
-            }
-            return str;
-        }
+
 
         #region string 转 HexString
         /// <summary>
@@ -942,7 +931,6 @@ namespace Tools
 
         #region Hex string and Byte[] transform
 
-
         /// <summary>
         /// 字节数据转化成16进制表示的字符串 ->
         /// Byte data into a string of 16 binary representations
@@ -971,6 +959,17 @@ namespace Tools
         /// </example>
         public static string ByteToHexString(byte[] InBytes, char segment)
         {
+            /*
+            if (bytes != null)
+            {
+                return Encoding.Default.GetString(bytes);
+            }
+            return "";
+             */
+            if (InBytes==null)
+            {
+                return "";
+            }
             StringBuilder sb = new StringBuilder();
             foreach (byte InByte in InBytes)
             {
