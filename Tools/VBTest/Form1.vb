@@ -22,7 +22,7 @@ Public Class Form1
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If serialPortBase.IsOpen Then
-            Dim bytes = serialPortBase.SendAndReceived(TextBox1.Text.ToHex(), TimeSpan.FromMilliseconds(1000))
+            Dim bytes = serialPortBase.SendResponse(TextBox1.Text.ToHex(), 1000)
             TextBox2.Text = Tools.StringHelper.ByteToHexString(bytes, " ")
         Else
             MsgBox("串口未打开")

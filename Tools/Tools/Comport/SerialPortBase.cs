@@ -54,19 +54,22 @@ namespace Tools
 
         }
 
+        /// <summary>
+        /// 默认COM1,9600,N,8,1
+        /// </summary>
         public SerialPortBase()
         {
             SerialPort = new SerialPort();
-            ////串口名 = COM1
-            //SerialPort.PortName = portName;
-            ////波特率 = 9600 38400  
-            //SerialPort.BaudRate = baudRate;
-            ////奇偶校验 = N
-            //SerialPort.Parity = parity;
-            ////每个字节标准数据位 = 8
-            //SerialPort.DataBits = dataBits;
-            ////停止位 = 1
-            //SerialPort.StopBits = stopBits;
+            //串口名 = COM1
+            SerialPort.PortName = SerialPort.GetPortNames()[0];
+            //波特率 = 9600 38400  
+            SerialPort.BaudRate = 9600;
+            //奇偶校验 = N
+            SerialPort.Parity = Parity.None;
+            //每个字节标准数据位 = 8
+            SerialPort.DataBits = 8;
+            //停止位 = 1
+            SerialPort.StopBits = StopBits.One;
             //字节编码
             SerialPort.Encoding = Encoding.UTF8;
             //在添加到序列缓冲区前，是否丢弃接口上接收的空字节(byte = 0x00)。
@@ -110,11 +113,15 @@ namespace Tools
             }
         }
 
-
-
+        #region 发送并返回数据
         byte[] bytesForSendReceived = null;//用于发送接收一体化的接收数据
         private Stopwatch sw = new Stopwatch();//用于发送接收一体化的定时器
         private bool isLoadDataReceive = false;//用于控制DataReceive += SerialPortBase_DataReceive;
+
+        private void SerialPortBase_DataReceive(SerialPort arg1, byte[] arg2)
+        {
+            bytesForSendReceived = arg2;
+        }
         /// <summary>
         /// 发送并返回数据
         /// </summary>
@@ -152,11 +159,36 @@ namespace Tools
 
             return bytesForSendReceived;
         }
-
-        private void SerialPortBase_DataReceive(SerialPort arg1, byte[] arg2)
+        /// <summary>
+        /// 发送带返回
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="delay"></param>
+        /// <returns></returns>
+        public byte[] SendResponse(byte[] data, int delay = 100)
         {
-            bytesForSendReceived = arg2;
+            bytesForSendReceived = null;
+            lock (this.data)
+            {
+                this.data.Clear();
+                if (this.Send(data))
+                {
+                    System.Common.Sleep(delay);
+                    int bytesToRead;
+                    while ((bytesToRead = SerialPort.BytesToRead) > 0)
+                    {
+                        byte[] array = new byte[bytesToRead];
+                        SerialPort.Read(array, 0, bytesToRead);
+                        this.data.AddRange(array);
+                        System.Common.Sleep(Math.Max(50, delay / 2));
+                    }
+                }
+                bytesForSendReceived = this.data.ToArray();
+            }
+            return bytesForSendReceived;
         }
+        #endregion
+
 
         /// <summary>
         /// 发送16进制字节
@@ -203,7 +235,6 @@ namespace Tools
                 return SerialPort.IsOpen;
             }
         }
-
 
         public bool Open()
         {
