@@ -30,6 +30,7 @@ namespace Comport
 
         /// <summary>
         /// 第2个参数是串口返回的bytes
+        /// 子类如果用new的意思是 子类有一个 和父类一样的同命方法 但是这个方法 和父类不一样
         /// </summary>
 		public new event Action<ComWaitRead, byte[]> DataReceive;
 
