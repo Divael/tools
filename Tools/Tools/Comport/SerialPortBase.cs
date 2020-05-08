@@ -40,7 +40,7 @@ namespace Tools
             //字节编码
             SerialPort.Encoding = Encoding.UTF8;
             //在添加到序列缓冲区前，是否丢弃接口上接收的空字节。
-            SerialPort.DiscardNull = true;
+            SerialPort.DiscardNull = false;
             //在通信过程中，是否启用数据终端就绪行。
             SerialPort.DtrEnable = false;
             //获取或设置串行端口数据传输的握手协议。
