@@ -19,11 +19,11 @@ namespace Tools
         /// <summary>
         ///  "COM5",9600,"N",8,1
         /// </summary>
-        /// <param name="portName"></param>
-        /// <param name="baudRate"></param>
-        /// <param name="parity"></param>
-        /// <param name="dataBits"></param>
-        /// <param name="stopBits"></param>
+        /// <param name="portName">COM1</param>
+        /// <param name="baudRate">9600 38400  </param>
+        /// <param name="parity">None</param>
+        /// <param name="dataBits">8</param>
+        /// <param name="stopBits">one</param>
         public SerialPortBase(string portName, int baudRate, Parity parity, int dataBits, StopBits stopBits)
         {
             SerialPort = new SerialPort();
@@ -41,6 +41,36 @@ namespace Tools
             SerialPort.Encoding = Encoding.UTF8;
             //在添加到序列缓冲区前，是否丢弃接口上接收的空字节。
             SerialPort.DiscardNull = true;
+            //在通信过程中，是否启用数据终端就绪行。
+            SerialPort.DtrEnable = false;
+            //获取或设置串行端口数据传输的握手协议。
+            SerialPort.Handshake = Handshake.None;
+            //获取或设置串行端口输出缓冲区的大小。常用的是2048或4096，2048足够用
+            //serialPort.WriteBufferSize = 2048;
+            //决定了当串口读缓存中数据多少个时才触发DataReceived事件
+            SerialPort.ReceivedBytesThreshold = 1;
+
+            SerialPort.DataReceived += SerialPort_DataReceived;
+
+        }
+
+        public SerialPortBase()
+        {
+            SerialPort = new SerialPort();
+            ////串口名 = COM1
+            //SerialPort.PortName = portName;
+            ////波特率 = 9600 38400  
+            //SerialPort.BaudRate = baudRate;
+            ////奇偶校验 = N
+            //SerialPort.Parity = parity;
+            ////每个字节标准数据位 = 8
+            //SerialPort.DataBits = dataBits;
+            ////停止位 = 1
+            //SerialPort.StopBits = stopBits;
+            //字节编码
+            SerialPort.Encoding = Encoding.UTF8;
+            //在添加到序列缓冲区前，是否丢弃接口上接收的空字节(byte = 0x00)。
+            SerialPort.DiscardNull = false;
             //在通信过程中，是否启用数据终端就绪行。
             SerialPort.DtrEnable = false;
             //获取或设置串行端口数据传输的握手协议。
@@ -97,6 +127,8 @@ namespace Tools
             {
                 throw new Exception("串口未打开！");
             }
+
+            bytesForSendReceived = null;
 
             SerialPort.Write(data, 0, data.Length);
 
@@ -188,7 +220,15 @@ namespace Tools
             return result;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="portName">COM1</param>
+        /// <param name="baudRate">9600 38400  </param>
+        /// <param name="parity">None</param>
+        /// <param name="dataBits">8</param>
+        /// <param name="stopBits">one</param>
+        /// <returns></returns>
         public bool Open(string portName, int baudRate, Parity parity, int dataBits, StopBits stopBits)
         {
             bool result;
