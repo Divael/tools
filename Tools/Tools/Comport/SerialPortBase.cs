@@ -167,6 +167,10 @@ namespace Tools
         /// <returns></returns>
         public byte[] SendResponse(byte[] data, int delay = 100)
         {
+            if (!SerialPort.IsOpen)
+            {
+                throw new Exception("串口未打开！");
+            }
             bytesForSendReceived = null;
             lock (this.data)
             {
@@ -184,6 +188,7 @@ namespace Tools
                     }
                 }
                 bytesForSendReceived = this.data.ToArray();
+                this.data.Clear();
             }
             return bytesForSendReceived;
         }
