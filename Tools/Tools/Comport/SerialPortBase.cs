@@ -61,7 +61,7 @@ namespace Tools
         {
             SerialPort = new SerialPort();
             //串口名 = COM1
-            SerialPort.PortName = SerialPort.GetPortNames()[0];
+            //SerialPort.PortName = SerialPort.GetPortNames()[0];
             //波特率 = 9600 38400  
             SerialPort.BaudRate = 9600;
             //奇偶校验 = N

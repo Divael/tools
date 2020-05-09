@@ -32,4 +32,8 @@ Public Class Form1
     Private Sub SerialPort1_DataReceived(sender As Object, e As IO.Ports.SerialDataReceivedEventArgs)
 
     End Sub
+
+    Private Sub UserButton1_Click(sender As Object, e As EventArgs) Handles UserButton1.Click
+
+    End Sub
 End Class
