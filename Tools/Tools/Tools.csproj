@@ -83,6 +83,8 @@
     <Compile Include="DateTimeHelper.cs" />
     <Compile Include="EncyptHelper.cs" />
     <Compile Include="ExcelHelper.cs" />
+    <Compile Include="Excel\AsposeExcel.cs" />
+    <Compile Include="Excel\NPOIExcel.cs" />
     <Compile Include="FilesHelper.cs" />
     <Compile Include="GUIDHelper.cs" />
     <Compile Include="HttpServices.cs" />
@@ -241,6 +243,13 @@
     <EmbeddedResource Include="注册机\UserButton.resx">
       <DependentUpon>UserButton.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Excel\Aspose.Cells.dll" />
+    <Content Include="Excel\NPOI.dll" />
+    <Content Include="Excel\NPOI.OOXML.dll" />
+    <Content Include="Excel\NPOI.OpenXml4Net.dll" />
+    <Content Include="Excel\NPOI.OpenXmlFormats.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
