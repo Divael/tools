@@ -27,6 +27,7 @@ Partial Class Form1
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.UserButton1 = New Tools.注册机.UserButton()
         Me.SuspendLayout()
         '
         'Button1
@@ -69,11 +70,24 @@ Partial Class Form1
         Me.TextBox2.Size = New System.Drawing.Size(263, 21)
         Me.TextBox2.TabIndex = 5
         '
+        'UserButton1
+        '
+        Me.UserButton1.BackColor = System.Drawing.Color.Transparent
+        Me.UserButton1.CustomerInformation = ""
+        Me.UserButton1.EnableColor = System.Drawing.Color.FromArgb(CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer))
+        Me.UserButton1.Font = New System.Drawing.Font("微软雅黑", 9.0!)
+        Me.UserButton1.Location = New System.Drawing.Point(261, 36)
+        Me.UserButton1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.UserButton1.Name = "UserButton1"
+        Me.UserButton1.Size = New System.Drawing.Size(78, 25)
+        Me.UserButton1.TabIndex = 6
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(382, 237)
+        Me.Controls.Add(Me.UserButton1)
         Me.Controls.Add(Me.TextBox2)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.TextBox1)
@@ -91,4 +105,5 @@ Partial Class Form1
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Button2 As Button
     Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents UserButton1 As Tools.注册机.UserButton
 End Class
