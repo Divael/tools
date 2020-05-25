@@ -9,9 +9,11 @@
  * Revision History:
  * Date         Author               Description
  * 2014-02-19 9:21:41       情缘
- * 用的nopI的excel
+ * 
+ * 最好用Apose收费的，但是效率高
+ * 
 *********************************************************************************/
-/*
+
 using Aspose.Cells;
 using System;
 using System.Collections.Generic;
@@ -19,7 +21,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-namespace Git.Storage.Common.Excel
+namespace Tools
 {
     /// <summary>
     /// Excel操作类
@@ -146,4 +148,3 @@ namespace Git.Storage.Common.Excel
         }
     }
 }
-*/

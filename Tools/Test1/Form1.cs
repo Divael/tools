@@ -79,6 +79,11 @@ namespace Test1
             }
 
         }
+
+        private void btnOutExcel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class Team:PropertyChangedBase {
