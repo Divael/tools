@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+
 
 namespace Test1
 {
@@ -13,7 +18,9 @@ namespace Test1
     /// </summary>
     public class DB
     {
-        const string strConnection = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Projects\CSharp\ToolsFromGit\Tools\Test1\DB\Database1.accdb";
+        //Provider=Microsoft.Jet.OLEDB.4.0;Data Source = E:\C#开发程序包\toolsFromGit1\Tools\Test1\DB\Database1.
+        //@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Application.StartupPath + @"\kerogen.mdb;";
+        string strConnection = @" Provider = Microsoft.Jet.OLEDB.4.0 ; Data Source= " + Application.StartupPath + @"\DB\Database1.mdb";
         OleDbConnection oleDb;
 
         public DB()

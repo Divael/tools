@@ -24,7 +24,9 @@ namespace Test1
             Binding binding = new Binding("Text",team,"Leader",false,DataSourceUpdateMode.OnPropertyChanged);
             button1.DataBindings.Add(binding);
 
-            
+            int[] ii = { 0, 12 };
+            DataGridViewComboBoxColumn col = dataGridView1.Columns["old"] as DataGridViewComboBoxColumn;
+            col.DataSource = ii;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -68,6 +70,10 @@ namespace Test1
 
         private void DataGridView1_CellValueChanged_1(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex == -1 || e.ColumnIndex == -1)
+            {
+                return;
+            }
             if (MessageBox.Show("是否需要单个单元格保存？","保存",MessageBoxButtons.OKCancel)==DialogResult.OK)
             {
                 dB.Update(e.RowIndex + 1, dt.Columns[e.ColumnIndex].Caption, dataGridView1.SelectedCells[0].FormattedValue.ToString());
@@ -83,6 +89,24 @@ namespace Test1
         private void btnOutExcel_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            MessageBox.Show(e.Exception.Message,"错误");
+        }
+
+        private void dataGridView1_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex!= -1 && dataGridView1.Columns[e.ColumnIndex] is DataGridViewComboBoxColumn)
+            {
+                SendKeys.Send("{F4}");
+            }
+        }
+
+        private void heheAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(@"快捷键A");
         }
     }
 
