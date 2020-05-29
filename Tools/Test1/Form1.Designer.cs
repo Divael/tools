@@ -42,6 +42,7 @@
             this.btnOutExcel = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.heheAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -178,11 +179,22 @@
             this.heheAToolStripMenuItem.Text = "快捷键&A";
             this.heheAToolStripMenuItem.Click += new System.EventHandler(this.heheAToolStripMenuItem_Click);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(418, 41);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(138, 23);
+            this.button3.TabIndex = 7;
+            this.button3.Text = "通过存储过程插入数据";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(588, 367);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.btnOutExcel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button2);
@@ -216,6 +228,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn id_sfz;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem heheAToolStripMenuItem;
+        private System.Windows.Forms.Button button3;
     }
 }
 

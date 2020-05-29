@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -107,6 +108,11 @@ namespace Test1
         private void heheAToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(@"快捷键A");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            dB.insetStudentByProduce("你好","男");
         }
     }
 

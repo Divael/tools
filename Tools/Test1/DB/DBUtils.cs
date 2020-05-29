@@ -18,12 +18,9 @@ namespace Tools
         //Provider=Microsoft.ACE.OLEDB.12.0;Data Source=I:\易用科技\19041-干酪根酸化\Project\kerogen.accdb
         //Provider=Microsoft.Jet.OLEDB.4.0;Data Source = I:\易用科技\19041-干酪根酸化\Project\ETUSE.干酪根酸化\酸化过程表\bin\Debug\kerogen.mdb
         public static string connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Application.StartupPath + @"\kerogen.mdb;";
-
         private static DBUtils dBUtils;
         private static object locks = new object();
-
         private OleDbConnection connection;
-
         
         public DBUtils()
         {
@@ -32,32 +29,6 @@ namespace Tools
                 connection = new OleDbConnection(connectionString);
             }
         }
-
-        #region 获取Access数据库中的所有表名
-        /// <summary>
-        /// 获取Access数据库中的所有表名
-        /// </summary>
-        /// <param name="Connection">OleDbConnection对象</param>
-        /// <returns></returns>
-        public DataTable GetDataTableName()
-        {
-            DataTable Dt = null;
-            try
-            {
-                if (connection.State == ConnectionState.Closed) connection.Open();
-                Dt = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                if (connection.State == ConnectionState.Open) connection.Close();
-            }
-            return Dt;
-        }
-        #endregion
 
         public static DBUtils getInstance()
         {
@@ -103,6 +74,32 @@ namespace Tools
                 }
             }
         }
+
+        #region 获取Access数据库中的所有表名
+        /// <summary>
+        /// 获取Access数据库中的所有表名
+        /// </summary>
+        /// <param name="Connection">OleDbConnection对象</param>
+        /// <returns></returns>
+        public DataTable GetDataTableName()
+        {
+            DataTable Dt = null;
+            try
+            {
+                if (connection.State == ConnectionState.Closed) connection.Open();
+                Dt = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open) connection.Close();
+            }
+            return Dt;
+        }
+        #endregion
 
         #region 公用方法
 
@@ -559,8 +556,6 @@ namespace Tools
             }
         }
         #endregion
-
-
 
         #region 将DataReaderToList
         public List<T> DataReaderToList<T>(OleDbDataReader SDR) where T : class

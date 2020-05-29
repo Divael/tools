@@ -68,5 +68,28 @@ namespace Test1
 
 
         }
+
+        internal void insetStudentByProduce(string v1, string v2)
+        {
+            //OleDbCommand command = new OleDbCommand();
+            //command.Connection = oleDb;
+            //command.CommandType = CommandType.StoredProcedure;
+            //command.CommandText = "insertNameAndSex";
+            OleDbParameter par = new OleDbParameter()
+            {
+                ParameterName = "name",
+                Value = v1
+            };
+            OleDbParameter par1 = new OleDbParameter()
+            {
+                ParameterName = "sex",
+                Value = v2
+            };
+            OleDbParameter[] pars = { par, par1 };
+            //int rs = command.ExecuteNonQuery();
+            OleDbCommand command = new OleDbCommand("execute insertNameAndSex", oleDb);
+            command.Parameters.AddRange(pars);
+            int rs = command.ExecuteNonQuery();
+        }
     }
 }
