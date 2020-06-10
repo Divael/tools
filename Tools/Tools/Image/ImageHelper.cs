@@ -152,6 +152,11 @@ namespace Tools
 
         /// <summary>
         /// 将bmp图片转成jpg图片
+        ///---------------------
+        ///作者：flywithmj
+        ///来源：CSDN
+        ///原文：https://blog.csdn.net/flywithmj/article/details/6548732 
+        ///版权声明：本文为博主原创文章，转载请附上博文链接！
         /// </summary>
         /// <param name="BmpFilePath"></param>
         /// <param name="JpgFilePath"></param>
@@ -169,11 +174,7 @@ namespace Tools
                 encoder.Save(fileStream);
                 fileStream.Close();
             }
-            //---------------------
-            //作者：flywithmj
-            //来源：CSDN
-            //原文：https://blog.csdn.net/flywithmj/article/details/6548732 
-            //版权声明：本文为博主原创文章，转载请附上博文链接！
+
         }
 
         /// <summary>

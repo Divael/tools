@@ -144,9 +144,9 @@ namespace Tools
         }
         #endregion
 
-        #region 生成年月日时分秒字符串
+        #region 生成 （当前年月日时分秒+随机数子 的字符串）
         /// <summary>
-        /// 工具方法:生成年月日时分秒字符串
+        /// 工具方法:生成 （当前年月日时分秒+随机数子 的字符串）
         /// </summary>
         /// <param name="link">年月日时分秒之间的连接字符</param>
         /// <param name="RanLength">最后生成随机数的位数</param>
@@ -179,9 +179,9 @@ namespace Tools
         }
         #endregion
 
-        #region 把秒转换成分钟
+        #region 把秒转换成分钟，往小取整
         /// <summary>
-        /// 把秒转换成分钟
+        /// 把秒转换成分钟，往小取整
         /// </summary>
         /// <param name="Second">秒</param>
         /// <returns>分钟</returns>

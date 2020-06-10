@@ -87,7 +87,6 @@
     <Compile Include="Excel\NPOIExcel.cs" />
     <Compile Include="FilesHelper.cs" />
     <Compile Include="GUIDHelper.cs" />
-    <Compile Include="HttpServices.cs" />
     <Compile Include="HTTP\RestFulClientHelper.cs" />
     <Compile Include="Image\ImageHelper.cs" />
     <Compile Include="Image\PngAddFonts.cs" />
@@ -95,7 +94,6 @@
     <Compile Include="JSONHelper.cs" />
     <Compile Include="MouseMoveEvents\KeyBroad_Hook.cs" />
     <Compile Include="lib\GUID.cs" />
-    <Compile Include="lib\Lazy.cs" />
     <Compile Include="Loger.cs" />
     <Compile Include="MathHelper.cs" />
     <Compile Include="MouseMoveEvents\MouseHelper.cs" />
@@ -104,7 +102,7 @@
     <Compile Include="common.cs" />
     <Compile Include="mvvm\PropertyChangedBase.cs" />
     <Compile Include="NetWorkHelper.cs" />
-    <Compile Include="OtherHelper.cs" />
+    <Compile Include="BarCodeHelper.cs" />
     <Compile Include="PrinterHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QRCodeConvert.cs" />

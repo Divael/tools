@@ -1,6 +1,6 @@
-﻿namespace Tools.注册机
+﻿namespace 皮肤
 {
-    partial class UserButton
+    partial class UserButton1
     {
         /// <summary> 
         /// 必需的设计器变量。

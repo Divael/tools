@@ -92,10 +92,11 @@ namespace System
         /// <summary>
         /// 当前线程睡眠
         /// </summary>
-        /// <param name="ms"></param>
+        /// <param name="ms">毫秒</param>
         public static void Sleep(int ms)
         {
-            Lazy.Sleep(ms);
+            //Lazy.Sleep(ms);
+            Thread.Sleep(ms);
         }
 
         /// <summary>
@@ -104,16 +105,22 @@ namespace System
         /// <param name="ts"></param>
         public static void Sleep(TimeSpan ts)
         {
-            Lazy.Sleep(ts);
+            //Lazy.Sleep(ts);
+            Thread.Sleep(ts);
         }
 
-
-        public static void SetSleepTick()
+        /// <summary>
+        /// 用到了winapi  timeBeginPeriod ,当前不在更新，可以直接用Thread
+        /// </summary>
+        private static void SetSleepTick()
         {
             WinSystem.WinApi.timeBeginPeriod(1);
         }
 
-        public static void AbortSleepTick()
+        /// <summary>
+        ///用到了winapi  timeEndPeriod ,当前不在更新，可以直接用Thread
+        /// </summary>
+        private static void AbortSleepTick()
         {
             WinSystem.WinApi.timeEndPeriod(1);
         }
@@ -221,7 +228,7 @@ namespace System
         /// <returns></returns>
         public static string MD5Str(string data)
         {
-            return Convert.ToBase64String(Common.MD5Code(data.GetBytes1(Encoding.UTF8)));
+            return Convert.ToBase64String(Common.MD5Code(data.GetBytess(Encoding.UTF8)));
         }
         /// <summary>
         /// gbk
@@ -234,7 +241,7 @@ namespace System
             return Encoding.UTF8.GetBytes(txt);
         }
 
-        public static byte[] GetBytes1(this string data, Encoding e)
+        public static byte[] GetBytess(this string data, Encoding e)
         {
             return Common.GetBytes(data, e);
         }

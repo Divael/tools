@@ -10,21 +10,45 @@ namespace Tools.sound
     /// <summary>
     /// 语音
     /// </summary>
-    public static class Speaker
+    public class Speaker
     {
-        public static void Speak(string data)
+        private SpeechSynthesizer man;
+        private static Speaker speaker;
+        private static object obj = new object();
+        private Speaker() {
+            man = new SpeechSynthesizer();
+        }
+
+        public static Speaker getInstance() {
+            if (speaker == null)
+            {
+                lock (obj)
+                {
+                    if (speaker == null)
+                    {
+                        speaker = new Speaker();
+                    }
+                }
+            }
+            return speaker;
+        }
+        /// <summary>
+        /// 用委托的方式播放声音，可以让声音说完
+        /// </summary>
+        /// <param name="data"></param>
+        private void Speak(string data)
         {
             // speraker.Speak(data);
             System.Common.invoke(() => SpeakAsy(data));
         }
-        private static SpeechSynthesizer man = new SpeechSynthesizer();
+
         /// <summary>
-        /// 语音合成
+        /// 语音合成,直接播放声音，会覆盖
         /// </summary>
         /// <param name="words"></param>
-        public static void SpeakAsy(string words)
+        private void SpeakAsy(string words)
         {
-            Speaker.man.SpeakAsync(words);
+            man.SpeakAsync(words);
         }
 
         

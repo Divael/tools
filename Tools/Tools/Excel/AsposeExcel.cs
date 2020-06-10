@@ -9,7 +9,7 @@
  * Revision History:
  * Date         Author               Description
  * 2014-02-19 9:21:41       情缘
- * 用的nopI的excel
+ * 付费效率高
 *********************************************************************************/
 /*
 using Aspose.Cells;

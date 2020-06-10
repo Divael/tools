@@ -35,7 +35,7 @@ namespace Tools.sound
         private static Task task = null;
 
         /// <summary>
-        /// 播放音频文件wav格式的
+        /// 播放音频文件wav格式的,播完完整的一段
         /// </summary>
         /// <param name="wavfile">wav格式地址</param>
         public static void WavPlayerTask(string wavfile)

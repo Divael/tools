@@ -19,6 +19,7 @@ namespace Tools
     /// <para>　IsPhone：检查字符串是否为手机号</para>
     /// <para>　IsHasCHZN：检测是否有中文字符</para>
     /// <para>　IsBoolen字符串能否转为Boolen类型</para>
+    /// <para>　IsColor 字符串能否转为16进制字符串</para>
     /// </summary>
     public class MathHelper
     {
@@ -59,6 +60,7 @@ namespace Tools
 
         #region 检测是否有Sql危险字符
         /// <summary>
+        /// 错误需要验证
         /// 检测是否有Sql危险字符,,需引用：using System.Text.RegularExpressions;
         /// </summary>
         /// <param name="str">要判断字符串</param>
@@ -185,6 +187,17 @@ namespace Tools
             {
             }
             return Flag;
+        }
+        #endregion
+
+        #region IsColor 字符串能否转为16进制字符串
+        /// <summary>
+        /// IsColor 字符串能否转为16进制字符串
+        /// </summary>
+        /// <param name="ColorNumber">#000000</param>
+        /// <returns></returns>
+        public static bool IsColor(string ColorNumber) {
+            return Regex.IsMatch(ColorNumber, "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$");
         }
         #endregion
     }

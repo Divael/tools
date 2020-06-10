@@ -52,6 +52,7 @@ namespace Test1
         {
             if (isUpdate)
             {
+                "".logThis();
                 bool isOk = dB.Update(dt);
                 isUpdate = false;
                 MessageBox.Show("更新成功","保存");

@@ -13,6 +13,7 @@ namespace Tools
 {
     /// <summary>
     /// WebService代理服务的服务器名及方法名[WebServiceHelper类用]
+    /// 比HttpService封装的更加完善一点
     /// </summary>
     public class WebServiceInfo
     {
@@ -292,6 +293,7 @@ namespace Tools
             request.Credentials = CredentialCache.DefaultCredentials;
             //request.Timeout = 30000;
             request.Timeout = 120000;
+            //request.PreAuthenticate = false;
         }
 
         private static void WriteRequestData(HttpWebRequest request, byte[] data)

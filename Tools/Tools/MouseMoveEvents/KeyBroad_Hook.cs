@@ -15,22 +15,18 @@ namespace Tools
     /// </summary>
     public class KeyBroad_Hook
     {
+        public ScanerHook Listener { get; set; }
+
         public KeyBroad_Hook() {
             Listener = new ScanerHook();
         }
-
-        private ScanerHook listener;
-
-        public ScanerHook Listener { get => listener; set => listener = value; }
-
         public bool Start() {
-            return listener.Start();
+            return Listener.Start();
         }
         public bool Stop()
         {
-            return listener.Stop();
+            return Listener.Stop();
         }
-
     }
 
     public class ScanerHook

@@ -8,18 +8,18 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 
-namespace Tools.注册机
+namespace 皮肤
 { 
     /// <summary>
     /// 一个自定义的按钮控件
     /// </summary>
     [DefaultEvent("Click")]
-    public partial class UserButton : UserControl
+    public partial class UserButton1 : UserControl
     {
         /// <summary>
         /// 实例化一个按钮对象
         /// </summary>
-        public UserButton()
+        public UserButton1()
         {
             InitializeComponent();
         }

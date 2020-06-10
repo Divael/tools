@@ -16,21 +16,20 @@ namespace Tools
     /// </summary>
     public class Loger
     {
-        string path = System.Environment.CurrentDirectory;//获取当前目录
+        //string path = System.Environment.CurrentDirectory;//获取当前目录
         #region 日志处理
-
         #region 属性
 
-        private static string m_LogName = "Log_";
 
-        public static bool IsLogToFile = true;
+
+        public static bool IsLogToFile { get; set; } = true;
 
         public static string[] typeSet = { "error","info" };
 
         #endregion
 
         #region 变量
-
+        private static string m_LogName = "Log_";
         /// <summary>
         /// 日志文件夹路径名称
         /// </summary>

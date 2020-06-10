@@ -47,11 +47,12 @@ namespace Tools
     /// <para>　GetStringLength：返回字符串真实长度, 1个汉字长度为2</para>
     /// <para>　UTF8ToGB2312：将UTF-８字符串转为GB2312</para>
     /// <para>　GB2312ToUTF8：将GB2312编码字符串转为UTF8</para>
-    /// <para>　byteToHexStr:       bytes转string</para>
+    /// <para>　BytesToHexString:       bytes转string</para>
     /// <para>　StringToHexString : string 转 HexsStringbytes</para>
     /// <para>　StringToBytes:      string 转 bytes</para>
     /// <para>　Base64ToString:     Base64和String互转</para>
     /// <para>　BytesGetBytes:     从bytes中截取有用的bytes</para>
+    /// <para>  StringArraySubStringArray   从string[]中截取有用的string[] StringArraySubStringArray</para>
     /// <para>　StringIsExist:     检查字符串中是否有compare的字符有返回true</para>
     /// </summary>
     public class StringHelper
@@ -743,9 +744,9 @@ namespace Tools
         }
         #endregion
 
-        #region 返回字符串真实长度, 1个汉字长度为2
+        #region 返回字符串真实长度, 1个汉字长度为2个byte，也不固定，如果是UTF-8的话
         /// <summary>
-        /// 返回字符串真实长度, 1个汉字长度为2
+        /// 返回字符串真实长度, 1个汉字长度为2个byte，也不固定，如果是UTF-8的话
         /// </summary>
         /// <param name="Str">字符串</param>
         /// <returns>字符长度</returns>
@@ -805,7 +806,7 @@ namespace Tools
         /// </summary>
         /// <param name="bytes"></param>
         /// <returns></returns>
-        public static string byteToHexStr(byte[] bytes)
+        public static string BytesToHexString(byte[] bytes)
         {
             string returnStr = "";
             if (bytes != null)
@@ -818,8 +819,6 @@ namespace Tools
             return returnStr;
         }
         #endregion
-
-
 
         #region string 转 HexString
         /// <summary>
@@ -865,12 +864,13 @@ namespace Tools
 
         #endregion
 
+        #region 16进制字符串转bytes数组 A1 E2 =》 bytes以一个空格隔开
         /// <summary>
         /// 16进制字符串转bytes数组
-        /// A1 E2 =》 bytes
+        /// A1 E2 =》 bytes以一个空格隔开
         /// </summary>
         /// <param name="s">16进制的字符串</param>
-        /// <returns></returns>
+        /// <returns>byte[]</returns>
         public static byte[] HexStringToByteArray(string s)
         {
             s = s.Replace(" ", "").Trim().ToUpper();
@@ -879,8 +879,9 @@ namespace Tools
                 buffer[i / 2] = (byte)Convert.ToByte(s.Substring(i, 2), 16);
             return buffer;
         }
+        #endregion
 
-        # region 从bytes中截取有用的bytes
+        #region 从bytes中截取有用的bytes
         /// <summary>
         /// 从bytes中截取有用的bytes
         /// </summary>
@@ -893,19 +894,23 @@ namespace Tools
         }
         #endregion
 
+        #region 从string[]中截取有用的string[] StringArraySubStringArray
         /// <summary>
-        /// 检查字符串中是否有compare的字符有返回true
+        /// 从string[]中截取有用的string[]
         /// </summary>
-        /// <param name="str">待比较的字符串</param>
-        /// <param name="compare">比较的字符串</param>
+        /// <param name="strArray">要截取的String[]数组</param>
+        /// <param name="StartIndex">开始截取的位置index</param>
+        /// <param name="Length">要截取的长度</param>
         /// <returns></returns>
-        private static bool StringIsExist(string str, string compare)
+        public static string[] StringArraySubStringArray(string[] strArray, int StartIndex, int Length)
         {
-            return str.Contains(compare);
+            return strArray.Skip(StartIndex).Take(Length).ToArray();
         }
+        #endregion
 
         /// <summary>
-        /// str转为16进制字符串 5位
+        /// 有疑问  需要能直接转成数字的字符串
+        /// str转为16进制字符串 5位 例如
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
@@ -932,7 +937,7 @@ namespace Tools
         #region Hex string and Byte[] transform
 
         /// <summary>
-        /// 字节数据转化成16进制表示的字符串 ->
+        /// 字节数据转化成16进制表示的字符串 -> byte[] 中单个byte不分割
         /// Byte data into a string of 16 binary representations
         /// </summary>
         /// <param name="InBytes">字节数组</param>
@@ -947,6 +952,7 @@ namespace Tools
         }
 
         /// <summary>
+        /// 疑问
         /// 字节数据转化成16进制表示的字符串 ->
         /// Byte data into a string of 16 binary representations
         /// </summary>
@@ -987,6 +993,7 @@ namespace Tools
 
 
         /// <summary>
+        /// 疑问
         /// 字符串数据转化成16进制表示的字符串 ->
         /// String data into a string of 16 binary representations
         /// </summary>
