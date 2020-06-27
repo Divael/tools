@@ -90,7 +90,8 @@
     <Compile Include="HTTP\RestFulClientHelper.cs" />
     <Compile Include="Image\ImageHelper.cs" />
     <Compile Include="Image\PngAddFonts.cs" />
-    <Compile Include="IniHelper.cs" />
+    <Compile Include="INIReader\IniHelper.cs" />
+    <Compile Include="INIReader\INIReader.cs" />
     <Compile Include="JSONHelper.cs" />
     <Compile Include="MouseMoveEvents\KeyBroad_Hook.cs" />
     <Compile Include="lib\GUID.cs" />

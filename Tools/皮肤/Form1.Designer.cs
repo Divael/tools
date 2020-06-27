@@ -214,7 +214,7 @@
             // 
             this.vScrollBar1.Location = new System.Drawing.Point(561, 115);
             this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(17, 80);
+            this.vScrollBar1.Size = new System.Drawing.Size(25, 189);
             this.vScrollBar1.TabIndex = 16;
             // 
             // progressBar1
