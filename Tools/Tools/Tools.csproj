@@ -52,6 +52,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Speech" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
@@ -149,6 +150,7 @@
     </Compile>
     <Compile Include="XmlHelper.cs" />
     <Compile Include="XMLWriteConfig.cs" />
+    <Compile Include="序列化\SerializationHelper.cs" />
     <Compile Include="注册机\AuthorizeCheckAction.cs" />
     <Compile Include="注册机\DefaultLanguage.cs" />
     <Compile Include="注册机\English.cs" />
