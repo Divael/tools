@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Windows;
-using System.Diagnostics;
 
 namespace keyboard
 {
@@ -16,11 +11,11 @@ namespace keyboard
         protected override void OnStartup(StartupEventArgs e)
         {
             Process thisProc = Process.GetCurrentProcess();
-          
+
             if (Process.GetProcessesByName(thisProc.ProcessName).Length > 1)
             {
-               
-               // MessageBox.Show("Application is already running.");
+
+                // MessageBox.Show("Application is already running.");
                 Application.Current.Shutdown();
                 return;
             }

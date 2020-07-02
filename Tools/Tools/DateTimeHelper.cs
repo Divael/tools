@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Web;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Tools
@@ -329,7 +326,7 @@ namespace Tools
                             arrs[0] = i;
                             arrs[1] = j;
                             YearMonthList.Add(arrs);
-                           // HttpContext.Current.Response.Write(arrs[0].ToString() + "年" + arrs[1] + "月<br><hr>");
+                            // HttpContext.Current.Response.Write(arrs[0].ToString() + "年" + arrs[1] + "月<br><hr>");
                         }
                     }
                     else if (i > SYear && i < EYear)

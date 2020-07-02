@@ -1,11 +1,7 @@
-﻿using System;
-using System.Configuration;
-using System.Web;
+﻿using Microsoft.Office.Core;
+using System;
 using System.Data;
 using System.Data.OleDb;
-using System.Data.SqlClient;
-using Microsoft.Office.Core;
-using System.Linq;
 
 namespace Tools
 {
@@ -57,7 +53,7 @@ namespace Tools
         /// <param name="ExcelFilePath">EXCEL文件相对于站点根目录的路径</param>
         /// <param name="Verion">Excel数据驱动版本：97-2003或2007,分别需要安装数据驱动软件</param>
         /// <returns>OleDbConnection对象</returns>
-        public static OleDbConnection CreateConnection(string ExcelFilePath,ExcelVerion Verion)
+        public static OleDbConnection CreateConnection(string ExcelFilePath, ExcelVerion Verion)
         {
             OleDbConnection Connection = null;
             string strConnection = string.Empty;
@@ -67,20 +63,20 @@ namespace Tools
                 {
                     case ExcelVerion.Excel2003: //读取Excel97-2003版本
                         strConnection = "Provider=Microsoft.Jet.OLEDB.4.0; " +
-"Data Source=" + System.Environment.CurrentDirectory+(ExcelFilePath) + ";Extended Properties=Excel 8.0";
+"Data Source=" + System.Environment.CurrentDirectory + (ExcelFilePath) + ";Extended Properties=Excel 8.0";
                         break;
                     case ExcelVerion.Excel2007: //读取Excel2007版本
-                         strConnection = "Provider=Microsoft.ACE.OLEDB.12.0;Extended Properties='Excel 12.0;HDR=YES';data source=" + ExcelFilePath;
+                        strConnection = "Provider=Microsoft.ACE.OLEDB.12.0;Extended Properties='Excel 12.0;HDR=YES';data source=" + ExcelFilePath;
                         break;
-                }               
-               if(!string.IsNullOrEmpty(strConnection)) Connection = new OleDbConnection(strConnection);
+                }
+                if (!string.IsNullOrEmpty(strConnection)) Connection = new OleDbConnection(strConnection);
             }
             catch (Exception)
             {
             }
 
             return Connection;
-        }        
+        }
         #endregion
 
         #region 创建一个OleDbCommand对象实例
@@ -522,7 +518,7 @@ namespace Tools
 
                 catch (Exception ex)
                 {
-                    Loger.err("",ex);
+                    Loger.err("", ex);
                     return false;
                 }
             }

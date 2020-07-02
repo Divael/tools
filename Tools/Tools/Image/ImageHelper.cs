@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
@@ -27,7 +23,8 @@ namespace Tools
 
         private static object obj = new object();
 
-        private ImageHelper() {
+        private ImageHelper()
+        {
 
         }
 
@@ -35,7 +32,8 @@ namespace Tools
         /// 获取实例
         /// </summary>
         /// <returns></returns>
-        public static ImageHelper getInstance() {
+        public static ImageHelper getInstance()
+        {
             if (mImageHelper == null)
             {
                 lock (obj)
@@ -550,7 +548,7 @@ namespace Tools
                     bitmap = img;
                 }
             }
-            catch 
+            catch
             {
             }
             return bitmap;
@@ -579,7 +577,7 @@ namespace Tools
                 }
                 return Convert.ToBase64String(arr);
             }
-            catch 
+            catch
             {
                 return null;
             }
@@ -592,7 +590,7 @@ namespace Tools
         /// <param name="strbase64"></param>
         /// <param name="filepath">jpg路径</param>
         /// <returns></returns>
-        public Bitmap Base64StringToBitmap(string strbase64,string filepath)
+        public Bitmap Base64StringToBitmap(string strbase64, string filepath)
         {
             try
             {
@@ -608,7 +606,7 @@ namespace Tools
                     return bmp;
                 }
             }
-            catch 
+            catch
             {
                 return null;
             }

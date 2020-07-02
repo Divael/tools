@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Media;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Tools.sound
@@ -27,7 +24,8 @@ namespace Tools.sound
         /// <param name="wavfile">wav格式地址</param>
         public static void WavPlayerInvoke(string wavfile)
         {
-            Common.invoke(()=> {
+            Common.invoke(() =>
+            {
                 WavPlayer(wavfile);
             });
         }
@@ -47,7 +45,8 @@ namespace Tools.sound
                     return;
                 }
             }
-            task = Task.Run(()=> {
+            task = Task.Run(() =>
+            {
                 WavPlayerInvoke(wavfile);
             });
         }

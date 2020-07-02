@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tools
 {
@@ -32,7 +28,8 @@ namespace Tools
             _base_top = base_top;
         }
 
-        public PngAddFonts() {
+        public PngAddFonts()
+        {
         }
 
         /// <summary>
@@ -51,7 +48,7 @@ namespace Tools
             String str = content;
             Font font = new Font("KaiTi", 52, FontStyle.Bold);//设置字体，大小，粗细
             SolidBrush sbrush = new SolidBrush(Color.Red);//设置颜色
-            
+
             //设置位置
             float base_left = _base_left;
             float left_space = (float)font.GetHeight(g);

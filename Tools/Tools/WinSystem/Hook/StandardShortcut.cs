@@ -6,16 +6,16 @@
 
 namespace System.WinSystem.Hook
 {
-  public enum StandardShortcut
-  {
-    Copy,
-    Cut,
-    Paste,
-    SelectAll,
-    Save,
-    Open,
-    New,
-    Close,
-    Print,
-  }
+    public enum StandardShortcut
+    {
+        Copy,
+        Cut,
+        Paste,
+        SelectAll,
+        Save,
+        Open,
+        New,
+        Close,
+        Print,
+    }
 }

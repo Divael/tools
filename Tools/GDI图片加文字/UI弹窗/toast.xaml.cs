@@ -1,19 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Test.UI弹窗
 {
@@ -26,14 +14,14 @@ namespace Test.UI弹窗
         public string Text { get; set; }
 
         public event Action Response;
-        public toast(string str,int seconds = 0)
+        public toast(string str, int seconds = 0)
         {
             InitializeComponent();
             Width = Tools.WindowHelper.WIDTH * 0.3;
             Height = Width * 0.75;
             Text = str;
             Seconds = seconds;
-            tb_notice.Content=Text;
+            tb_notice.Content = Text;
             pwd.TextDecorations = new TextDecorationCollection(new TextDecoration[] {
                 new TextDecoration() {
                      Location= TextDecorationLocation.Strikethrough,
@@ -48,7 +36,8 @@ namespace Test.UI弹窗
             });
         }
 
-        public void Show(string str,int seconds = 0) {
+        public void Show(string str, int seconds = 0)
+        {
             Text = str;
             Seconds = seconds;
             tb_notice.Content = Text;

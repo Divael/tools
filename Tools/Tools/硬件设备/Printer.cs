@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Tools.硬件设备
@@ -16,7 +12,7 @@ namespace Tools.硬件设备
         private Font titleFont;
         private StringReader streamToPrint;
         private int leftMargin = 0;
-        private StringReader lineReader= null;
+        private StringReader lineReader = null;
         System.Drawing.Printing.PrintDocument pd;
         String text;
 
@@ -36,7 +32,8 @@ namespace Tools.硬件设备
             try
             {
                 text = str;
-                using (streamToPrint = new StringReader(str)) {
+                using (streamToPrint = new StringReader(str))
+                {
                     printFont = new Font("黑体", 10);
                     titleFont = new Font("黑体", 15);
                     pd = new System.Drawing.Printing.PrintDocument();
@@ -47,7 +44,7 @@ namespace Tools.硬件设备
                     pd.PrintController = new System.Drawing.Printing.StandardPrintController();
                     pd.Print();
                     pd.Dispose();
-                } ;
+                };
             }
             catch (Exception ex)
             {
@@ -88,7 +85,8 @@ namespace Tools.硬件设备
         }
 
 
-        private void pd_PrintPage1(object sender, System.Drawing.Printing.PrintPageEventArgs e) {
+        private void pd_PrintPage1(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
             Graphics g = e.Graphics; //获得绘图对象
             float linesPerPage = 0; //页面的行号
             float yPosition = 0;   //绘制字符串的纵向位置
@@ -121,7 +119,8 @@ namespace Tools.硬件设备
             }
         }
 
-        public void 打印预览(string text) {
+        public void 打印预览(string text)
+        {
             this.text = text;
             PrintPreviewDialog printPreviewDialog = new PrintPreviewDialog();
             printPreviewDialog.Document = pd;
@@ -136,29 +135,34 @@ namespace Tools.硬件设备
             }
         }
 
-        public void 页面设置() {
+        public void 页面设置()
+        {
             PageSetupDialog pageSetupDialog = new PageSetupDialog();
             pageSetupDialog.Document = pd;
             pageSetupDialog.ShowDialog();
         }
 
-        public void 打印设置() {
+        public void 打印设置()
+        {
             PrintDialog printDialog = new PrintDialog();
             printDialog.Document = pd;
             printDialog.ShowDialog();
         }
 
-        public void setPage() {
-            pd.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Custom",500,300);
+        public void setPage()
+        {
+            pd.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Custom", 500, 300);
         }
 
-        public void 开始打印(string text) {
+        public void 开始打印(string text)
+        {
             lineReader = new StringReader(text);   // 获取要打印的字符串
             pd.Print();
         }
 
-        public void 设置纸张大小(Int32 width,Int32 height) {
-            pd.DefaultPageSettings.PaperSize = new PaperSize("Custom", width,height);
+        public void 设置纸张大小(Int32 width, Int32 height)
+        {
+            pd.DefaultPageSettings.PaperSize = new PaperSize("Custom", width, height);
         }
 
         public void Close()
@@ -171,9 +175,9 @@ namespace Tools.硬件设备
             }
             catch (Exception ex)
             {
-                Loger.err("打印机释放",ex);
+                Loger.err("打印机释放", ex);
             }
-            
+
         }
     }
 }

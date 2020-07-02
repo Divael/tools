@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,10 +8,7 @@ using System.Runtime.Serialization.Json;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.WinSystem;
-using Tools;
 
 namespace System
 {
@@ -26,7 +22,8 @@ namespace System
         /// </summary>
         /// <param name="win"></param>
         /// <param name="owner"></param>
-        public static void Show(this Window win, Window owner) {
+        public static void Show(this Window win, Window owner)
+        {
             win.Owner = owner;
             win.Show();
         }
@@ -34,7 +31,8 @@ namespace System
         /// 打开一个窗口，并返回而不等待新打开的窗口关闭。
         /// </summary>
         /// <param name="win"></param>
-        public static void ShowEx(this Window win) {
+        public static void ShowEx(this Window win)
+        {
             win.Show(Application.Current.MainWindow);
         }
 
@@ -325,9 +323,9 @@ namespace System
         /// 正常日志
         /// </summary>
         /// <param name="mess"></param>
-        public static void logThis(this string mess,string title)
+        public static void logThis(this string mess, string title)
         {
-            Tools.Loger.info(title +"  " +mess.ToString());
+            Tools.Loger.info(title + "  " + mess.ToString());
         }
 
 
@@ -336,9 +334,9 @@ namespace System
         /// </summary>
         /// <param name="mess">信息</param>
         /// <param name="ex">异常</param>
-        public static void logErr(this string mess,Exception ex)
+        public static void logErr(this string mess, Exception ex)
         {
-            Tools.Loger.err(mess,ex);
+            Tools.Loger.err(mess, ex);
         }
 
 

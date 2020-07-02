@@ -1,22 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Test.UI弹窗;
-using Tools;
-using Tools.HTTP;
 
 namespace Test
 {
@@ -98,9 +83,11 @@ namespace Test
         }
 
 
-        public void msg(string msg) {
-            text_msg.Dispatcher.BeginInvoke((Action)delegate() {
-                text_msg.Text += "msg"+"\r\n";
+        public void msg(string msg)
+        {
+            text_msg.Dispatcher.BeginInvoke((Action)delegate ()
+            {
+                text_msg.Text += "msg" + "\r\n";
             });
         }
 
@@ -131,9 +118,11 @@ namespace Test
                 dlg1.Close();
             }
             dlg.ShowEx();
-            Task.Run(()=> {
+            Task.Run(() =>
+            {
                 Common.Sleep(3000);
-                dlg.Dispatcher.Invoke(()=> {
+                dlg.Dispatcher.Invoke(() =>
+                {
                     dlg.Close();
                 });
                 GC.Collect();

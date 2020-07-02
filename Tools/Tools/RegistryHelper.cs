@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
+using System;
 
 
 namespace Tools
@@ -111,7 +109,7 @@ namespace Tools
             try
             {
                 RegistryKey Key = RegistryEx(RootKey).OpenSubKey(KeyPath);
-                BackMsg= Key.GetValue(KeyName, null).ToString();
+                BackMsg = Key.GetValue(KeyName, null).ToString();
             }
             catch (Exception)
             {
@@ -129,14 +127,14 @@ namespace Tools
         /// <param name="KeyName">键名</param>
         /// <param name="KeyValue">键值</param>
         /// <returns></returns>
-        public static bool SetRegValue(RootKey RootKey,string KeyPath,string KeyName,object KeyValue)
+        public static bool SetRegValue(RootKey RootKey, string KeyPath, string KeyName, object KeyValue)
         {
             bool flag = false;
             try
             {
                 RegistryKey Key = RegistryEx(RootKey).OpenSubKey(KeyPath, true);
-                Key.SetValue(KeyName,KeyValue);
-                flag=true;
+                Key.SetValue(KeyName, KeyValue);
+                flag = true;
             }
             catch (Exception)
             {
@@ -182,7 +180,7 @@ namespace Tools
             try
             {
                 RegistryEx(RootKey).CreateSubKey(RegPath);
-                RegistryKey Key = RegistryEx(RootKey).OpenSubKey(RegPath,true);
+                RegistryKey Key = RegistryEx(RootKey).OpenSubKey(RegPath, true);
                 Key.SetValue(KeyName, KeyValue);
                 flag = true;
             }
@@ -222,7 +220,7 @@ namespace Tools
         /// <param name="RootKey">根键枚举</param>
         /// <param name="SubPath">要删除的路径</param>
         /// <returns></returns>
-        public static bool DeleteSubKeyTree(RootKey RootKey,string SubPath)
+        public static bool DeleteSubKeyTree(RootKey RootKey, string SubPath)
         {
             bool flag = false;
             try

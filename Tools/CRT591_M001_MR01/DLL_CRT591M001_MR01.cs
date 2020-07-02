@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CRT591_M001_MR01
 {
@@ -14,7 +10,7 @@ namespace CRT591_M001_MR01
         /// </summary>
         /// <param name="port">串口号COM1</param>
         /// <returns>0打开失败</returns>
-        [DllImport("CRT_591_M001.dll",EntryPoint = "CRT591MROpen")]
+        [DllImport("CRT_591_M001.dll", EntryPoint = "CRT591MROpen")]
         public static extern IntPtr CRT591MROpen(string port);
 
         /// <summary>
@@ -53,8 +49,8 @@ namespace CRT591_M001_MR01
         /// <param name="RxData">返回的数据包</param>
         /// <returns>0成功</returns>
         [DllImport("CRT_591_M001.dll")]
-        public static extern int RS232_ExeCommand(IntPtr ComHandle,byte TxAddr,byte TxCmCode,byte TxPmCode,int TxDataLen, byte[] TxData,
-           ref byte RxReplyType, ref byte RxStCode0, ref byte RxStCode1, ref byte RxStCode2,ref int RxDataLen,byte[] RxData);
+        public static extern int RS232_ExeCommand(IntPtr ComHandle, byte TxAddr, byte TxCmCode, byte TxPmCode, int TxDataLen, byte[] TxData,
+           ref byte RxReplyType, ref byte RxStCode0, ref byte RxStCode1, ref byte RxStCode2, ref int RxDataLen, byte[] RxData);
 
 
 
@@ -78,8 +74,8 @@ namespace CRT591_M001_MR01
         /// <param name="ATR_DataLen">ATR_DataLen：读卡器中卡的 ATR 数据长度</param>
         /// <returns>=0 成功</returns>
         [DllImport("CRT_591_M001.dll")]//[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 数组大小)] public string 数组名
-        public static extern int GetSCardReaderStatus(int ReaderSort,ref ushort ReaderName,ref int ReaderNameLen,ref byte CardState,
-            ref byte CardProtocol,byte[] ATR_Data,ref int ATR_DataLen);
+        public static extern int GetSCardReaderStatus(int ReaderSort, ref ushort ReaderName, ref int ReaderNameLen, ref byte CardState,
+            ref byte CardProtocol, byte[] ATR_Data, ref int ATR_DataLen);
 
         /// <summary>
         /// 使用智能读卡器进行 APDU 传输
@@ -91,7 +87,7 @@ namespace CRT591_M001_MR01
         /// <param name="RxData">RxData：返回的 RPDU 数据</param>
         /// <returns> =0 成功</returns>
         [DllImport("CRT_591_M001.dll")]
-        public static extern int APDU_Transmit( int ReaderSort,int TxDataLen,byte[] TxData,ref int RxDataLen,byte[] RxData);
+        public static extern int APDU_Transmit(int ReaderSort, int TxDataLen, byte[] TxData, ref int RxDataLen, byte[] RxData);
 
         /// <summary>
         /// 断开智能读卡器

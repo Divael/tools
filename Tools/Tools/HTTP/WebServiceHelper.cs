@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
+using System.IO;
+using System.Net;
 using System.Text;
 using System.Web;
-using System.IO;
 using System.Xml;
-using System.Collections;
-using System.Net;
 using System.Xml.Serialization;
-using System.Drawing;
 
 namespace Tools
 {
@@ -51,7 +49,7 @@ namespace Tools
         /// <param name="Para">string型的参数名和参数值组成的哈希表</param>
         /// <param name="contentType">application/x-www-form-urlencoded</param>   
         /// <returns></returns>   
-        public static XmlDocument QueryPostWebService(WebServiceInfo WebServiceInfos, string MethodName, Hashtable Para ,string contentType = "application/x-www-form-urlencoded")
+        public static XmlDocument QueryPostWebService(WebServiceInfo WebServiceInfos, string MethodName, Hashtable Para, string contentType = "application/x-www-form-urlencoded")
         {
             HttpWebRequest request;
             if (string.IsNullOrWhiteSpace(MethodName))
@@ -79,7 +77,7 @@ namespace Tools
         /// <param name="Para">post 参数hashtable.add("","")</param>
         /// <param name="contentType">默认application/x-www-form-urlencoded</param>
         /// <returns>string 可以是json</returns>
-        public static string QueryPostWebServiceReString(WebServiceInfo WebServiceInfos, string MethodName, Hashtable Para,string contentType = "application/x-www-form-urlencoded")
+        public static string QueryPostWebServiceReString(WebServiceInfo WebServiceInfos, string MethodName, Hashtable Para, string contentType = "application/x-www-form-urlencoded")
         {
             HttpWebRequest request;
             if (string.IsNullOrWhiteSpace(MethodName))
@@ -98,7 +96,7 @@ namespace Tools
             string res = string.Empty;
             using (var s = request.GetResponse().GetResponseStream())
             {
-                if (s!= null)
+                if (s != null)
                 {
                     using (StreamReader sRead = new StreamReader(s))
                     {
@@ -182,9 +180,9 @@ namespace Tools
         /// <returns></returns>   
         public static XmlDocument QuerySoapWebService(WebServiceInfo WebServiceInfos, string MethodName, Hashtable Para)
         {
-            if (_xmlNamespaces.ContainsKey(WebServiceInfos.WebServiceUrl+"/"+WebServiceInfos.WebServiceName))
+            if (_xmlNamespaces.ContainsKey(WebServiceInfos.WebServiceUrl + "/" + WebServiceInfos.WebServiceName))
             {
-                return QuerySoapWebService(WebServiceInfos, MethodName, Para, _xmlNamespaces[WebServiceInfos.WebServiceUrl+"/"+WebServiceInfos.WebServiceName].ToString());
+                return QuerySoapWebService(WebServiceInfos, MethodName, Para, _xmlNamespaces[WebServiceInfos.WebServiceUrl + "/" + WebServiceInfos.WebServiceName].ToString());
             }
             else
             {
@@ -203,8 +201,8 @@ namespace Tools
         /// <returns></returns>
         private static XmlDocument QuerySoapWebService(WebServiceInfo WebServiceInfos, String MethodName, Hashtable Para, string XmlNs)
         {
-            _xmlNamespaces[WebServiceInfos.WebServiceUrl+"/"+WebServiceInfos.WebServiceName] = XmlNs;//加入缓存，提高效率   
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(WebServiceInfos.WebServiceUrl+"/"+WebServiceInfos.WebServiceName+".asmx");
+            _xmlNamespaces[WebServiceInfos.WebServiceUrl + "/" + WebServiceInfos.WebServiceName] = XmlNs;//加入缓存，提高效率   
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(WebServiceInfos.WebServiceUrl + "/" + WebServiceInfos.WebServiceName + ".asmx");
             request.Method = "POST";
             request.ContentType = "text/xml; charset=utf-8";
             request.Headers.Add("SOAPAction", "\"" + XmlNs + (XmlNs.EndsWith("/") ? "" : "/") + MethodName + "\"");

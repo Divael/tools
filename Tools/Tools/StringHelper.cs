@@ -1,16 +1,10 @@
-﻿using System;
-using System.Configuration;
-using System.Collections;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Text;
-using System.Web;
-using System.Drawing;
-using System.Security.Cryptography;
-using System.Text.RegularExpressions;
-using Microsoft.VisualBasic;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Tools
 {
@@ -91,14 +85,14 @@ namespace Tools
         /// </summary>
         /// <param name="str">a=1&b=2</param>
         /// <returns></returns>
-        public static Dictionary<string,string> StringSplit(string str)
+        public static Dictionary<string, string> StringSplit(string str)
         {
             string[] sArray = Regex.Split(str, "&", RegexOptions.IgnoreCase);
             Dictionary<string, string> keyValuePairs = new Dictionary<string, string>();
             foreach (var item in sArray)
             {
                 string[] Arrays = Regex.Split(str, "=", RegexOptions.IgnoreCase);
-                keyValuePairs.Add(Arrays[0],Arrays[1]);
+                keyValuePairs.Add(Arrays[0], Arrays[1]);
             }
             return keyValuePairs;
         }
@@ -813,7 +807,7 @@ namespace Tools
             {
                 for (int i = 0; i < bytes.Length; i++)
                 {
-                    returnStr += bytes[i].ToString("X2")+" ";
+                    returnStr += bytes[i].ToString("X2") + " ";
                 }
             }
             return returnStr;
@@ -889,7 +883,8 @@ namespace Tools
         /// <param name="StartIndex">开始截取的位置index</param>
         /// <param name="Length">要截取的长度</param>
         /// <returns></returns>
-        public static byte[] BytesGetBytes(byte[] bytes,int StartIndex,int Length) {
+        public static byte[] BytesGetBytes(byte[] bytes, int StartIndex, int Length)
+        {
             return bytes.Skip(StartIndex).Take(Length).ToArray();
         }
         #endregion
@@ -972,7 +967,7 @@ namespace Tools
             }
             return "";
              */
-            if (InBytes==null)
+            if (InBytes == null)
             {
                 return "";
             }
@@ -1052,10 +1047,11 @@ namespace Tools
         /// </summary>
         /// <param name="vs"></param>
         /// <returns></returns>
-        public static int bytesToInt32(byte [] vs) {
+        public static int bytesToInt32(byte[] vs)
+        {
             try
             {
-               return BitConverter.ToInt32(vs, 0);
+                return BitConverter.ToInt32(vs, 0);
 
             }
             catch (Exception)

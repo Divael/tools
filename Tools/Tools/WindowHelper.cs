@@ -1,13 +1,9 @@
 ﻿using IWshRuntimeLibrary;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Tools
@@ -23,7 +19,8 @@ namespace Tools
         /// 是窗口居中
         /// </summary>
         /// <param name="win"></param>
-        public static void center(Window win) {
+        public static void center(Window win)
+        {
             double workHeight = SystemParameters.WorkArea.Height;
 
             double workWidth = SystemParameters.WorkArea.Width;
@@ -37,7 +34,8 @@ namespace Tools
         /// 打开指定程序（目录+.exe）
         /// </summary>
         /// <param name="fileExe"></param>
-        public static void openProcesses(string fileExe) {
+        public static void openProcesses(string fileExe)
+        {
             try
             {
                 Process.Start(fileExe);
@@ -125,7 +123,7 @@ namespace Tools
         /// <param name="quickName">快捷方式名称</param>
         /// <param name="onOff">自启开关</param>
         /// <param name="isDeskTop">是否创建桌面快捷方式</param> 
-        public static void SetMeAutoStart(string quickName, bool onOff = true,bool isDeskTop = false)
+        public static void SetMeAutoStart(string quickName, bool onOff = true, bool isDeskTop = false)
         {
             QuickName = quickName;
             if (onOff)//开机启动
@@ -163,7 +161,7 @@ namespace Tools
             {
                 CreateDesktopQuick(desktopPath, QuickName, appAllPath);
             }
-            
+
         }
 
         /// <summary>

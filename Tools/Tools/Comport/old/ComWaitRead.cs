@@ -16,17 +16,17 @@ namespace Comport
     /// 
     /// </summary>
     public class ComWaitRead : Com
-	{
+    {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="cpp">参数</param>
         /// <param name="ReceiveDelay">等待接收时间</param>
 		public ComWaitRead(ComPortParm cpp, int ReceiveDelay = 50) : base(cpp)
-		{
-			base.DataReceive += this.ComWaitRead_DataReceive;
-			this.ReceiveDelay = ReceiveDelay;
-		}
+        {
+            base.DataReceive += this.ComWaitRead_DataReceive;
+            this.ReceiveDelay = ReceiveDelay;
+        }
 
         /// <summary>
         /// 第2个参数是串口返回的bytes
@@ -34,43 +34,43 @@ namespace Comport
         /// </summary>
 		public new event Action<ComWaitRead, byte[]> DataReceive;
 
-		private void ComWaitRead_DataReceive(object sender, SerialDataReceivedEventArgs e)
-		{
-			List<byte> data = this.Data;
-			lock (data)
-			{
-				try
-				{
-					int bytesToRead;
-					while (base.IsOpen && (bytesToRead = this.handle.BytesToRead) > 0)
-					{
-						byte[] array = new byte[bytesToRead];
-						this.handle.Read(array, 0, bytesToRead);
-						this.Data.AddRange(array);
+        private void ComWaitRead_DataReceive(object sender, SerialDataReceivedEventArgs e)
+        {
+            List<byte> data = this.Data;
+            lock (data)
+            {
+                try
+                {
+                    int bytesToRead;
+                    while (base.IsOpen && (bytesToRead = this.handle.BytesToRead) > 0)
+                    {
+                        byte[] array = new byte[bytesToRead];
+                        this.handle.Read(array, 0, bytesToRead);
+                        this.Data.AddRange(array);
                         System.Common.Sleep(this.ReceiveDelay);
-					}
-					Action<ComWaitRead, byte[]> dataReceive = this.DataReceive;
-					if (dataReceive != null)
-					{
-						dataReceive(this, this.Data.ToArray());
-					}
+                    }
+                    Action<ComWaitRead, byte[]> dataReceive = this.DataReceive;
+                    if (dataReceive != null)
+                    {
+                        dataReceive(this, this.Data.ToArray());
+                    }
                 }
-				catch (Exception e2)
-				{
-                    Tools.Loger.err("tools_loghelper",e2);
-				}
-				finally
-				{
-					this.Data.Clear();
-				}
-			}
-		}
+                catch (Exception e2)
+                {
+                    Tools.Loger.err("tools_loghelper", e2);
+                }
+                finally
+                {
+                    this.Data.Clear();
+                }
+            }
+        }
         /// <summary>
         /// 接收延时
         /// </summary>
 		public int ReceiveDelay = 50;
 
-		private List<byte> Data = new List<byte>();
+        private List<byte> Data = new List<byte>();
 
         public static Stopwatch sw = new Stopwatch();
         /// <summary>
@@ -79,7 +79,7 @@ namespace Comport
         /// <param name="data"></param>
         /// <param name="timeout">3s带返回 TimeSpan.FromSeconds(3)</param>
         /// <returns></returns>
-        public byte[] SendAndGetReply(byte[] data,TimeSpan timeout)
+        public byte[] SendAndGetReply(byte[] data, TimeSpan timeout)
         {
             byte[] bytes = null;
             if (!this.IsOpen)
@@ -87,7 +87,8 @@ namespace Comport
                 throw new Exception("串口未打开！");
             }
 
-            this.DataReceive += (s, e) => {
+            this.DataReceive += (s, e) =>
+            {
                 bytes = e;
             };
 

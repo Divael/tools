@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Configuration;
-using System.Web;
 using System.Data;
 using System.Data.OleDb;
-using System.Data.SqlClient;
 
 namespace Tools
 {
@@ -36,7 +33,7 @@ namespace Tools
             try
             {
                 string strConnection = "Provider=Microsoft.Jet.OLEDB.4.0; " +
-"Data Source=" + System.Environment.CurrentDirectory+(MdbPath);
+"Data Source=" + System.Environment.CurrentDirectory + (MdbPath);
                 Connection = new OleDbConnection(strConnection);
             }
             catch (Exception)
@@ -172,7 +169,7 @@ namespace Tools
             int i = -1;
             try
             {
-                if (Connection.State == ConnectionState.Closed) Connection.Open();                
+                if (Connection.State == ConnectionState.Closed) Connection.Open();
                 OleDbCommand comm = CreateCommand(CommandText, Connection, OleDbParameters);
                 i = comm.ExecuteNonQuery();
             }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Speech.Synthesis;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Speech.Synthesis;
 
 namespace Tools.sound
 {
@@ -15,11 +10,13 @@ namespace Tools.sound
         private SpeechSynthesizer man;
         private static Speaker speaker;
         private static object obj = new object();
-        private Speaker() {
+        private Speaker()
+        {
             man = new SpeechSynthesizer();
         }
 
-        public static Speaker getInstance() {
+        public static Speaker getInstance()
+        {
             if (speaker == null)
             {
                 lock (obj)
@@ -51,6 +48,6 @@ namespace Tools.sound
             man.SpeakAsync(words);
         }
 
-        
+
     }
 }

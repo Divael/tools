@@ -1,8 +1,8 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using MaterialDesignThemes.Wpf;
 
 namespace AmRoMessageDialog
 {
@@ -137,9 +137,9 @@ namespace AmRoMessageDialog
 
         private void PrepareMessageWindow()
         {
-            if (ParentWindow == null 
-                || !ShowMessageWithEffect 
-                || ParentWindow.ActualWidth <= CardMain.ActualWidth + 200 
+            if (ParentWindow == null
+                || !ShowMessageWithEffect
+                || ParentWindow.ActualWidth <= CardMain.ActualWidth + 200
                 || ParentWindow.ActualHeight <= CardMain.ActualHeight + 200)
             {
                 WindowStartupLocation = WindowStartupLocation.CenterScreen;

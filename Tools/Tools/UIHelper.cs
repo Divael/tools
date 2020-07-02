@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace Tools
@@ -90,7 +86,8 @@ namespace Tools
         /// <param name="nextControlControl">下一页面</param>
         public static void ToUI(UserControl curControl, UserControl nextControlControl)
         {
-            if (DisplayUserControl != null) {
+            if (DisplayUserControl != null)
+            {
                 if (Main_page == null)
                 {
                     Main_page = curControl;
@@ -124,9 +121,10 @@ namespace Tools
         }
     }
 
-    public class UIController {
+    public class UIController
+    {
 
-        public ContentControl _MainContentControl { get;private set; }
+        public ContentControl _MainContentControl { get; private set; }
         public UserControl _lastUserControl { get; private set; }
         public UserControl _FirstUserControl { get; private set; }
 
@@ -155,12 +153,14 @@ namespace Tools
             return sClass;
         }
 
-        public void SetMainControlContent(ContentControl contentControl) {
+        public void SetMainControlContent(ContentControl contentControl)
+        {
             _MainContentControl = contentControl;
         }
 
-        public void ToUserControl(UserControl userControl) {
-            if (_MainContentControl.Content!= null)
+        public void ToUserControl(UserControl userControl)
+        {
+            if (_MainContentControl.Content != null)
             {
                 _lastUserControl = (UserControl)_MainContentControl.Content;
             }
@@ -171,7 +171,8 @@ namespace Tools
             _MainContentControl.Content = userControl;
         }
 
-        public void ToUpUserControl() {
+        public void ToUpUserControl()
+        {
             if (_lastUserControl == null)
             {
                 throw new Exception("ToUpUserControl 上一个control是空的！");
@@ -179,7 +180,8 @@ namespace Tools
             _MainContentControl.Content = _lastUserControl;
         }
 
-        public void ToFirstUserControl() {
+        public void ToFirstUserControl()
+        {
             if (_FirstUserControl == null)
             {
                 throw new Exception("ToFirstUserControl error = _FirstUserControl是空的！");

@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.OleDb;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -37,9 +29,10 @@ namespace Test1
             return dt;
         }
 
-        public bool Update(int id ,string rowName,string strUpdate) {
+        public bool Update(int id, string rowName, string strUpdate)
+        {
             string sql = "update 学生表 set " + rowName + " = '" + strUpdate + "' where id = " + id;
-            OleDbCommand command = new OleDbCommand(sql,oleDb);
+            OleDbCommand command = new OleDbCommand(sql, oleDb);
             int i = command.ExecuteNonQuery();
             if (i == 1)
             {
@@ -57,7 +50,7 @@ namespace Test1
             OleDbDataAdapter dbDataAdapter = new OleDbDataAdapter(sql, oleDb);
             OleDbCommandBuilder commandBuilder = new OleDbCommandBuilder(dbDataAdapter);
             int rs = dbDataAdapter.Update(dt);
-            if (rs>0)
+            if (rs > 0)
             {
                 return true;
             }

@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace 数据库配置工具
 {
@@ -41,7 +35,8 @@ namespace 数据库配置工具
 
         }
 
-        public static DBConfig getConnectionString() {
+        public static DBConfig getConnectionString()
+        {
             DBConfig config = new DBConfig();
             Tools.IniHelper.SetFilePath(System.Environment.CurrentDirectory + @"\config.ini");
             config.Server = Tools.IniHelper.ReadIniData("数据库配置", "DataSource", "");
@@ -62,7 +57,8 @@ namespace 数据库配置工具
     }
 
 
-    public class DBConfig {
+    public class DBConfig
+    {
         public string Server { get; set; }
         public string Database { get; set; }
         public string UserId { get; set; }

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Tools.注册机
 {
@@ -161,7 +158,7 @@ namespace Tools.注册机
                     }
                     catch (Exception ex)
                     {
-                        Tools.Loger.err("LoadByFile",ex);
+                        Tools.Loger.err("LoadByFile", ex);
                     }
                     finally
                     {
@@ -201,7 +198,7 @@ namespace Tools.注册机
                 }
                 catch (Exception ex)
                 {
-                    Loger.err("SaveToFile",ex);
+                    Loger.err("SaveToFile", ex);
                 }
                 finally
                 {

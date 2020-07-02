@@ -45,7 +45,7 @@ namespace Splash
 
         public FingerPictureBox()
         {
-            InitializeComponent();         
+            InitializeComponent();
 
             // 设置装载事件处理器
             this.Loaded += new RoutedEventHandler(FingerPictureBox_Loaded);
@@ -71,13 +71,13 @@ namespace Splash
 
             // 设置图像框伸展属性
             this.image1.Stretch = System.Windows.Media.Stretch.Fill;
-            this.image1.StretchDirection = StretchDirection.Both;    
+            this.image1.StretchDirection = StretchDirection.Both;
         }
 
         private void FingerPictureBox_DragEnter(object sender, DragEventArgs e)
         {
             // 拖放时显示的效果
-            e.Effects = DragDropEffects.Link;            
+            e.Effects = DragDropEffects.Link;
         }
 
         private void FingerPictureBox_Drop(object sender, DragEventArgs e)
@@ -88,11 +88,11 @@ namespace Splash
             {   // 设置控件图像
                 BitmapImage DropImage = new BitmapImage();
                 DropImage.BeginInit();
-                DropImage.UriSource = new Uri(DropFiles[0]);                
+                DropImage.UriSource = new Uri(DropFiles[0]);
                 DropImage.EndInit();
 
                 // 设置活动图像
-                this.ActiveImage = DropImage; 
+                this.ActiveImage = DropImage;
             }
         }
 
@@ -102,7 +102,7 @@ namespace Splash
             previousMousePoint = e.GetPosition(this);
 
             // 设置鼠标捕获
-            this.image1.CaptureMouse();            
+            this.image1.CaptureMouse();
         }
 
         private void FingerPictureBox_MouseMove(object sender, MouseEventArgs e)
@@ -175,7 +175,7 @@ namespace Splash
                 return this.image1.Source;
             }
             set
-            { 
+            {
                 this.image1.Source = value;
                 if (value == _InitialImage)
                 {    // 禁止图像拖动删除功能        
@@ -188,8 +188,8 @@ namespace Splash
                     this.image1.MouseDown += new MouseButtonEventHandler(FingerPictureBox_MouseDown);
                     this.image1.MouseMove += new MouseEventHandler(FingerPictureBox_MouseMove);
                     this.image1.MouseUp += new MouseButtonEventHandler(FingerPictureBox_MouseUp);
-                }     
-            }            
+                }
+            }
         }
     }
 }

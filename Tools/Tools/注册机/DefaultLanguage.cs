@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tools.注册机
+﻿namespace Tools.注册机
 {
     /// <summary>
     /// 系统的语言基类，默认也即是中文版本
     /// </summary>
     public class DefaultLanguage
     {
-        #pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
+#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
         /***********************************************************************************
          * 
          *    一般的错误信息

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CRT591_M001_MR01
 {
@@ -29,7 +26,8 @@ namespace CRT591_M001_MR01
         /// </summary>
         public event Action<Msg> msg;
 
-        public CRT591MR01_Controller() {
+        public CRT591MR01_Controller()
+        {
 
         }
 
@@ -37,7 +35,8 @@ namespace CRT591_M001_MR01
         /// COM2
         /// </summary>
         /// <param name="com"></param>
-        public bool OpenCom(string com) {
+        public bool OpenCom(string com)
+        {
             var handle = DLL_CRT591M001_MR01.CRT591MROpen(com);
             if ((int)handle == 0)
             {
@@ -67,7 +66,8 @@ namespace CRT591_M001_MR01
             return true;
         }
 
-        public bool CloseCom() {
+        public bool CloseCom()
+        {
             int a = DLL_CRT591M001_MR01.CRT591MRClose(comHandler);
             return a == 0 ? true : false;
         }
@@ -75,7 +75,8 @@ namespace CRT591_M001_MR01
         /// <summary>
         /// 处理发送的数据包
         /// </summary>
-        public void DealData() {
+        public void DealData()
+        {
 
         }
 
@@ -83,12 +84,13 @@ namespace CRT591_M001_MR01
         /// 获取所有连接的读卡器状态，先初始化
         /// </summary>
         /// <returns></returns>
-        public List<ReaderCardandState> GetSCardReaderStatus() {
+        public List<ReaderCardandState> GetSCardReaderStatus()
+        {
             List<ReaderCardandState> list = new List<ReaderCardandState>();
             for (int i = 0; i < ReaderCount; i++)
             {
                 ReaderCardandState reader = new ReaderCardandState();
-                DLL_CRT591M001_MR01.GetSCardReaderStatus(i, ref reader.ReaderName,ref reader.ReaderNameLen,ref reader.CardState,ref reader.CardProtocol,reader.ATR_DATA,ref reader.ATR_DataLen);
+                DLL_CRT591M001_MR01.GetSCardReaderStatus(i, ref reader.ReaderName, ref reader.ReaderNameLen, ref reader.CardState, ref reader.CardProtocol, reader.ATR_DATA, ref reader.ATR_DataLen);
                 list.Add(reader);
             }
             return list;
@@ -113,17 +115,17 @@ namespace CRT591_M001_MR01
 
             RxRes rxRes = new RxRes();
             byte[] vs = "00".ToHex();
-            int res  = DLL_CRT591M001_MR01.RS232_ExeCommand(comHandler, TxAddr,(byte)0x30, (byte)_InitPm, 0x00, vs, ref rxRes.RxReplyType,ref rxRes.RxStCode0,ref  rxRes.RxStCode1,ref  rxRes.RxStCode2,ref rxRes.RxDataLen, rxRes.RxData);
+            int res = DLL_CRT591M001_MR01.RS232_ExeCommand(comHandler, TxAddr, (byte)0x30, (byte)_InitPm, 0x00, vs, ref rxRes.RxReplyType, ref rxRes.RxStCode0, ref rxRes.RxStCode1, ref rxRes.RxStCode2, ref rxRes.RxDataLen, rxRes.RxData);
             rxRes.ToString().logThis();
             if (res.Equals(0))
             {
-                if ((enum_RxReplyType)rxRes.RxReplyType ==enum_RxReplyType.执行成功)
+                if ((enum_RxReplyType)rxRes.RxReplyType == enum_RxReplyType.执行成功)
                 {
                     return true;
                 }
             }
             return false;
-            
+
         }
 
         /// <summary>
@@ -189,7 +191,8 @@ namespace CRT591_M001_MR01
         /// <summary>
         /// 初始化读卡器环境
         /// </summary>
-        public bool InitializeContext() {
+        public bool InitializeContext()
+        {
             int count = 0;
             int res = DLL_CRT591M001_MR01.InitializeContext(ref count);
             if (res.Equals(0))
@@ -242,8 +245,9 @@ namespace CRT591_M001_MR01
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public bool DisconnectSCardReader(int index) {
-            int res =DLL_CRT591M001_MR01.DisconnectSCardReader(index);
+        public bool DisconnectSCardReader(int index)
+        {
+            int res = DLL_CRT591M001_MR01.DisconnectSCardReader(index);
             if (res.Equals(0))
             {
                 return true;
@@ -265,7 +269,8 @@ namespace CRT591_M001_MR01
 
     }
 
-    public class ReaderCardandState {
+    public class ReaderCardandState
+    {
 
         public ushort ReaderName;
         public int ReaderNameLen;
@@ -286,12 +291,12 @@ namespace CRT591_M001_MR01
 
         public override string ToString()
         {
-            string bytes ="";
+            string bytes = "";
             foreach (var item in ATR_DATA)
             {
                 bytes += item + " ";
             }
-            return "读卡器名称 = "+ReaderName+ " 读卡器名称长度="+ ReaderNameLen+" 卡状态=" + CardState+ " 读卡器中卡的使用标准=" + CardProtocol+ " 读卡器中卡的 ATR 数据=" + bytes+ " 读卡器中卡的 ATR 数据长度=" + ATR_DataLen;
+            return "读卡器名称 = " + ReaderName + " 读卡器名称长度=" + ReaderNameLen + " 卡状态=" + CardState + " 读卡器中卡的使用标准=" + CardProtocol + " 读卡器中卡的 ATR 数据=" + bytes + " 读卡器中卡的 ATR 数据长度=" + ATR_DataLen;
         }
     }
 
@@ -301,8 +306,8 @@ namespace CRT591_M001_MR01
         /// <summary>
         /// 返回的应答类型  0x50 : 执行成功 0x4E : 执行失败 0x10 : 下位机取消通讯(NAK ) 0x20 : 通讯错误 0x30 : 上位机取消命令(DLE, EOT) </param>
         /// </summary>
-        public byte RxReplyType ;
-        public byte RxStCode0 ;
+        public byte RxReplyType;
+        public byte RxStCode0;
         public byte RxStCode1;
         public byte RxStCode2;
         public int RxDataLen;
@@ -329,7 +334,8 @@ namespace CRT591_M001_MR01
         }
     }
 
-    public enum enum_RxReplyType {
+    public enum enum_RxReplyType
+    {
         执行成功 = 0x50,
         执行失败 = 0x4E,
         下位机取消通讯Nak = 0x10,
@@ -363,5 +369,5 @@ namespace CRT591_M001_MR01
         TypeB = 0x42,
         MifareOneCard = 0x4D
     }
-    
+
 }

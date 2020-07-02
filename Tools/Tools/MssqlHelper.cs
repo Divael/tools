@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 
 namespace Tools
 {
@@ -159,7 +157,7 @@ namespace Tools
             result = command.ExecuteNonQuery();
             command.Parameters.Clear();
             command.Dispose();
-             return result;
+            return result;
         }
         #endregion
 

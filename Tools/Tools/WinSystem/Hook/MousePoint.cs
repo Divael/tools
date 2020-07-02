@@ -8,35 +8,35 @@ using System.Drawing;
 
 namespace System.WinSystem.Hook
 {
-  public struct MousePoint
-  {
-    public int X;
-    public int Y;
-
-    public MousePoint(Point p)
+    public struct MousePoint
     {
-      this.X = p.X;
-      this.Y = p.Y;
-    }
+        public int X;
+        public int Y;
 
-    public static implicit operator Point(MousePoint p)
-    {
-      return new Point(p.X, p.Y);
-    }
+        public MousePoint(Point p)
+        {
+            this.X = p.X;
+            this.Y = p.Y;
+        }
 
-    public static MousePoint Parse(string s)
-    {
-      string str = s.Replace(',', ' ');
-      char[] chArray = new char[1];
-      int index = 0;
-      int num = 32;
-      chArray[index] = (char) num;
-      string[] strArray = str.Split(chArray);
-      return new MousePoint()
-      {
-        X = int.Parse(strArray[0].Trim()),
-        Y = int.Parse(strArray[1].Trim())
-      };
+        public static implicit operator Point(MousePoint p)
+        {
+            return new Point(p.X, p.Y);
+        }
+
+        public static MousePoint Parse(string s)
+        {
+            string str = s.Replace(',', ' ');
+            char[] chArray = new char[1];
+            int index = 0;
+            int num = 32;
+            chArray[index] = (char)num;
+            string[] strArray = str.Split(chArray);
+            return new MousePoint()
+            {
+                X = int.Parse(strArray[0].Trim()),
+                Y = int.Parse(strArray[1].Trim())
+            };
+        }
     }
-  }
 }

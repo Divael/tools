@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tools
 {
@@ -18,7 +15,8 @@ namespace Tools
         /// 获取本地ip地址,首选第一个
         /// </summary>
         /// <returns></returns>
-        public static IPAddress GetLocalIPAddress() {
+        public static IPAddress GetLocalIPAddress()
+        {
 
             IPAddress localIp = null;
 

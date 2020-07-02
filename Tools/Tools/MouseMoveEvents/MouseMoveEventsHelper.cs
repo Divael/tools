@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Threading;
 
 namespace Tools
@@ -18,14 +13,15 @@ namespace Tools
     {
         private event Action DoEvent;
 
-        public MouseMoveEventsHelper(Action action) {
+        public MouseMoveEventsHelper(Action action)
+        {
             DoEvent += action;
         }
 
         private DispatcherTimer mousePositionTimer;    //长时间不操作该程序退回到登录界面的计时器
         public Point mousePosition;    //鼠标的位置
 
-        public bool IsEnable { get => mousePositionTimer.IsEnabled;}
+        public bool IsEnable { get => mousePositionTimer.IsEnabled; }
 
         /// <summary>
         /// 启动鼠标移动timer

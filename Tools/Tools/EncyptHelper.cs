@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Text;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 
 namespace Tools
@@ -58,7 +58,7 @@ namespace Tools
         /// <returns>编码结果</returns>
         public static string UrlEncode(string str)
         {
-            return  HttpUtility.UrlEncode(str);
+            return HttpUtility.UrlEncode(str);
         }
         #endregion
 

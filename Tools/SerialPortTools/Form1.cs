@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tools;
 
@@ -61,7 +54,7 @@ namespace SerialPortTools
             if (serialPort.IsOpen)
             {
                 serialPort.DataReceive -= SerialPort_DataReceive;
-                byte [] bytes = serialPort.SendAndReceived(tbSendTxt.Text.ToHex(),new TimeSpan(0,0,0,0,1000));
+                byte[] bytes = serialPort.SendAndReceived(tbSendTxt.Text.ToHex(), new TimeSpan(0, 0, 0, 0, 1000));
                 serialPort.DataReceive += SerialPort_DataReceive;
                 if (bytes == null)
                 {
@@ -71,7 +64,7 @@ namespace SerialPortTools
                 {
                     lb_msg.Items.Add(Tools.StringHelper.ByteToHexString(bytes));
                 }
-                
+
             }
             else
             {

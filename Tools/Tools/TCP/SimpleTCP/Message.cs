@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimpleTCP
 {
@@ -61,12 +57,13 @@ namespace SimpleTCP
             if (data.LastOrDefault() != _writeLineDelimiter)
             {
                 Reply(data + _encoder.GetString(new byte[] { _writeLineDelimiter }));
-            } else
+            }
+            else
             {
                 Reply(data);
             }
         }
 
-        public TcpClient TcpClient {  get { return _tcpClient; } }
+        public TcpClient TcpClient { get { return _tcpClient; } }
     }
 }

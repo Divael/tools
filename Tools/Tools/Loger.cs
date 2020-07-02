@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Tools
 {
@@ -24,7 +22,7 @@ namespace Tools
 
         public static bool IsLogToFile { get; set; } = true;
 
-        public static string[] typeSet = { "error","info" };
+        public static string[] typeSet = { "error", "info" };
 
         #endregion
 
@@ -40,7 +38,7 @@ namespace Tools
         /// 记录组件日志
         /// </summary>
         /// <param name="logInfo">日志内容</param>
-        public static void info( string logInfo,string type = "info")
+        public static void info(string logInfo, string type = "info")
         {
             try
             {
@@ -61,7 +59,7 @@ namespace Tools
                 }
 
                 File.AppendAllText(m_LogDire + m_LogName + type + "_" + DateTime.Now.ToString("yyyyMMdd") + ".log",
-                        "【" + System.DateTime.Now.ToString("HH:mm:ss:fff") + "】\r\n"+ ">>>>>" + logInfo + "\r\n"+"----------------------------"+"\r\n",
+                        "【" + System.DateTime.Now.ToString("HH:mm:ss:fff") + "】\r\n" + ">>>>>" + logInfo + "\r\n" + "----------------------------" + "\r\n",
                         Encoding.Default);
             }
             catch
@@ -73,7 +71,7 @@ namespace Tools
         /// 记录错误组件日志
         /// </summary>
         /// <param name="logInfo">日志内容</param>
-        public static void err(string logInfo,Exception err, string type = "error")
+        public static void err(string logInfo, Exception err, string type = "error")
         {
             try
             {
@@ -94,7 +92,7 @@ namespace Tools
                 }
 
                 File.AppendAllText(m_LogDire + m_LogName + type + "_" + DateTime.Now.ToString("yyyyMMdd") + ".log",
-                        "时间：" + System.DateTime.Now.ToString("HH:mm:ss:fff") + "\r\n" + "类型：" + type + "\r\n" + "信息：" + logInfo+">>>"+err.ToString() + "\r\n" + "\r\n",
+                        "时间：" + System.DateTime.Now.ToString("HH:mm:ss:fff") + "\r\n" + "类型：" + type + "\r\n" + "信息：" + logInfo + ">>>" + err.ToString() + "\r\n" + "\r\n",
                         Encoding.Default);
             }
             catch

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.OleDb;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Tools.mvvm;
 namespace Test1
@@ -21,8 +16,8 @@ namespace Test1
         public Form1()
         {
             InitializeComponent();
-            team = new Team() { Leader = "杨海"};
-            Binding binding = new Binding("Text",team,"Leader",false,DataSourceUpdateMode.OnPropertyChanged);
+            team = new Team() { Leader = "杨海" };
+            Binding binding = new Binding("Text", team, "Leader", false, DataSourceUpdateMode.OnPropertyChanged);
             button1.DataBindings.Add(binding);
 
             int[] ii = { 0, 12 };
@@ -55,7 +50,7 @@ namespace Test1
                 "".logThis();
                 bool isOk = dB.Update(dt);
                 isUpdate = false;
-                MessageBox.Show("更新成功","保存");
+                MessageBox.Show("更新成功", "保存");
             }
             else
             {
@@ -76,7 +71,7 @@ namespace Test1
             {
                 return;
             }
-            if (MessageBox.Show("是否需要单个单元格保存？","保存",MessageBoxButtons.OKCancel)==DialogResult.OK)
+            if (MessageBox.Show("是否需要单个单元格保存？", "保存", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 dB.Update(e.RowIndex + 1, dt.Columns[e.ColumnIndex].Caption, dataGridView1.SelectedCells[0].FormattedValue.ToString());
             }
@@ -95,12 +90,12 @@ namespace Test1
 
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            MessageBox.Show(e.Exception.Message,"错误");
+            MessageBox.Show(e.Exception.Message, "错误");
         }
 
         private void dataGridView1_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex!= -1 && dataGridView1.Columns[e.ColumnIndex] is DataGridViewComboBoxColumn)
+            if (e.RowIndex != -1 && dataGridView1.Columns[e.ColumnIndex] is DataGridViewComboBoxColumn)
             {
                 SendKeys.Send("{F4}");
             }
@@ -113,19 +108,22 @@ namespace Test1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            dB.insetStudentByProduce("你好","男");
+            dB.insetStudentByProduce("你好", "男");
         }
     }
 
-    public class Team:PropertyChangedBase {
+    public class Team : PropertyChangedBase
+    {
         private string _leader;
-        public string Leader {
+        public string Leader
+        {
             get { return _leader; }
-            set {
+            set
+            {
                 if (value != _leader)
                 {
                     _leader = value;
-                    this.NotifyPropertyChanged(()=>Leader);
+                    this.NotifyPropertyChanged(() => Leader);
                 }
             }
         }

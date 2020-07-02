@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Test
 {
@@ -46,7 +42,8 @@ namespace Test
         /// <param name="tempPath">模板图片路径 @"D:\Users\Pictures\壁纸\wallhaven-541924.png"</param>
         /// <param name="content">内容</param>
         /// <param name="savePath">生成文字图片保存路径</param>
-        public void PicAddFonts(string tempPath,string  content,string savePath) {
+        public void PicAddFonts(string tempPath, string content, string savePath)
+        {
             string path = @tempPath;
 
             Bitmap bmp = new Bitmap(path);
@@ -63,7 +60,7 @@ namespace Test
             {
                 if (i > 13)
                 {
-                    
+
                     g.DrawString(str[i] + "", font, sbrush, new PointF(base_left + (left_space * 2), base_top + (top_space * (i - 14))));
                     continue;
                 }
@@ -73,8 +70,8 @@ namespace Test
                 }
                 else
                 {
-                    g.DrawString(str[i] + "", font, sbrush, new PointF(base_left+(left_space*i), base_top));
-                    g.DrawString(str[i] + "", font, sbrush, new PointF(base_left, base_top+(i*top_space)));
+                    g.DrawString(str[i] + "", font, sbrush, new PointF(base_left + (left_space * i), base_top));
+                    g.DrawString(str[i] + "", font, sbrush, new PointF(base_left, base_top + (i * top_space)));
                 }
 
             }
@@ -84,6 +81,6 @@ namespace Test
             bmp.Save(@savePath);
         }
 
-       
+
     }
 }

@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Data;
-using System.Data.SqlClient;
-using System.Web;
-using System.IO;
-using System.IO.Compression;
-using System.Runtime.CompilerServices;
-using System.Xml;
-using System.Windows.Media.Imaging;
-using System.Windows;
-using System.Windows.Interop;
-using System.WinSystem;
 using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using System.Windows.Media;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
+using System.Reflection;
+using System.Text;
+using System.Windows;
+using System.Windows.Interop;
+using System.Windows.Media.Imaging;
+using System.WinSystem;
+using System.Xml;
 
 namespace Tools
 {
@@ -318,7 +312,7 @@ namespace Tools
         {
             if ((Dt != null) && (!string.IsNullOrEmpty(XmlFilePath)))
             {
-                string path = System.Environment.CurrentDirectory+(XmlFilePath);
+                string path = System.Environment.CurrentDirectory + (XmlFilePath);
                 MemoryStream ms = null;
                 XmlTextWriter XmlWt = null;
                 try
@@ -488,7 +482,7 @@ namespace Tools
         {
             if (!string.IsNullOrEmpty(XmlFilePath))
             {
-                string path = System.Environment.CurrentDirectory+(XmlFilePath);
+                string path = System.Environment.CurrentDirectory + (XmlFilePath);
                 StringReader StrStream = null;
                 XmlTextReader Xmlrdr = null;
                 try
@@ -570,7 +564,8 @@ namespace Tools
                     stream.Read(Buffer, 0, Convert.ToInt32(stream.Length));
                 }
             }
-            else {
+            else
+            {
                 throw new Exception("文件不存在，请检查文件或路径是否正确");
             }
             return Buffer;
@@ -616,15 +611,16 @@ namespace Tools
         {
             try
             {
-                using (MemoryStream ms = new MemoryStream()) { 
-                image.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
-                byte[] arr = new byte[ms.Length];
-                ms.Position = 0;
-                ms.Read(arr, 0, (int)ms.Length);
-                ms.Close();
-                string pic = Convert.ToBase64String(arr);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    image.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+                    byte[] arr = new byte[ms.Length];
+                    ms.Position = 0;
+                    ms.Read(arr, 0, (int)ms.Length);
+                    ms.Close();
+                    string pic = Convert.ToBase64String(arr);
 
-                return pic;
+                    return pic;
                 }
             }
             catch (Exception)
@@ -747,7 +743,8 @@ namespace Tools
         #region bitmap bitmapImage icon相互转化
 
 
-        public static BitmapImage CreateBitmapImageFromBitmap(Bitmap bitmap) {
+        public static BitmapImage CreateBitmapImageFromBitmap(Bitmap bitmap)
+        {
             BitmapImage bitmapImage = new BitmapImage();
             using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
             {
@@ -766,7 +763,8 @@ namespace Tools
         /// </summary>
         /// <param name="bmp"></param>
         /// <returns></returns>
-        public static Icon CreateIconFromBitmap(Bitmap bmp) {
+        public static Icon CreateIconFromBitmap(Bitmap bmp)
+        {
             System.IntPtr iconHandle = bmp.GetHicon();
             return System.Drawing.Icon.FromHandle(iconHandle);
         }
@@ -776,7 +774,8 @@ namespace Tools
         /// </summary>
         /// <param name="bitmapSource"></param>
         /// <returns></returns>
-        public static Bitmap CreateBitmapFromBitmapImage(BitmapSource bitmapSource) {
+        public static Bitmap CreateBitmapFromBitmapImage(BitmapSource bitmapSource)
+        {
             System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(bitmapSource.PixelWidth, bitmapSource.PixelHeight, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
             System.Drawing.Imaging.BitmapData data = bmp.LockBits(
             new System.Drawing.Rectangle(System.Drawing.Point.Empty, bmp.Size), System.Drawing.Imaging.ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
@@ -790,7 +789,8 @@ namespace Tools
         /// <param name="path"></param>
         /// <param name="kind"></param>
         /// <returns></returns>
-        public static Icon CreateIconFromBitmapSource(string path, UriKind kind = UriKind.Relative) {
+        public static Icon CreateIconFromBitmapSource(string path, UriKind kind = UriKind.Relative)
+        {
             BitmapImage bitmapImage = CreateBitmapSourceFromUri(path, UriKind.RelativeOrAbsolute);
             return CreateIconFromBitmap(CreateBitmapFromBitmapImage(bitmapImage));
         }
@@ -838,7 +838,8 @@ namespace Tools
         /// <returns></returns>
         public static Image CreateImageFromBytes(byte[] buffer)
         {
-            using (MemoryStream ms = new MemoryStream(buffer)) {
+            using (MemoryStream ms = new MemoryStream(buffer))
+            {
                 Image image = System.Drawing.Image.FromStream(ms);
                 return image;
             }

@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Runtime.InteropServices;
-using System.Windows.Interop;
+using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Input;
+using System.Windows.Interop;
 
 
 namespace keyboard
@@ -72,14 +62,14 @@ namespace keyboard
             IntPtr a = new System.Windows.Interop.WindowInteropHelper(this).Handle;
             int temp = GetWindowLong(a, -20);
             SetWindowLong(a, -20, temp | 0x08000000);
-           // HwndSource.FromHwnd(a).AddHook(new HwndSourceHook(WndProc));
-           // double height = Screen.PrimaryScreen.Bounds.Height;
-           // double width = Screen.PrimaryScreen.Bounds.Width;
-          //  this.Left = (width-960)/2; this.Top = height - 400;
-           // this.WindowStartupLocation = WindowStartupLocation.Manual;
+            // HwndSource.FromHwnd(a).AddHook(new HwndSourceHook(WndProc));
+            // double height = Screen.PrimaryScreen.Bounds.Height;
+            // double width = Screen.PrimaryScreen.Bounds.Width;
+            //  this.Left = (width-960)/2; this.Top = height - 400;
+            // this.WindowStartupLocation = WindowStartupLocation.Manual;
             this.ShowInTaskbar = false;
 
-          
+
         }
         private void cmd1_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -462,15 +452,15 @@ namespace keyboard
 
                 System.Windows.Application.Current.Shutdown();
             }
-            else if(keybtn.Name == "CmdTypeWriting")
+            else if (keybtn.Name == "CmdTypeWriting")
             {
                 changeInput();
             }
 
             #endregion
         }
-     
-        
+
+
         //切换输入法
         private void changeInput()
         {
@@ -555,7 +545,7 @@ namespace keyboard
                     keybd_event(input, 0, 0x02, 0);
                 }
             }
-          
+
         }
 
         public struct GUITHREADINFO
@@ -618,7 +608,7 @@ namespace keyboard
                 hwndSource.AddHook(new HwndSourceHook(this.WndProc));
         }
 
-       
+
 
         //private void CmdCapsLock_FocusableChanged(object sender, DependencyPropertyChangedEventArgs e)
         //{

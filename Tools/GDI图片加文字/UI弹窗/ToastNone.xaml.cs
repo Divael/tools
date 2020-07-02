@@ -1,19 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Test.UI弹窗
 {
@@ -45,7 +34,7 @@ namespace Test.UI弹窗
             e.Cancel = true;
             this.Hide();
         }
-        public void Show(string title,string str, int seconds = 0)
+        public void Show(string title, string str, int seconds = 0)
         {
             Seconds = seconds;
             tb_notice.Content = title;
@@ -53,9 +42,11 @@ namespace Test.UI弹窗
             this.Show();
             if (Seconds > 0)
             {
-                Task.Run(()=> {
+                Task.Run(() =>
+                {
                     Thread.Sleep(Seconds * 1000);
-                    this.Dispatcher.BeginInvoke((Action)delegate () {
+                    this.Dispatcher.BeginInvoke((Action)delegate ()
+                    {
                         this.Close();
                     });/*
                     InitApp.getInstance().Booking.Dispatcher.Invoke(() => {
@@ -70,9 +61,11 @@ namespace Test.UI弹窗
             this.Topmost = true;
             if (Seconds > 0)
             {
-                Task.Run(() => {
+                Task.Run(() =>
+                {
                     Thread.Sleep(Seconds * 1000);
-                    this.Dispatcher.BeginInvoke((Action)delegate () {
+                    this.Dispatcher.BeginInvoke((Action)delegate ()
+                    {
                         this.Close();
                     });/*
                     InitApp.getInstance().Booking.Dispatcher.Invoke(() => {

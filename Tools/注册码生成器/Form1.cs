@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using 注册码生成器.Entities;
 
@@ -34,7 +29,7 @@ namespace 注册码生成器
             {
                 MessageBox.Show(exception.Message);
             }
-            
+
         }
 
 
@@ -57,7 +52,7 @@ namespace 注册码生成器
             using (var db = new yhxrEntities())
             {
                 var list = db.DEV_REG.Where((x) => x.R_RCODE.Equals(tbRegisterCode.Text)).ToList();
-                if (list.Count>0)
+                if (list.Count > 0)
                 {
                     return;
                 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tools.注册机
+﻿namespace Tools.注册机
 {
     /// <summary>
     /// English Version Text

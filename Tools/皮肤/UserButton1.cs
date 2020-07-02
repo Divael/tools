@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace 皮肤
-{ 
+{
     /// <summary>
     /// 一个自定义的按钮控件
     /// </summary>
@@ -42,7 +38,7 @@ namespace 皮肤
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
 
-            
+
         }
 
         private void UserButton_SizeChanged(object sender, EventArgs e)
@@ -127,8 +123,8 @@ namespace 皮肤
         [Description("按钮的背景色")]
         public Color OriginalColor
         {
-            get{return m_backcor; }
-            set{m_backcor = value;Invalidate(); }
+            get { return m_backcor; }
+            set { m_backcor = value; Invalidate(); }
         }
 
         private Color m_enablecolor = Color.FromArgb(190, 190, 190);
@@ -152,7 +148,7 @@ namespace 皮肤
         [Category("外观")]
         [DefaultValue(typeof(Color), "AliceBlue")]
         [Description("按钮的活动色")]
-        public Color  ActiveColor
+        public Color ActiveColor
         {
             get { return m_active; }
             set { m_active = value; Invalidate(); }
@@ -220,7 +216,7 @@ namespace 皮肤
 
         #endregion
 
-        
+
 
 
         /// <summary>
@@ -261,7 +257,7 @@ namespace 皮肤
             if (Enabled)
             {
                 brush_fore_text = new SolidBrush(TextColor);
-                if(Selected)
+                if (Selected)
                 {
                     brush_back_text = new SolidBrush(Color.DodgerBlue);
                 }

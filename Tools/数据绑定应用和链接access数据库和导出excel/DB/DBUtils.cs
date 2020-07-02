@@ -3,11 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
-using System.Data.SqlClient;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Tools
@@ -21,7 +17,7 @@ namespace Tools
         private static DBUtils dBUtils;
         private static object locks = new object();
         private OleDbConnection connection;
-        
+
         public DBUtils()
         {
             if (connection == null)
@@ -47,8 +43,9 @@ namespace Tools
             return dBUtils;
         }
 
-        public void OpenDB() {
-            if (connection.State!= ConnectionState.Open)
+        public void OpenDB()
+        {
+            if (connection.State != ConnectionState.Open)
             {
                 try
                 {
@@ -56,12 +53,13 @@ namespace Tools
                 }
                 catch (OleDbException ex)
                 {
-                    throw new Exception(ex.Message) ;
+                    throw new Exception(ex.Message);
                 }
             }
         }
 
-        public void CloseDB() {
+        public void CloseDB()
+        {
             if (connection.State != ConnectionState.Closed)
             {
                 try
@@ -70,7 +68,7 @@ namespace Tools
                 }
                 catch (OleDbException ex)
                 {
-                    throw new Exception(ex.Message) ;
+                    throw new Exception(ex.Message);
                 }
             }
         }

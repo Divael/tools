@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CRT591_M001_MR01
@@ -27,7 +20,7 @@ namespace CRT591_M001_MR01
         public Form1()
         {
             InitializeComponent();
-            cb_com.DataSource =  SerialPort.GetPortNames();
+            cb_com.DataSource = SerialPort.GetPortNames();
             Control.CheckForIllegalCrossThreadCalls = false;
             controller = new CRT591MR01_Controller();
             this.FormClosed += Form1_FormClosed; ;
@@ -47,7 +40,7 @@ namespace CRT591_M001_MR01
 
         private void bt_openCom_Click(object sender, EventArgs e)
         {
-            if (controller.OpenCom(cb_com.SelectedItem.ToString(),"9600"))
+            if (controller.OpenCom(cb_com.SelectedItem.ToString(), "9600"))
             {
                 lb_msg.Items.Add("串口已经打开");
             }
@@ -56,7 +49,7 @@ namespace CRT591_M001_MR01
                 lb_msg.Items.Add("串口未打开");
             }
             visable();
-            controller.InitializeContext().ToString().logThis() ;
+            controller.InitializeContext().ToString().logThis();
             "初始化只能读卡器".logThis();
             var tp = controller.GetSCardReaderStatus();
             foreach (var item in tp)
@@ -166,8 +159,8 @@ namespace CRT591_M001_MR01
             {
                 lb_msg.Items.Add("移动卡片到持卡位fail!");
             }
-            
-            
+
+
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -221,13 +214,13 @@ namespace CRT591_M001_MR01
         private void button13_Click(object sender, EventArgs e)
         {
             byte[] bt = controller.ReadRFCard();
-            if (bt==null)
+            if (bt == null)
             {
                 lb_msg.Items.Add("读卡RF fail!");
                 return;
             }
             string a = Tools.StringHelper.byteToHexStr(bt);
-            lb_msg.Items.Add("读卡="+a);
+            lb_msg.Items.Add("读卡=" + a);
         }
 
         private void button9_Click(object sender, EventArgs e)

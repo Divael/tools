@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
 namespace Tools
 {
@@ -98,7 +96,7 @@ namespace Tools
         /// <param name="inputData">字符串</param>
         /// <returns></returns>
         public static bool IsNumber(string inputData)
-        {            
+        {
             Match m = RegNumber.Match(inputData);
             return m.Success;
         }
@@ -196,7 +194,8 @@ namespace Tools
         /// </summary>
         /// <param name="ColorNumber">#000000</param>
         /// <returns></returns>
-        public static bool IsColor(string ColorNumber) {
+        public static bool IsColor(string ColorNumber)
+        {
             return Regex.IsMatch(ColorNumber, "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$");
         }
         #endregion

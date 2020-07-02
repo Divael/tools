@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -69,7 +65,7 @@ namespace Test
         private void ErrorDeal(string errorMsg)
         {
             MessageBox.Show("我们很抱歉，当前应用程序遇到一些问题，该操作已经终止，请进行重试，如果问题继续存在，请联系管理员.", "意外的操作", MessageBoxButton.OK, MessageBoxImage.Information);
-            Tools.Loger.err(TAG+"异常日志", errorMsg);
+            Tools.Loger.err(TAG + "异常日志", errorMsg);
             Environment.Exit(0);
         }
 

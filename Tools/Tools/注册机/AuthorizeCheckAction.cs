@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Tools.注册机
@@ -27,10 +23,12 @@ namespace Tools.注册机
             return sClass;
         }
 
-        private AuthorizeCheckAction() {
+        private AuthorizeCheckAction()
+        {
         }
 
-        public AuthorizeCheckAction init(string mechName,string deviceId) {
+        public AuthorizeCheckAction init(string mechName, string deviceId)
+        {
             MechName = mechName;
             DeviceId = deviceId;
             return this;

@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Text;
 using System.IO;
-using System.Windows.Forms;
+using System.Text;
 using System.Threading;
 using System.Web;
-using System.Media;
+using System.Windows.Forms;
 
 namespace Tools
 {
@@ -276,7 +275,7 @@ namespace Tools
         {
             try
             {
-                if (Directory.Exists(System.Environment.CurrentDirectory+("//") + OldFloderName))
+                if (Directory.Exists(System.Environment.CurrentDirectory + ("//") + OldFloderName))
                 {
                     Directory.Move(System.Environment.CurrentDirectory + ("//") + OldFloderName, System.Environment.CurrentDirectory + ("//") + NewFloderName);
                 }
@@ -533,7 +532,8 @@ namespace Tools
         /// 打开文件目录
         /// </summary>
         /// <param name="v_OpenFolderPath">目录名，默认当前目录</param>
-        public static void OpenDirectory(string v_OpenFolderPath = "0") {
+        public static void OpenDirectory(string v_OpenFolderPath = "0")
+        {
             try
             {
                 if (v_OpenFolderPath == "0")
@@ -544,7 +544,7 @@ namespace Tools
             }
             catch (Exception ex)
             {
-                Loger.err("打开目录失败",ex);
+                Loger.err("打开目录失败", ex);
             }
         }
 
@@ -552,13 +552,15 @@ namespace Tools
         /// 打开文件
         /// </summary>
         /// <param name="v_OpenFilePath">文件目录+文件名后缀</param>
-        public static void OpenFile(string v_OpenFilePath) {
+        public static void OpenFile(string v_OpenFilePath)
+        {
             if (File.Exists(v_OpenFilePath))
             {
                 System.Diagnostics.Process.Start(v_OpenFilePath);
             }
-            else {
-                Loger.err("文件","打开失败！");
+            else
+            {
+                Loger.err("文件", "打开失败！");
             }
 
         }
@@ -609,7 +611,8 @@ namespace Tools
         /// <param name="newfile">需要粘贴到的路径</param>
         /// <param name="newfileName">可不填，需要重命名，则填写</param>
         /// <returns></returns>
-        public static bool CopyFile(string oldfile, string newfile, string newfileName = null) {
+        public static bool CopyFile(string oldfile, string newfile, string newfileName = null)
+        {
             try
             {
                 FileInfo f = new FileInfo(oldfile);
@@ -618,15 +621,16 @@ namespace Tools
                 int indexFilename = filename.Length;
                 if (newfileName == null)
                 {
-                    f.CopyTo(newfile + "\\"+filename[filename.Length - 1]);
+                    f.CopyTo(newfile + "\\" + filename[filename.Length - 1]);
                 }
-                else {
+                else
+                {
                     f.CopyTo(newfile + "\\" + newfileName + "." + name[1]);
                 }
             }
             catch (Exception e)
             {
-                Loger.err("文件Copy失败",e);
+                Loger.err("文件Copy失败", e);
                 return false;
             }
             return true;

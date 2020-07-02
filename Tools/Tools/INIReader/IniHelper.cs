@@ -19,7 +19,7 @@ namespace Tools
     /// </summary>
     public class IniHelper
     {
-        private static string filePath = System.Environment.CurrentDirectory+"/";
+        private static string filePath = System.Environment.CurrentDirectory + "/";
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -96,12 +96,13 @@ namespace Tools
         #endregion
 
         #region 读取指定section下的所有键值对HashTable
-        public static Hashtable ReadIniDataByHashTable(string SectionName) {
+        public static Hashtable ReadIniDataByHashTable(string SectionName)
+        {
             Hashtable ht = new Hashtable();
             var tp = ReadKeys(SectionName);
             foreach (var item in tp)
             {
-                ht.Add(item,ReadIniData(SectionName,item,""));
+                ht.Add(item, ReadIniData(SectionName, item, ""));
             }
             return ht;
         }
@@ -115,7 +116,7 @@ namespace Tools
         /// <param name="Key">要写入的键</param>
         /// <param name="Value">要写的的键值</param>
         /// <param name="Value">路径</param>
-        public static void IniWriteValue(string Section, string Key, string Value,string Path = "")
+        public static void IniWriteValue(string Section, string Key, string Value, string Path = "")
         {
             if (string.IsNullOrWhiteSpace(Path))
             {

@@ -1,19 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Test.UI弹窗
 {
@@ -28,7 +17,7 @@ namespace Test.UI弹窗
         bool _isok = false;
 
 
-        public LoadingSendCard(bool isok = false ,int seconds = 0)
+        public LoadingSendCard(bool isok = false, int seconds = 0)
         {
             InitializeComponent();
             Width = Tools.WindowHelper.WIDTH * 0.3;
@@ -37,7 +26,8 @@ namespace Test.UI弹窗
             DisplayLoading(isok);
         }
 
-        void DisplayLoading(bool flag) {
+        void DisplayLoading(bool flag)
+        {
             if (!flag)
             {
                 sp_loading.Visibility = Visibility.Visible;
@@ -94,7 +84,8 @@ namespace Test.UI弹窗
             if (Seconds > 0)
             {
                 Thread.Sleep(Seconds * 1000);
-                this.Dispatcher.BeginInvoke((Action)delegate () {
+                this.Dispatcher.BeginInvoke((Action)delegate ()
+                {
                     this.Close();
                 });
                 /*

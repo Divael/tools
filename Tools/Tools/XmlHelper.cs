@@ -25,7 +25,6 @@
 //</config>
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Xml;
 //两个构造函数中，一个是XML文件路径，一个文件路径加上节点路径，在重载的函数中有的需要设置节点路径
 //方法为：xmlManager.NodePath = "\\子节点\子节点……"

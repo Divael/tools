@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace Tools.注册机
-{ 
+{
     /// <summary>
     /// 一个自定义的按钮控件
     /// </summary>
@@ -125,8 +121,8 @@ namespace Tools.注册机
         [Description("按钮的背景色")]
         public Color OriginalColor
         {
-            get{return m_backcor; }
-            set{m_backcor = value;Invalidate(); }
+            get { return m_backcor; }
+            set { m_backcor = value; Invalidate(); }
         }
 
         private Color m_enablecolor = Color.FromArgb(190, 190, 190);
@@ -150,7 +146,7 @@ namespace Tools.注册机
         [Category("外观")]
         [DefaultValue(typeof(Color), "AliceBlue")]
         [Description("按钮的活动色")]
-        public Color  ActiveColor
+        public Color ActiveColor
         {
             get { return m_active; }
             set { m_active = value; Invalidate(); }
@@ -218,7 +214,7 @@ namespace Tools.注册机
 
         #endregion
 
-        
+
 
 
         /// <summary>
@@ -259,7 +255,7 @@ namespace Tools.注册机
             if (Enabled)
             {
                 brush_fore_text = new SolidBrush(TextColor);
-                if(Selected)
+                if (Selected)
                 {
                     brush_back_text = new SolidBrush(Color.DodgerBlue);
                 }

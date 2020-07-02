@@ -1,8 +1,7 @@
-﻿using System;
+﻿using AForge.Video.DirectShow;
+using System;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using AForge.Video.DirectShow;
-using Splash;
 
 namespace FaceCapture
 {
@@ -43,7 +42,7 @@ namespace FaceCapture
                 Properties.Resources.capture.GetHbitmap(),
                 IntPtr.Zero,
                 Int32Rect.Empty,
-                BitmapSizeOptions.FromEmptyOptions());            
+                BitmapSizeOptions.FromEmptyOptions());
 
             // 设置窗体装载后事件处理器
             this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
@@ -55,7 +54,7 @@ namespace FaceCapture
             FilterInfoCollection videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             if (videoDevices.Count > 0)
             {   // 默认设备
-                sourcePlayer.VideoSource = new VideoCaptureDevice(videoDevices[0].MonikerString);                
+                sourcePlayer.VideoSource = new VideoCaptureDevice(videoDevices[0].MonikerString);
             }
             else
             {
@@ -77,7 +76,7 @@ namespace FaceCapture
         }
 
         private void button_Play_Click(object sender, RoutedEventArgs e)
-        {            
+        {
             if (image_Play.Source == ImagePlay)
             {   // 开启视频
                 sourcePlayer.Start();
@@ -90,7 +89,7 @@ namespace FaceCapture
                     // 允许拍照
                     button_Capture.IsEnabled = true;
                 }
-            }  
+            }
             else
             {
                 if (sourcePlayer.IsRunning)
@@ -104,7 +103,7 @@ namespace FaceCapture
 
                     // 关闭拍照
                     button_Capture.IsEnabled = false;
-                }                
+                }
             }
         }
 
@@ -116,7 +115,7 @@ namespace FaceCapture
                 for (Int32 i = 1; i <= 4; i++)
                 {
                     object box = this.FindName("fingerPictureBox" + i);
-                    if(box is FingerPictureBox)
+                    if (box is FingerPictureBox)
                     {
                         if ((box as FingerPictureBox).ActiveImage == (box as FingerPictureBox).InitialImage)
                         {   // 更新图像
@@ -126,7 +125,7 @@ namespace FaceCapture
                                 Int32Rect.Empty,
                                 BitmapSizeOptions.FromEmptyOptions());
                             break;
-                        }                    
+                        }
                     }
                 }
             }

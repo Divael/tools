@@ -11,59 +11,59 @@ namespace Tools.TCP
     /// Dispose
     /// </summary>
     public class Server : IDisposable
-  {
-    private Socket handle = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-    public event Action<Client> NewClient;
-
-    public void Listen(int Port)
     {
-      Server server = this;
-      bool lockTaken = false;
-      try
-      {
-        Monitor.Enter((object) server, ref lockTaken);
-        this.handle.Bind((EndPoint) new IPEndPoint(IPAddress.Any, Port));
-        this.handle.Listen(int.MaxValue);
-        this.BeginListen();
-      }
-      finally
-      {
-        if (lockTaken)
-          Monitor.Exit((object) server);
-      }
-    }
+        private Socket handle = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-    private void BeginListen()
-    {
-      this.handle.BeginAccept(new AsyncCallback(this.Acceptor), (object) null);
-    }
+        public event Action<Client> NewClient;
 
-    private void Acceptor(IAsyncResult ir)
-    {
-      Client client = new Client(this.handle.EndAccept(ir));
-      // ISSUE: reference to a compiler-generated field
-      if (this.NewClient != null)
-      {
-        // ISSUE: reference to a compiler-generated field
-        this.NewClient(client);
-      }
-      this.BeginListen();
-    }
+        public void Listen(int Port)
+        {
+            Server server = this;
+            bool lockTaken = false;
+            try
+            {
+                Monitor.Enter((object)server, ref lockTaken);
+                this.handle.Bind((EndPoint)new IPEndPoint(IPAddress.Any, Port));
+                this.handle.Listen(int.MaxValue);
+                this.BeginListen();
+            }
+            finally
+            {
+                if (lockTaken)
+                    Monitor.Exit((object)server);
+            }
+        }
 
-    public void Dispose()
-    {
-      try
-      {
-        if (!this.handle.Connected)
-          return;
-        this.handle.Shutdown(SocketShutdown.Both);
-        this.handle.Close();
-        this.handle.Dispose();
-      }
-      catch
-      {
-      }
+        private void BeginListen()
+        {
+            this.handle.BeginAccept(new AsyncCallback(this.Acceptor), (object)null);
+        }
+
+        private void Acceptor(IAsyncResult ir)
+        {
+            Client client = new Client(this.handle.EndAccept(ir));
+            // ISSUE: reference to a compiler-generated field
+            if (this.NewClient != null)
+            {
+                // ISSUE: reference to a compiler-generated field
+                this.NewClient(client);
+            }
+            this.BeginListen();
+        }
+
+        public void Dispose()
+        {
+            try
+            {
+                if (!this.handle.Connected)
+                    return;
+                this.handle.Shutdown(SocketShutdown.Both);
+                this.handle.Close();
+                this.handle.Dispose();
+            }
+            catch
+            {
+            }
+        }
     }
-  }
 }

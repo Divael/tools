@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Text;
 using System.IO;
 using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace Tools
 {

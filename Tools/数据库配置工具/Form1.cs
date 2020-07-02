@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace 数据库配置工具
@@ -27,7 +20,7 @@ namespace 数据库配置工具
             {
                 //Provider=SQLOLEDB.1;Password=aza@lea@123;Persist Security Info=True;User ID=sa;Initial Catalog=fkgl;Data Source=ftp.smartpioneer.cn
                 Tools.IniHelper.SetFilePath(System.Environment.CurrentDirectory + @"\config.ini");
-                tbservername.Text = Tools.IniHelper.ReadIniData("数据库配置", "DataSource", "") ;
+                tbservername.Text = Tools.IniHelper.ReadIniData("数据库配置", "DataSource", "");
                 tbdbname.Text = Tools.IniHelper.ReadIniData("数据库配置", "Database", "");
                 tbusername.Text = Tools.IniHelper.ReadIniData("数据库配置", "UserID", "");
                 string s = Tools.IniHelper.ReadIniData("数据库配置", "Password", "").Trim();
@@ -60,7 +53,7 @@ namespace 数据库配置工具
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Tools.IniHelper.SetFilePath(System.Environment.CurrentDirectory+@"\config.ini");
+            Tools.IniHelper.SetFilePath(System.Environment.CurrentDirectory + @"\config.ini");
             Tools.IniHelper.IniWriteValue("数据库配置", "DataSource", tbservername.Text);
             Tools.IniHelper.IniWriteValue("数据库配置", "Database", tbdbname.Text);
             Tools.IniHelper.IniWriteValue("数据库配置", "UserID", tbusername.Text);
@@ -75,7 +68,7 @@ namespace 数据库配置工具
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DBClass dbClass = new DBClass(tbservername.Text,tbdbname.Text,tbusername.Text,tbpassword.Text);
+            DBClass dbClass = new DBClass(tbservername.Text, tbdbname.Text, tbusername.Text, tbpassword.Text);
             if (dbClass.OpenTest())
             {
                 MessageBox.Show("连接成功");

@@ -12,11 +12,11 @@
 *********************************************************************************/
 
 
-using System.Data;
-using System.IO;
-using NPOI.SS.Util;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
+using NPOI.SS.Util;
+using System.Data;
+using System.IO;
 
 namespace Tools
 {
@@ -42,7 +42,7 @@ namespace Tools
         {
             FileStream fs = new FileStream(this._filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
             IWorkbook workBook = new HSSFWorkbook();
-            this._sheetName = string .IsNullOrEmpty(this._sheetName) ? "sheet1" : this._sheetName;
+            this._sheetName = string.IsNullOrEmpty(this._sheetName) ? "sheet1" : this._sheetName;
             ISheet sheet = workBook.CreateSheet(this._sheetName);
 
             //处理表格标题
