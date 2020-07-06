@@ -50,5 +50,10 @@ namespace Tools
             this.IsEnabled = false;
             this.t.Change(-1, 0);
         }
+
+        public void Dispose() 
+        {
+            this.t.Dispose();
+        }
     }
 }
