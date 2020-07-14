@@ -41,6 +41,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Winform", "Winform", "{60E8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserControls", "UserControls\UserControls.csproj", "{A5EA1966-387B-46B1-AA12-DFAF6A8B7AA0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "异步并行async await patalled用法", "异步并行async await patalled用法\异步并行async await patalled用法.csproj", "{F99D5E97-7280-4308-A588-54942D163B62}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -173,6 +175,14 @@ Global
 		{A5EA1966-387B-46B1-AA12-DFAF6A8B7AA0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A5EA1966-387B-46B1-AA12-DFAF6A8B7AA0}.Release|x86.ActiveCfg = Release|Any CPU
 		{A5EA1966-387B-46B1-AA12-DFAF6A8B7AA0}.Release|x86.Build.0 = Release|Any CPU
+		{F99D5E97-7280-4308-A588-54942D163B62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F99D5E97-7280-4308-A588-54942D163B62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F99D5E97-7280-4308-A588-54942D163B62}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F99D5E97-7280-4308-A588-54942D163B62}.Debug|x86.Build.0 = Debug|Any CPU
+		{F99D5E97-7280-4308-A588-54942D163B62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F99D5E97-7280-4308-A588-54942D163B62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F99D5E97-7280-4308-A588-54942D163B62}.Release|x86.ActiveCfg = Release|Any CPU
+		{F99D5E97-7280-4308-A588-54942D163B62}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -188,6 +198,7 @@ Global
 		{9177968B-C7C7-41AC-98F4-362DCAA27FAA} = {60E8781C-8D30-4276-81FB-3D974A3F1366}
 		{AEBD6D53-C361-4BA0-9DC1-F8AF35F67EE7} = {60E8781C-8D30-4276-81FB-3D974A3F1366}
 		{A5EA1966-387B-46B1-AA12-DFAF6A8B7AA0} = {60E8781C-8D30-4276-81FB-3D974A3F1366}
+		{F99D5E97-7280-4308-A588-54942D163B62} = {60E8781C-8D30-4276-81FB-3D974A3F1366}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8312A7ED-0443-48D0-A6F2-52648B062579}
