@@ -225,6 +225,46 @@ namespace Tools.注册机
             OnClick(new EventArgs());
         }
 
+        /// <summary>
+        /// 颜色加深
+        /// </summary>
+        /// <param name="color"></param>
+        /// <param name="correctionFactor"></param>
+        /// <returns></returns>
+        public static Color ChangeColor(Color color, float correctionFactor)
+        {
+            float red = (float)color.R;
+            float green = (float)color.G;
+            float blue = (float)color.B;
+
+            if (correctionFactor < 0)
+            {
+                correctionFactor = 1 + correctionFactor;
+                red *= correctionFactor;
+                green *= correctionFactor;
+                blue *= correctionFactor;
+            }
+            else
+            {
+                red = (255 - red) * correctionFactor + red;
+                green = (255 - green) * correctionFactor + green;
+                blue = (255 - blue) * correctionFactor + blue;
+            }
+
+            if (red < 0) red = 0;
+
+            if (red > 255) red = 255;
+
+            if (green < 0) green = 0;
+
+            if (green > 255) green = 255;
+
+            if (blue < 0) blue = 0;
+
+            if (blue > 255) blue = 255;
+
+            return Color.FromArgb(color.A, (int)red, (int)green, (int)blue);
+        }
 
         /// <summary>
         /// 重绘数据区
@@ -257,11 +297,25 @@ namespace Tools.注册机
                 brush_fore_text = new SolidBrush(TextColor);
                 if (Selected)
                 {
-                    brush_back_text = new SolidBrush(Color.DodgerBlue);
+                    if (ActiveColor == Color.AliceBlue)
+                    {
+                        brush_back_text = new SolidBrush(ChangeColor(OriginalColor, -0.2f));
+                    }
+                    else
+                    {
+                        brush_back_text = new SolidBrush(ActiveColor);
+                    }
                 }
                 else if (is_mouse_on)
                 {
-                    brush_back_text = new SolidBrush(ActiveColor);
+                    if (ActiveColor == Color.AliceBlue)
+                    {
+                        brush_back_text = new SolidBrush(ChangeColor(OriginalColor, -0.2f));
+                    }
+                    else
+                    {
+                        brush_back_text = new SolidBrush(ActiveColor);
+                    }
                 }
                 else
                 {
@@ -285,7 +339,6 @@ namespace Tools.注册机
                 e.Graphics.DrawPath(pen_border, path);
             }
             e.Graphics.DrawString(UIText, Font, brush_fore_text, rect_text, sf);
-
 
             //base.OnPaint(e);
             brush_fore_text.Dispose();

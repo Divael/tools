@@ -71,5 +71,10 @@ namespace SerialPortTools
                 MessageBox.Show("请先打开串口");
             }
         }
+
+        private void userButton1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
