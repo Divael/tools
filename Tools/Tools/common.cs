@@ -339,7 +339,10 @@ namespace System
             Tools.Loger.err(mess, ex);
         }
 
-
+        public static string ToInt32(this byte[] data, string split = " ")
+        {
+            return data.ToJoinString1((byte m) => m.ToString("D2"), split);
+        }
 
         public static string ToHex(this byte[] data, string split = " ")
         {
