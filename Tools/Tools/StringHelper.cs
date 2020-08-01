@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualBasic;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -1059,5 +1059,52 @@ namespace Tools
                 throw new Exception("bytesToInt32转换失败！");
             }
         }
+
+        #region
+        //https://www.cnblogs.com/xxaxx/p/5681726.html
+        ///<summary>
+         /// 将浮点数转ASCII格式十六进制字符串（符合IEEE-754标准（32））
+         /// </summary>
+         /// <paramname="data">浮点数值</param>
+         /// <returns>十六进制字符串</returns>
+         public static stringfloatToIntString(float data)
+         {
+             byte[]intBuffer = BitConverter.GetBytes(data);
+            StringBuilder stringBuffer = new StringBuilder(0);
+             for (int i =0; i < intBuffer.Length; i++)
+             {
+                stringBuffer.Insert(0, toHexString(intBuffer[i] & 0xff, 2));
+             }
+             returnstringBuffer.ToString();
+         }
+
+        ///<summary>
+         /// 将ASCII格式十六进制字符串转浮点数（符合IEEE-754标准（32））
+         /// </summary>
+         /// <paramname="data">十六进制字符串</param>
+         /// <returns>浮点数值</returns>
+         public static FloatintStringToFloat(String data)
+         {
+             if(data.Length < 8 || data.Length > 8)
+             {
+                //throw new NotEnoughDataInBufferException(data.length(), 8);
+                throw (new ApplicationException("缓存中的数据不完整。"));
+             }
+             else
+             {
+                byte[] intBuffer = new byte[4];
+                // 将16进制串按字节逆序化（一个字节2个ASCII码）
+                for(int i=0; i<4; i++)
+                {
+                    intBuffer[i] = Convert.ToByte(data.Substring((3 - i) * 2, 2),16);   
+                }
+                return BitConverter.ToSingle(intBuffer, 0);
+             }
+         }
+
+         #endregion
+
+                
+
     }
 }
