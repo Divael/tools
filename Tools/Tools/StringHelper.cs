@@ -48,6 +48,8 @@ namespace Tools
     /// <para>　BytesGetBytes:     从bytes中截取有用的bytes</para>
     /// <para>  StringArraySubStringArray   从string[]中截取有用的string[] StringArraySubStringArray</para>
     /// <para>　StringIsExist:     检查字符串中是否有compare的字符有返回true</para>
+    /// <para>　FloatToHexString HexStringToFloat:     符合IEEE-754标准（32） 的小数点转换</para>
+    /// 
     /// </summary>
     public class StringHelper
     {
@@ -1060,14 +1062,37 @@ namespace Tools
             }
         }
 
-        #region
+        #region 符合IEEE-754标准（32） 的小数点转换
+        /// <summary>
+        /// 将二进制值转ASCII格式十六进制字符串
+        /// </summary>
+        /// <paramname="data">二进制值</param>
+        /// <paramname="length">定长度的二进制</param>
+        /// <returns>ASCII格式十六进制字符串</returns>
+        private static string toHexString(int data, int length)
+        {
+            string result = "";
+            if (data > 0)
+                result = Convert.ToString(data, 16).ToUpper();
+            if (result.Length < length)
+            {
+                // 位数不够补0
+                StringBuilder msg = new StringBuilder(0);
+                msg.Length = 0;
+                msg.Append(result);
+                for (; msg.Length < length; msg.Insert(0, "0")) ;
+                result = msg.ToString();
+            }
+            return result;
+        }
+
         //https://www.cnblogs.com/xxaxx/p/5681726.html
         ///<summary>
-         /// 将浮点数转ASCII格式十六进制字符串（符合IEEE-754标准（32））
-         /// </summary>
-         /// <paramname="data">浮点数值</param>
-         /// <returns>十六进制字符串</returns>
-         public static stringfloatToIntString(float data)
+        /// 将浮点数转ASCII格式十六进制字符串（符合IEEE-754标准（32））
+        /// </summary>
+        /// <paramname="data">浮点数值</param>
+        /// <returns>十六进制字符串</returns>
+        public static string FloatToHexString(float data)
          {
              byte[]intBuffer = BitConverter.GetBytes(data);
             StringBuilder stringBuffer = new StringBuilder(0);
@@ -1075,7 +1100,7 @@ namespace Tools
              {
                 stringBuffer.Insert(0, toHexString(intBuffer[i] & 0xff, 2));
              }
-             returnstringBuffer.ToString();
+             return stringBuffer.ToString();
          }
 
         ///<summary>
@@ -1083,7 +1108,7 @@ namespace Tools
          /// </summary>
          /// <paramname="data">十六进制字符串</param>
          /// <returns>浮点数值</returns>
-         public static FloatintStringToFloat(String data)
+         public static float HexStringToFloat(String data)
          {
              if(data.Length < 8 || data.Length > 8)
              {
