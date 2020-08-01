@@ -1091,40 +1091,55 @@ namespace Tools
         /// 将浮点数转ASCII格式十六进制字符串（符合IEEE-754标准（32））
         /// </summary>
         /// <paramname="data">浮点数值</param>
-        /// <returns>十六进制字符串</returns>
+        /// <returns>十六进制字符串 err ""</returns>
         public static string FloatToHexString(float data)
          {
-             byte[]intBuffer = BitConverter.GetBytes(data);
-            StringBuilder stringBuffer = new StringBuilder(0);
-             for (int i =0; i < intBuffer.Length; i++)
-             {
-                stringBuffer.Insert(0, toHexString(intBuffer[i] & 0xff, 2));
-             }
-             return stringBuffer.ToString();
+            try
+            {
+                byte[] intBuffer = BitConverter.GetBytes(data);
+                StringBuilder stringBuffer = new StringBuilder(0);
+                for (int i = 0; i < intBuffer.Length; i++)
+                {
+                    stringBuffer.Insert(0, toHexString(intBuffer[i] & 0xff, 2));
+                }
+                return stringBuffer.ToString();
+            }
+            catch 
+            {
+                return "";
+            }
          }
 
         ///<summary>
          /// 将ASCII格式十六进制字符串转浮点数（符合IEEE-754标准（32））
          /// </summary>
          /// <paramname="data">十六进制字符串</param>
-         /// <returns>浮点数值</returns>
+         /// <returns>浮点数值 err -1</returns>
          public static float HexStringToFloat(String data)
          {
-             if(data.Length < 8 || data.Length > 8)
-             {
-                //throw new NotEnoughDataInBufferException(data.length(), 8);
-                throw (new ApplicationException("缓存中的数据不完整。"));
-             }
-             else
-             {
-                byte[] intBuffer = new byte[4];
-                // 将16进制串按字节逆序化（一个字节2个ASCII码）
-                for(int i=0; i<4; i++)
+            try
+            {
+                if (data.Length < 8 || data.Length > 8)
                 {
-                    intBuffer[i] = Convert.ToByte(data.Substring((3 - i) * 2, 2),16);   
+                    //throw new NotEnoughDataInBufferException(data.length(), 8);
+                    throw (new ApplicationException("缓存中的数据不完整。"));
                 }
-                return BitConverter.ToSingle(intBuffer, 0);
-             }
+                else
+                {
+                    byte[] intBuffer = new byte[4];
+                    // 将16进制串按字节逆序化（一个字节2个ASCII码）
+                    for (int i = 0; i < 4; i++)
+                    {
+                        intBuffer[i] = Convert.ToByte(data.Substring((3 - i) * 2, 2), 16);
+                    }
+                    return BitConverter.ToSingle(intBuffer, 0);
+                }
+            }
+            catch
+            {
+                return -1;
+            }
+
          }
 
          #endregion
