@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tools;
 
@@ -72,9 +73,20 @@ namespace SerialPortTools
             }
         }
 
-        private void userButton1_Click(object sender, EventArgs e)
+        private async void userButton1_Click(object sender, EventArgs e)
         {
+            //主线程
+            await Task.Run(()=> {
+                //子线程
+                var rs = this.BeginInvoke((Action)delegate () {
+                    //主线程..
+                    
+                });
+                this.EndInvoke(rs);
+            });
 
+            await Task.Delay(100);//不影响主线程的delay
+            //主线程
         }
     }
 }

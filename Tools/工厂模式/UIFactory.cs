@@ -35,14 +35,14 @@ namespace 工厂模式
 
         public override void ToPage(UserControl userControl)
         {
-            if (ContentControl != null)
-            {
-                if (Umain == null)
-                {
-                    Umain = userControl;
-                }
+            //if (this.ContentControl != null)
+            //{
+            //    if (Umain == null)
+            //    {
+            //        Umain = userControl;
+            //    }
 
-            }
+            //}
         }
 
         public override void ToUp(UserControl userControl)

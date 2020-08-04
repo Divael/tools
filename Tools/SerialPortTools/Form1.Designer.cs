@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cb_com = new System.Windows.Forms.ComboBox();
             this.bt_CloseCom = new System.Windows.Forms.Button();
@@ -119,17 +118,16 @@
             // userButton1
             // 
             this.userButton1.BackColor = System.Drawing.Color.Transparent;
-            this.userButton1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("userButton1.BackgroundImage")));
             this.userButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.userButton1.CustomerInformation = "";
             this.userButton1.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton1.Location = new System.Drawing.Point(234, 228);
+            this.userButton1.Location = new System.Drawing.Point(304, 238);
             this.userButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton1.Name = "userButton1";
-            this.userButton1.Size = new System.Drawing.Size(135, 58);
+            this.userButton1.Size = new System.Drawing.Size(65, 31);
             this.userButton1.TabIndex = 24;
-            this.userButton1.UIText = "你好";
+            this.userButton1.UIText = "异步写法";
             this.userButton1.Click += new System.EventHandler(this.userButton1_Click);
             // 
             // Form1
