@@ -42,6 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlarmLampControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AlarmLampControl.Designer.cs">
+      <DependentUpon>AlarmLampControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="DateTimeChoser.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -61,6 +67,9 @@
     <EmbeddedResource Include="PagingControl.resx">
       <DependentUpon>PagingControl.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="控件说明.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
