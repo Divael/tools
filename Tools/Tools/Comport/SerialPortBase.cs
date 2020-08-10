@@ -26,6 +26,10 @@ namespace Tools
         /// <param name="IsNeedDataReceived">是否需要事件中断模式接收数据，false则相关功能不可用</param>
         public SerialPortBase(string portName, int baudRate, Parity parity, int dataBits, StopBits stopBits,bool IsNeedDataReceived)
         {
+            if (!portName.ToUpper().Contains("COM"))
+            {
+                portName = "COM" + portName;
+            }
             SerialPort = new SerialPort();
             //串口名 = COM1
             SerialPort.PortName = portName;
@@ -42,7 +46,8 @@ namespace Tools
             //在添加到序列缓冲区前，是否丢弃接口上接收的空字节。
             SerialPort.DiscardNull = false;
             //在通信过程中，是否启用数据终端就绪行。
-            SerialPort.DtrEnable = false;
+            SerialPort.DtrEnable = true;
+            SerialPort.RtsEnable = false;
             //获取或设置串行端口数据传输的握手协议。
             //SerialPort.Handshake = Handshake.None;
             //获取或设置串行端口输出缓冲区的大小。常用的是2048或4096，2048足够用
@@ -78,7 +83,8 @@ namespace Tools
             //在添加到序列缓冲区前，是否丢弃接口上接收的空字节(byte = 0x00)。
             SerialPort.DiscardNull = false;
             //在通信过程中，是否启用数据终端就绪行。
-            SerialPort.DtrEnable = false;
+            SerialPort.DtrEnable = true;
+            SerialPort.RtsEnable = false;
             //获取或设置串行端口数据传输的握手协议。
             //SerialPort.Handshake = Handshake.None;
             //获取或设置串行端口输出缓冲区的大小。常用的是2048或4096，2048足够用
@@ -209,7 +215,7 @@ namespace Tools
         }
         
 
-        private void ClearBuffer()
+        protected void ClearBuffer()
         {
             //清空缓冲区
             SerialPort.DiscardOutBuffer();//清空发送
