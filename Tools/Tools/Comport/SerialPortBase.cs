@@ -8,12 +8,13 @@ namespace Tools
 {
     public class SerialPortBase
     {
-        private List<byte> data = new List<byte>();
+        private List<byte> m_data = new List<byte>();//接收的数据
 
-        public SerialPort SerialPort { get; set; }
+        public SerialPort SerialPort { get;}
         public event Action<SerialPort, byte[]> DataReceive;//用于接收数据
 
-
+        private bool m_isReceived = false;
+        private static object locker = new object();//锁这个类
         /// <summary>
         ///  "COM5",9600,"N",8,1
         /// </summary>
@@ -22,7 +23,8 @@ namespace Tools
         /// <param name="parity">None</param>
         /// <param name="dataBits">8</param>
         /// <param name="stopBits">one</param>
-        public SerialPortBase(string portName, int baudRate, Parity parity, int dataBits, StopBits stopBits)
+        /// <param name="IsNeedDataReceived">是否需要事件中断模式接收数据，false则相关功能不可用</param>
+        public SerialPortBase(string portName, int baudRate, Parity parity, int dataBits, StopBits stopBits,bool IsNeedDataReceived)
         {
             SerialPort = new SerialPort();
             //串口名 = COM1
@@ -48,14 +50,17 @@ namespace Tools
             //决定了当串口读缓存中数据多少个时才触发DataReceived事件
             SerialPort.ReceivedBytesThreshold = 1;
 
-            SerialPort.DataReceived += SerialPort_DataReceived;
-
+            if (IsNeedDataReceived)
+            {
+                SerialPort.DataReceived += SerialPort_DataReceived;//事件
+            }
         }
 
         /// <summary>
         /// 默认COM1,9600,N,8,1
+        /// <param name="IsNeedDataReceived">是否需要事件中断模式接收数据，false则相关功能不可用</param>
         /// </summary>
-        public SerialPortBase()
+        public SerialPortBase(bool IsNeedDataReceived)
         {
             SerialPort = new SerialPort();
             //串口名 = COM1
@@ -81,13 +86,17 @@ namespace Tools
             //决定了当串口读缓存中数据多少个时才触发DataReceived事件
             SerialPort.ReceivedBytesThreshold = 1;
 
-            SerialPort.DataReceived += SerialPort_DataReceived;
-
+            if (IsNeedDataReceived)
+            {
+                SerialPort.DataReceived += SerialPort_DataReceived;//事件
+            }
         }
+
+
 
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            lock (data)
+            lock (locker)
             {
                 try
                 {
@@ -96,9 +105,10 @@ namespace Tools
                     {
                         byte[] array = new byte[bytesToRead];
                         SerialPort.Read(array, 0, bytesToRead);
-                        data.AddRange(array);
+                        m_data.AddRange(array);
                     }
-                    this.DataReceive?.Invoke(SerialPort, data.ToArray());
+                    m_isReceived = true;
+                    this.DataReceive?.Invoke(SerialPort, m_data.ToArray());
                 }
                 catch (Exception e2)
                 {
@@ -106,89 +116,99 @@ namespace Tools
                 }
                 finally
                 {
-                    data.Clear();
+                    m_data.Clear();
                 }
             }
         }
 
         #region 发送并返回数据
-        byte[] bytesForSendReceived = null;//用于发送接收一体化的接收数据
         private Stopwatch sw = new Stopwatch();//用于发送接收一体化的定时器
-        private bool isLoadDataReceive = false;//用于控制DataReceive += SerialPortBase_DataReceive;
 
-        private void SerialPortBase_DataReceive(SerialPort arg1, byte[] arg2)
-        {
-            bytesForSendReceived = arg2;
-        }
         /// <summary>
-        /// 发送并返回数据
+        /// 发送并返回数据,使用事件的方式
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="_sendData"></param>
         /// <param name="timeout">3s带返回 TimeSpan.FromSeconds(3)</param>
         /// <returns></returns>
-        public byte[] SendAndReceived(byte[] data, TimeSpan timeout)
+        public byte[] SendAndReceived(byte[] _sendData, TimeSpan timeout)
         {
-            if (!SerialPort.IsOpen)
+            lock (locker)
             {
-                throw new Exception("串口未打开！");
+                if (!SerialPort.IsOpen)
+                {
+                    throw new Exception("串口未打开！");
+                }
+                this.m_data.Clear();
+                m_isReceived = false;
+
+                Send(_sendData);
+
+                sw.Reset();
+                sw.Start();
+
+                while (sw.Elapsed < timeout)
+                {
+                    if (m_isReceived)
+                    {
+                        m_isReceived = false;
+                        sw.Stop();
+                        return this.m_data.ToArray();
+                    }
+                    System.Threading.Thread.Sleep(10);
+                }
+                sw.Stop();
+                return null;
             }
-
-            bytesForSendReceived = null;
-
-            SerialPort.Write(data, 0, data.Length);
-
-            sw.Reset();
-            sw.Start();
-
-            if (!isLoadDataReceive)
-            {
-                DataReceive += SerialPortBase_DataReceive;
-                isLoadDataReceive = true;
-            }
-
-            while (bytesForSendReceived == null && sw.Elapsed < timeout)
-            {
-                System.Threading.Thread.Sleep(10);
-            }
-
-            sw.Stop();
-            DataReceive -= SerialPortBase_DataReceive;
-            isLoadDataReceive = false;
-
-            return bytesForSendReceived;
         }
+
+
         /// <summary>
-        /// 发送带返回
+        /// 发送带返回,使用轮询的方式
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="receivedNum">接收数据的大小</param>
         /// <param name="delay"></param>
-        /// <returns></returns>
-        public byte[] SendResponse(byte[] data, int delay = 100)
+        /// <returns></returns>Received
+        public byte[] SendResponse(byte[] data, int receivedNum, int delay = 100)
         {
-            if (!SerialPort.IsOpen)
+            lock (locker)
             {
-                throw new Exception("串口未打开！");
-            }
-            bytesForSendReceived = null;
-            lock (this.data)
-            {
-                this.data.Clear();
-                if (this.Send(data))
+                if (!SerialPort.IsOpen)
                 {
-                    System.Common.Sleep(delay);
-                    int bytesToRead;
-                    while ((bytesToRead = SerialPort.BytesToRead) > 0)
-                    {
-                        byte[] array = new byte[bytesToRead];
-                        SerialPort.Read(array, 0, bytesToRead);
-                        this.data.AddRange(array);
-                        System.Common.Sleep(Math.Max(50, delay / 2));
-                    }
+                    throw new Exception("串口未打开！");
                 }
-                bytesForSendReceived = this.data.ToArray();
-                this.data.Clear();
+                this.m_data.Clear();
+                Send(data);
+                sw.Reset();
+                sw.Start();
+                int bytesToRead = 0;
+                do
+                {
+                    try
+                    {
+                        if ((bytesToRead = SerialPort.BytesToRead) > 0)
+                        {
+                            byte[] array = new byte[bytesToRead];
+                            SerialPort.Read(array, 0, bytesToRead);
+                            this.m_data.AddRange(array);
+                        }
+                    }
+                    catch {
+                        sw.Reset();
+                        return this.m_data.ToArray();
+                    }
+                } while (sw.ElapsedMilliseconds > delay && this.m_data.Count >= receivedNum);
+                sw.Reset();
+                return this.m_data.ToArray();
             }
-            return bytesForSendReceived;
+        }
+        
+
+        private void ClearBuffer()
+        {
+            //清空缓冲区
+            SerialPort.DiscardOutBuffer();
+            SerialPort.DiscardInBuffer();
         }
         #endregion
 
