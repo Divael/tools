@@ -44,11 +44,11 @@ namespace Tools
             //在通信过程中，是否启用数据终端就绪行。
             SerialPort.DtrEnable = false;
             //获取或设置串行端口数据传输的握手协议。
-            SerialPort.Handshake = Handshake.None;
+            //SerialPort.Handshake = Handshake.None;
             //获取或设置串行端口输出缓冲区的大小。常用的是2048或4096，2048足够用
-            //serialPort.WriteBufferSize = 2048;
+            //SerialPort.WriteBufferSize = 2048;
             //决定了当串口读缓存中数据多少个时才触发DataReceived事件
-            SerialPort.ReceivedBytesThreshold = 1;
+            //SerialPort.ReceivedBytesThreshold = 1;
 
             if (IsNeedDataReceived)
             {
@@ -80,11 +80,11 @@ namespace Tools
             //在通信过程中，是否启用数据终端就绪行。
             SerialPort.DtrEnable = false;
             //获取或设置串行端口数据传输的握手协议。
-            SerialPort.Handshake = Handshake.None;
+            //SerialPort.Handshake = Handshake.None;
             //获取或设置串行端口输出缓冲区的大小。常用的是2048或4096，2048足够用
-            //serialPort.WriteBufferSize = 2048;
+            //SerialPort.WriteBufferSize = 2048;
             //决定了当串口读缓存中数据多少个时才触发DataReceived事件
-            SerialPort.ReceivedBytesThreshold = 1;
+            //SerialPort.ReceivedBytesThreshold = 1;
 
             if (IsNeedDataReceived)
             {
@@ -199,6 +199,11 @@ namespace Tools
                     }
                 } while (sw.ElapsedMilliseconds > delay && this.m_data.Count >= receivedNum);
                 sw.Reset();
+                if (this.m_data.Count == 0)
+                {
+                    //超时了
+                    ClearBuffer();
+                }
                 return this.m_data.ToArray();
             }
         }
@@ -207,8 +212,8 @@ namespace Tools
         private void ClearBuffer()
         {
             //清空缓冲区
-            SerialPort.DiscardOutBuffer();
-            SerialPort.DiscardInBuffer();
+            SerialPort.DiscardOutBuffer();//清空发送
+            SerialPort.DiscardInBuffer();//清空接收
         }
         #endregion
 

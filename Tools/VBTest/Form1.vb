@@ -15,7 +15,7 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        serialPortBase = New SerialPortBase
+        serialPortBase = New SerialPortBase(True)
         ComboBox1.DataSource = serialPortBase.GetPortNames()
 
     End Sub

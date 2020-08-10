@@ -12,7 +12,7 @@ namespace SerialPortTools
         public Form1()
         {
             InitializeComponent();
-            serialPort = new SerialPortBase();
+            serialPort = new SerialPortBase(true);
             serialPort.DataReceive += SerialPort_DataReceive;
             string[] a = serialPort.GetPortNames();
             cb_com.DataSource = a;
