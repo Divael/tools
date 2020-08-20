@@ -96,7 +96,7 @@
     <Compile Include="JSONHelper.cs" />
     <Compile Include="MouseMoveEvents\KeyBroad_Hook.cs" />
     <Compile Include="lib\GUID.cs" />
-    <Compile Include="Loger.cs" />
+    <Compile Include="LogUtils\Loger.cs" />
     <Compile Include="MathHelper.cs" />
     <Compile Include="MouseMoveEvents\MouseHelper.cs" />
     <Compile Include="MouseMoveEvents\MouseMoveEventsHelper.cs" />

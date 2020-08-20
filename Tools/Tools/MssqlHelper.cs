@@ -49,7 +49,7 @@ namespace Tools
             }
             catch (Exception ex)
             {
-                ex.logThis();
+                ex.logErr();
             }
             return Connss;
         }

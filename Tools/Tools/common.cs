@@ -314,21 +314,19 @@ namespace System
         /// 正常日志
         /// </summary>
         /// <param name="mess"></param>
-        public static void logThis(this Exception mess)
+        public static void logThis(this string mess, string title)
         {
-            Tools.Loger.info(mess.Message.ToString());
+            Tools.Loger.info("【" + title + "】  " + mess.ToString());
         }
 
         /// <summary>
-        /// 正常日志
+        /// 异常日志
         /// </summary>
         /// <param name="mess"></param>
-        public static void logThis(this string mess, string title)
+        public static void logErr(this Exception mess)
         {
-            Tools.Loger.info(title + "  " + mess.ToString());
+            Tools.Loger.err(mess);
         }
-
-
         /// <summary>
         /// 异常日志
         /// </summary>
