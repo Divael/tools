@@ -203,7 +203,7 @@ namespace Tools
                         sw.Reset();
                         return this.m_data.ToArray();
                     }
-                } while (sw.ElapsedMilliseconds > delay && this.m_data.Count >= receivedNum);
+                } while (sw.ElapsedMilliseconds <= delay && this.m_data.Count < receivedNum);
                 sw.Reset();
                 if (this.m_data.Count == 0)
                 {
